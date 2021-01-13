@@ -18,7 +18,7 @@ namespace CarTradeCenter.Repository
 
         public bool Create(Car entity)
         {
-            Db.Cars.Add(Car);
+            Db.Cars.Add(entity);
             return Save();
         }
 
@@ -38,14 +38,11 @@ namespace CarTradeCenter.Repository
             return Db.Cars.Find(id);
         }
 
-        public IEnumerable<Car> GetAllVehiclesUndamaged()
-        {
-            throw new NotImplementedException();
-        }
-
         public IEnumerable<Car> GetVehiclesByName(string name)
         {
-            throw new NotImplementedException();
+            return from c in Db.Cars where
+                   c.Title.ToLower().Contains(name.ToLower())
+                   select c;
         }
 
         public bool Save()
@@ -55,7 +52,7 @@ namespace CarTradeCenter.Repository
 
         public bool Update(Car entity)
         {
-            Db.Cars.Update(Car);
+            Db.Cars.Update(entity);
             return Save();
         }
     }
