@@ -9,6 +9,7 @@ namespace CarTradeCenter.Contracts
     {
         IEnumerable<T> FindAll();
         T FindById(int id);
+        IEnumerable<T> GetVehiclesByName(string name);
         bool Create(T entity);
         bool Update(T entity);
         bool Delete(T entity);

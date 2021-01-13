@@ -8,7 +8,6 @@ namespace CarTradeCenter.Contracts
 {
     public interface ICarRepository : IRepositoryBase<Car>
     {
-        IEnumerable<Car> GetAllVehiclesUndamaged();
-        IEnumerable<Car> GetVehiclesByName(string name);
+
     }
 }

@@ -8,7 +8,6 @@ namespace CarTradeCenter.Contracts
 {
     public interface ICarDamagedRepository : IRepositoryBase<CarDamaged>
     {
-        IEnumerable<CarDamaged> GetAllVehiclesDamaged();
-        IEnumerable<CarDamaged> GetVehiclesDamagedByname(string name);
+
     }
 }

@@ -19,22 +19,23 @@ namespace CarTradeCenter.Repository
         public bool Create(Car entity)
         {
             Db.Cars.Add(Car);
-
+            return Save();
         }
 
         public bool Delete(Car entity)
         {
-            throw new NotImplementedException();
+            Db.Cars.Remove(entity);
+            return Save();
         }
 
         public IEnumerable<Car> FindAll()
         {
-            throw new NotImplementedException();
+            return Db.Cars.ToList();
         }
 
         public Car FindById(int id)
         {
-            throw new NotImplementedException();
+            return Db.Cars.Find(id);
         }
 
         public IEnumerable<Car> GetAllVehiclesUndamaged()
@@ -49,12 +50,13 @@ namespace CarTradeCenter.Repository
 
         public bool Save()
         {
-            return Db.SaveChanges();
+            return Db.SaveChanges() > 0;
         }
 
         public bool Update(Car entity)
         {
-            throw new NotImplementedException();
+            Db.Cars.Update(Car);
+            return Save();
         }
     }
 }
