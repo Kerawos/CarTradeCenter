@@ -8,5 +8,6 @@ namespace CarTradeCenter.Data
     public class CarDamaged : Vehicle   
     {
         public string DamageDescription  { get; set; }
+        public IEnumerable<DamageType> Damages { get; set; }
     }
 }

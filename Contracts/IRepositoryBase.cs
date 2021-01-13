@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarTradeCenter.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ namespace CarTradeCenter.Contracts
         IEnumerable<T> FindAll();
         T FindById(int id);
         IEnumerable<T> GetVehiclesByName(string name);
+        IEnumerable<T> GetVehiclesByType(VehicleType type);
         bool Create(T entity);
         bool Update(T entity);
         bool Delete(T entity);

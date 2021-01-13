@@ -38,11 +38,30 @@ namespace CarTradeCenter.Repository
             return Db.CarsDamaged.Find(id);
         }
 
+        public IEnumerable<CarDamaged> GetVehiclesByDamage(DamageType type)
+        {
+            return from c in Db.CarsDamaged
+                   where
+                        from dt in c.Damages
+                        where dt == type
+                        select dt
+                   c.Damages.ge == type
+                   select c;
+        }
+
         public IEnumerable<CarDamaged> GetVehiclesByName(string name)
         {
             return from c in Db.CarsDamaged
                    where
                     c.Title.ToLower().Contains(name.ToLower())
+                   select c;
+        }
+
+        public IEnumerable<CarDamaged> GetVehiclesByType(VehicleType type)
+        {
+            return from c in Db.CarsDamaged
+                   where
+                   c.Type == type
                    select c;
         }
 
