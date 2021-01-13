@@ -12,5 +12,8 @@ namespace CarTradeCenter.Data
             : base(options)
         {
         }
+
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<CarDamaged> CarsDamaged { get; set; }
     }
 }
