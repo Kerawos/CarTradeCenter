@@ -9,51 +9,52 @@ namespace CarTradeCenter.Repository
 {
     public class CarDamagedRepository : ICarDamagedRepository
     {
-        private readonly ApplicationDbContext _db;
+        private readonly ApplicationDbContext Db;
 
-        public CarDamagedRepository(ApplicationDbContext db)
+        public CarDamagedRepository(ApplicationDbContext dbContext)
         {
-            _db = db;
+            Db = dbContext;
         }
 
         public bool Create(CarDamaged entity)
         {
-            throw new NotImplementedException();
+            Db.CarsDamaged.Add(entity);
+            return Save();
         }
 
         public bool Delete(CarDamaged entity)
         {
-            throw new NotImplementedException();
+            Db.CarsDamaged.Remove(entity);
+            return Save();
         }
 
         public IEnumerable<CarDamaged> FindAll()
         {
-            throw new NotImplementedException();
+            return Db.CarsDamaged.ToList();
         }
 
         public CarDamaged FindById(int id)
         {
-            throw new NotImplementedException();
+            return Db.CarsDamaged.Find(id);
         }
 
-        public IEnumerable<CarDamaged> GetAllVehiclesDamaged()
+        public IEnumerable<CarDamaged> GetVehiclesByName(string name)
         {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<CarDamaged> GetVehiclesDamagedByname(string name)
-        {
-            throw new NotImplementedException();
+            return from c in Db.CarsDamaged
+                   where
+                    c.Title.ToLower().Contains(name.ToLower())
+                   select c;
         }
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return Db.SaveChanges() > 0;
         }
 
         public bool Update(CarDamaged entity)
         {
-            throw new NotImplementedException();
+            Db.CarsDamaged.Update(entity);
+            return Save();
         }
     }
 }
