@@ -9,9 +9,17 @@ namespace CarTradeCenter.Repository
 {
     public class CarRepository : ICarRepository
     {
+        private readonly ApplicationDbContext Db;
+
+        public CarRepository(ApplicationDbContext dbContext)
+        {
+            Db = dbContext;
+        }
+
         public bool Create(Car entity)
         {
-            throw new NotImplementedException();
+            Db.Cars.Add(Car);
+
         }
 
         public bool Delete(Car entity)
@@ -41,7 +49,7 @@ namespace CarTradeCenter.Repository
 
         public bool Save()
         {
-            throw new NotImplementedException();
+            return Db.SaveChanges();
         }
 
         public bool Update(Car entity)

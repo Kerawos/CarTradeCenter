@@ -9,6 +9,13 @@ namespace CarTradeCenter.Repository
 {
     public class CarDamagedRepository : ICarDamagedRepository
     {
+        private readonly ApplicationDbContext _db;
+
+        public CarDamagedRepository(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+
         public bool Create(CarDamaged entity)
         {
             throw new NotImplementedException();
