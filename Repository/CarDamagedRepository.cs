@@ -40,12 +40,9 @@ namespace CarTradeCenter.Repository
 
         public IEnumerable<CarDamaged> GetVehiclesByDamage(DamageType type)
         {
-            return from c in Db.CarsDamaged
+            return from c in Db.CarsDamaged 
                    where
-                        from dt in c.Damages
-                        where dt == type
-                        select dt
-                   c.Damages.ge == type
+                   c.Damages.Contains(type)
                    select c;
         }
 
