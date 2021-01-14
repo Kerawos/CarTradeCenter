@@ -1,5 +1,7 @@
+using AutoMapper;
 using CarTradeCenter.Contracts;
 using CarTradeCenter.Data;
+using CarTradeCenter.Mappings;
 using CarTradeCenter.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,6 +36,7 @@ namespace CarTradeCenter
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICarDamagedRepository, CarDamagedRepository>();
+            services.AddAutoMapper(typeof(Maps));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
