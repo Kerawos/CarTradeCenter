@@ -1,0 +1,32 @@
+﻿@model IEnumerable<CarTradeCenter.Models.CarDamagedViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Dodaj Nowy</a>
+</p>
+<hr />
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nazwa</th>
+            <th>Zdjecie</th>
+            <th>Koniec Aukcji</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var car in Model)
+        {
+        <tr>
+            <td>@car.Title</td>
+            <td>@car.Image</td>
+            <td>@car.DateAuctionEnd</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
