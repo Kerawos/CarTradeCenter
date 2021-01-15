@@ -45,14 +45,6 @@ namespace CarTradeCenter.Repository
                    select c;
         }
 
-        public IEnumerable<Car> GetVehiclesByType(VehicleType type)
-        {
-            return from c in Db.Cars
-                   where
-                   c.Type == type
-                   select c;
-        }
-
         public bool Save()
         {
             return Db.SaveChanges() > 0;

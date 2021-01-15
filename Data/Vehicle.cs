@@ -16,6 +16,5 @@ namespace CarTradeCenter.Data
         public DateTime DateAuctionEnd { get; set; }
         public DateTime DateAuctionStart { get; set; }
         public Image Image { get; set; }
-        public VehicleType Type { get; set; }
     }
 }
