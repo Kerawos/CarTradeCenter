@@ -98,19 +98,29 @@ namespace CarTradeCenter.Controllers
             }
         }
 
+        //hard delete. Soft delete = inactivity in database
         // GET: CarDamagedController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            var car = Repo.FindById(id);
+            if (car == null)
+                return NotFound();
+            return View(car);
         }
 
         // POST: CarDamagedController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(CarDamaged model)
         {
             try
             {
+                var isSuccess = Repo.Delete(model);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "Error during deleting...");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch
