@@ -105,7 +105,9 @@ namespace CarTradeCenter.Controllers
             var car = Repo.FindById(id);
             if (car == null)
                 return NotFound();
-            return View(car);
+            if (Repo.Delete(car))
+                return RedirectToAction(nameof(Index));
+            return BadRequest();
         }
 
         // POST: CarDamagedController/Delete/5

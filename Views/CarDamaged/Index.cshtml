@@ -27,7 +27,7 @@
             <td>@car.DateAuctionEnd</td>
             <td> <a asp-action="Edit" asp-route-id="@car.Id">Edytuj</a> </td>
             <td> <a asp-action="Details" asp-route-id="@car.Id">Detale</a></td>
-            <td> <a asp-action="Delete" asp-route-id="@car.Id">Usun</a></td>
+            <td> <a asp-action="Delete" asp-route-id="@car.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>
         </tr>
         }
     </tbody>
