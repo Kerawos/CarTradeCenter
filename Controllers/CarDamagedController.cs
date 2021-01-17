@@ -33,7 +33,10 @@ namespace CarTradeCenter.Controllers
         // GET: CarDamagedController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var car = Repo.FindById(id);
+            if (car == null)
+                return NotFound();
+            return View(car);
         }
 
         // GET: CarDamagedController/Create
@@ -68,16 +71,25 @@ namespace CarTradeCenter.Controllers
         // GET: CarDamagedController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var car = Repo.FindById(id);
+            if (car == null)
+                return NotFound();
+            return View(car);
         }
 
         // POST: CarDamagedController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(CarDamaged model)
         {
             try
             {
+                var isSuccess = Repo.Update(model);
+                if (!isSuccess)
+                {
+                    ModelState.AddModelError("", "Error during updating...");
+                    return View(model);
+                }
                 return RedirectToAction(nameof(Index));
             }
             catch

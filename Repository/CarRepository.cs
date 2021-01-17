@@ -45,6 +45,7 @@ namespace CarTradeCenter.Repository
                    select c;
         }
 
+
         public bool Save()
         {
             return Db.SaveChanges() > 0;

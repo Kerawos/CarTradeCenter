@@ -25,6 +25,9 @@
             <td>@car.Title</td>
             <td> <img src="@car.ImageMini" class="img-thumbnail" style="width: 25%"> </td>
             <td>@car.DateAuctionEnd</td>
+            <td> <a asp-action="Edit" asp-route-id="@car.Id">Edytuj</a> </td>
+            <td> <a asp-action="Details" asp-route-id="@car.Id">Detale</a></td>
+            <td> <a asp-action="Delete" asp-route-id="@car.Id">Usun</a></td>
         </tr>
         }
     </tbody>
