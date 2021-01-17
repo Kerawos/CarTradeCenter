@@ -45,15 +45,23 @@ namespace CarTradeCenter.Controllers
         // POST: CarDamagedController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(CarDamaged car)
         {
             try
             {
+                //var car = Mapper.Map<CarDamaged>(model);
+                car.DateAuctionStart = DateTime.Now;
+                if (!Repo.Create(car))
+                {
+                    ModelState.AddModelError("", "Error during creating...");
+                    return View(car);
+                }
+
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(car);
             }
         }
 

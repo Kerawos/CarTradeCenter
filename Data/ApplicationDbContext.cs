@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using CarTradeCenter.Models;
 
 namespace CarTradeCenter.Data
 {
@@ -15,5 +16,6 @@ namespace CarTradeCenter.Data
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarDamaged> CarsDamaged { get; set; }
+        public DbSet<CarTradeCenter.Models.CarDamagedViewModel> CarDamagedViewModel { get; set; }
     }
 }

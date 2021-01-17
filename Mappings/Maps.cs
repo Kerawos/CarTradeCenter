@@ -15,6 +15,7 @@ namespace CarTradeCenter.Mappings
             CreateMap<Car, CarViewModel>();
             CreateMap<CarDamaged, CarDamagedViewModel>();
             CreateMap<Image, ImageViewModel>();
+            CreateMap<Vehicle, VehicleViewModel>();
         }
     }
 }
