@@ -1,0 +1,4 @@
+ applications:
+ - name: CarTradeCenter
+   random-route: true
+   memory: 512M
