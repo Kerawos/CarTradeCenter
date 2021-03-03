@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarTradeCenter", "CarTradeCenter.csproj", "{69DEDF90-2B93-4CD5-83A0-58A275F2222E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarScrapper_AC", "..\CarScrapper_AC\CarScrapper_AC.csproj", "{C983CAC9-6677-4D01-BE6F-E09CEE6C97EE}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{69DEDF90-2B93-4CD5-83A0-58A275F2222E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69DEDF90-2B93-4CD5-83A0-58A275F2222E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69DEDF90-2B93-4CD5-83A0-58A275F2222E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C983CAC9-6677-4D01-BE6F-E09CEE6C97EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C983CAC9-6677-4D01-BE6F-E09CEE6C97EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C983CAC9-6677-4D01-BE6F-E09CEE6C97EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C983CAC9-6677-4D01-BE6F-E09CEE6C97EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
