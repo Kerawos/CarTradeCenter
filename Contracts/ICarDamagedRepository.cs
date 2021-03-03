@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CarTradeCenter.Contracts
 {
-    public interface ICarDamagedRepository : IRepositoryBase<CarDamaged>
+    public interface ICarDamagedRepository : IRepositoryVehicle<CarDamaged>
     {
 
     }

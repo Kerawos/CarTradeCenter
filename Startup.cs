@@ -1,4 +1,5 @@
 using AutoMapper;
+using CarTradeCenter.BackgroundServices;
 using CarTradeCenter.Contracts;
 using CarTradeCenter.Data;
 using CarTradeCenter.Mappings;
@@ -36,6 +37,7 @@ namespace CarTradeCenter
             Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICarDamagedRepository, CarDamagedRepository>();
+            services.AddHostedService<CarScrapperTest>();
             services.AddAutoMapper(typeof(Maps));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
