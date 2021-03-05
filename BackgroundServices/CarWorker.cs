@@ -12,7 +12,7 @@ namespace CarTradeCenter.BackgroundServices
     public class CarWorker 
     {
         
-        private readonly Random rnd;
+        
         
 
         

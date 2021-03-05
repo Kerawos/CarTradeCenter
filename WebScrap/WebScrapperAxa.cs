@@ -20,9 +20,9 @@ namespace CarTradeCenter.WebScrap
             this.httpClient = new HttpClient();
         }
 
-        public string GetPageTextRaw(string url)
+        public string GetPageTextRaw()
         {
-            var html = httpClient.GetStringAsync(url).GetAwaiter().GetResult();
+            var html = httpClient.GetStringAsync(URL_AXA_LIST).GetAwaiter().GetResult();
             HtmlDocument htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(html);
             return htmlDocument.Text.ToString();   
@@ -30,31 +30,30 @@ namespace CarTradeCenter.WebScrap
 
         public List<CarDamaged> GetCarListFromMain(string pageTextRaw)
         {
+            List<CarDamaged> carList = new List<CarDamaged>();
             string[] carsNode = pageTextRaw.Split('{');
-            CarDamaged carToAdd;
             foreach (var carNode in carsNode)
             {
                 if (carNode.Contains("id"))
                 {
                     try
                     {
-                        carToAdd = new CarDamaged(
-                                                Convert.ToInt32(NodeCutter(carNode, "id", ",", false)),
-                                                NodeCutter(carNode, "at", "\"", true),
-                                                DateTime.Now.AddDays(30),
-                                                DateTime.Now,
-                                                URL_AXA + NodeCutter(carNode, "is", "\"", true),
-                                                "");
+                        carList.Add(new CarDamaged(
+                                        Convert.ToInt32(NodeCutter(carNode, "id", ",", false)),
+                                        NodeCutter(carNode, "at", "\"", true),
+                                        DateTime.Now.AddDays(30),
+                                        DateTime.Now,
+                                        URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true),
+                                        NodeCutter(carNode, "au", "\"", true),
+                                        ""));
                     }
                     catch
                     {
-
+                        continue;
                     }
-
- 
-
                 }
             }
+            return carList;
         }
 
         public string NodeCutter(string node, string start, string end, bool isQuotes)
