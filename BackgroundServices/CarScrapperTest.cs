@@ -9,7 +9,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace CarTradeCenter.BackgroundServices 
+namespace CarTradeCenter.BackgroundServices
 {
     public class CarScrapperTest : BackgroundService, IHostedService
     {
@@ -79,7 +79,7 @@ namespace CarTradeCenter.BackgroundServices
                 "https://wokolmotoryzacji.pl/wp-content/uploads/2020/05/alfa-romeo-giulia-gtam-coupe-rendering.jpg",
                 "https://images.unsplash.com/photo-1550355291-bbee04a92027?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NHx8Y2FyfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
             };
-            return dummyLinks[rnd.Next(dummyLinks.Count-1)];
+            return dummyLinks[rnd.Next(dummyLinks.Count - 1)];
         }
 
     }
