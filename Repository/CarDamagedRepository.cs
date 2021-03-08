@@ -38,6 +38,11 @@ namespace CarTradeCenter.Repository
             return Db.CarsDamaged.Find(id);
         }
 
+        public CarDamaged FindByIdExternal(int idExternal)
+        {
+            return Db.CarsDamaged.Where(c => c.IdExternal == idExternal).First();     
+        }
+
         public IEnumerable<CarDamaged> GetVehiclesByName(string name)
         {
             return from c in Db.CarsDamaged

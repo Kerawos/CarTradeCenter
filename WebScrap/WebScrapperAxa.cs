@@ -39,15 +39,18 @@ namespace CarTradeCenter.WebScrap
                 {
                     try
                     {
-                        cd = new CarDamaged();
-                        cd.IdExternal = Convert.ToInt32(NodeCutter(carNode, "id", ",", false));
-                        cd.Title = NodeCutter(carNode, "at", "\"", true);
-                        cd.DateAuctionEnd = DateTime.Now.AddDays(30);
-                        cd.DateAuctionStart = DateTime.Now;
-                        cd.Url = NodeCutter(carNode, "au", "\"", true);
-                        cd.ImageMini = URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true);
-                        cd.DamageDescription = "no damage";
+                        cd = new CarDamaged
+                        {
+                            Title = NodeCutter(carNode, "at", "\"", true),
+                            DateAuctionEnd = DateTime.Now.AddDays(30),
+                            DateAuctionStart = DateTime.Now,
+                            ImageMini = URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true),
+                            DamageDescription = "no damage",
+                            Url = NodeCutter(carNode, "au", "\"", true),
+                            IdExternal = Convert.ToInt32(NodeCutter(carNode, "id", ",", false)),
+                        };
                         carList.Add(cd);
+
                     }
                     catch
                     {

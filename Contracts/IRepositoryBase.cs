@@ -9,5 +9,6 @@ namespace CarTradeCenter.Contracts
     {
         IEnumerable<T> FindAll();
         T FindById(int id);
+        T FindByIdExternal(int idExternal);
     }
 }

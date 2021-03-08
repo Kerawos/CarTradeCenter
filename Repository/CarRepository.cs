@@ -38,6 +38,11 @@ namespace CarTradeCenter.Repository
             return Db.Cars.Find(id);
         }
 
+        public Car FindByIdExternal(int idExternal)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Car> GetVehiclesByName(string name)
         {
             return from c in Db.Cars where
