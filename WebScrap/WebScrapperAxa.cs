@@ -32,20 +32,22 @@ namespace CarTradeCenter.WebScrap
         {
             List<CarDamaged> carList = new List<CarDamaged>();
             string[] carsNode = pageTextRaw.Split('{');
+            CarDamaged cd;
             foreach (var carNode in carsNode)
             {
                 if (carNode.Contains("id"))
                 {
                     try
                     {
-                        carList.Add(new CarDamaged(
-                                        Convert.ToInt32(NodeCutter(carNode, "id", ",", false)),
-                                        NodeCutter(carNode, "at", "\"", true),
-                                        DateTime.Now.AddDays(30),
-                                        DateTime.Now,
-                                        URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true),
-                                        NodeCutter(carNode, "au", "\"", true),
-                                        ""));
+                        cd = new CarDamaged();
+                        cd.IdExternal = Convert.ToInt32(NodeCutter(carNode, "id", ",", false));
+                        cd.Title = NodeCutter(carNode, "at", "\"", true);
+                        cd.DateAuctionEnd = DateTime.Now.AddDays(30);
+                        cd.DateAuctionStart = DateTime.Now;
+                        cd.Url = NodeCutter(carNode, "au", "\"", true);
+                        cd.ImageMini = URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true);
+                        cd.DamageDescription = "no damage";
+                        carList.Add(cd);
                     }
                     catch
                     {

@@ -14,10 +14,11 @@ namespace CarTradeCenter.Data
         {
         }
 
-        public CarDamaged(int id, string title, DateTime dateAuctionEnd, DateTime dateAuctionStart, string imageMini, string url, string damageDescription) : base(id, title, dateAuctionEnd, dateAuctionStart, url, imageMini)
+        public CarDamaged(int id, int idExternal, string title, DateTime dateAuctionEnd, DateTime dateAuctionStart, string imageMini, string url, string damageDescription) : base(id, idExternal, title, dateAuctionEnd, dateAuctionStart, imageMini, url)
         {
             DamageDescription = damageDescription;
             Id = id;
+            IdExternal = idExternal;
             Title = title;
             DateAuctionEnd = dateAuctionEnd;
             DateAuctionStart = dateAuctionStart;

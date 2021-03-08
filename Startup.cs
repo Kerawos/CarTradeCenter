@@ -37,12 +37,14 @@ namespace CarTradeCenter
             Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<ICarDamagedRepository, CarDamagedRepository>();
+            //services.AddHostedService<CarScrapperAxa>();
             services.AddHostedService<CarScrapperTest>();
             services.AddAutoMapper(typeof(Maps));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+            services.AddApplicationInsightsTelemetry(Configuration["APPINSIGHTS_CONNECTIONSTRING"]);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

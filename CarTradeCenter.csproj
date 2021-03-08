@@ -3,12 +3,14 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>aspnet-CarTradeCenter-E5658D03-0D71-4F29-8DC0-FCB8AECD9099</UserSecretsId>
+    <ApplicationInsightsResourceId>/subscriptions/305d924d-72a9-4a33-8911-1118b5a914fa/resourceGroups/CarTradeCenter_Group/providers/microsoft.insights/components/CarTradeCenter</ApplicationInsightsResourceId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.0" />
     <PackageReference Include="HtmlAgilityPack" Version="1.11.31" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.15.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.10" />

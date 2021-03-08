@@ -49,7 +49,8 @@ namespace CarTradeCenter.BackgroundServices
                 DateAuctionEnd = DateTime.Now.AddDays(30),
                 DateAuctionStart = DateTime.Now,
                 ImageMini = CreateDummyImage(),
-                DamageDescription = "brak uszkodzen"
+                DamageDescription = "brak uszkodzen",
+                Url = "google.com",
             };
 
         }
