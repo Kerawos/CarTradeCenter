@@ -16,6 +16,6 @@ namespace CarTradeCenter.Data
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarDamaged> CarsDamaged { get; set; }
-        public DbSet<CarTradeCenter.Models.CarDamagedViewModel> CarDamagedViewModel { get; set; }
+        //public DbSet<CarTradeCenter.Models.CarDamagedViewModel> CarDamagedViewModel { get; set; }
     }
 }

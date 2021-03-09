@@ -14,20 +14,17 @@ namespace CarTradeCenter.Controllers
     public class CarDamagedController : Controller
     {
         private readonly ICarDamagedRepository Repo;
-        private readonly IMapper Mapper;
 
-        public CarDamagedController(ICarDamagedRepository carDamagedRepository, IMapper mapper)
+        public CarDamagedController(ICarDamagedRepository carDamagedRepository)
         {
-            Mapper = mapper;
             Repo = carDamagedRepository;
         }
 
         // GET: CarDamagedController
         public ActionResult Index()
         {
-            var carsDamaged = Repo.FindAll();
-            var model = Mapper.Map<IEnumerable<CarDamaged>, IEnumerable<CarDamagedViewModel>> (carsDamaged);
-            return View(model);
+            IEnumerable<CarDamaged> carsDamaged = Repo.FindAll();
+            return View(carsDamaged);
         }
 
         // GET: CarDamagedController/Details/5

@@ -2,7 +2,6 @@ using AutoMapper;
 using CarTradeCenter.BackgroundServices;
 using CarTradeCenter.Contracts;
 using CarTradeCenter.Data;
-using CarTradeCenter.Mappings;
 using CarTradeCenter.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,7 +38,6 @@ namespace CarTradeCenter
             services.AddScoped<ICarDamagedRepository, CarDamagedRepository>();
             services.AddHostedService<CarScrapperAxa>();
             //services.AddHostedService<CarScrapperTest>();
-            services.AddAutoMapper(typeof(Maps));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

@@ -38,8 +38,9 @@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.ImageMini)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ImageMini)
+            <img src="@Html.DisplayFor(model => model.ImageMini)" class="img-thumbnail" style="width: 100%">
         </dd>
     </dl>
 </div>

@@ -70,7 +70,10 @@ namespace CarTradeCenter.BackgroundServices
             {
                 try
                 {
-                    if (!Repo.FindById(car.Id).Equals(null))
+                    var f = Repo.FindByIdExternal(car.IdExternal);
+                    bool found = !Repo.FindByIdExternal(car.IdExternal).Equals(null);
+                    
+                    if (!found)
                     {
                         return car;
                     }

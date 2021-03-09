@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CarTradeCenter.Data.Migrations
+namespace CarTradeCenter.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210308144028_updateUrl")]
-    partial class updateUrl
+    [Migration("20210309133311_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,6 +33,9 @@ namespace CarTradeCenter.Data.Migrations
 
                     b.Property<DateTime>("DateAuctionStart")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("IdExternal")
+                        .HasColumnType("int");
 
                     b.Property<string>("ImageMini")
                         .HasColumnType("nvarchar(max)");
@@ -65,6 +68,9 @@ namespace CarTradeCenter.Data.Migrations
                     b.Property<DateTime>("DateAuctionStart")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("IdExternal")
+                        .HasColumnType("int");
+
                     b.Property<string>("ImageMini")
                         .HasColumnType("nvarchar(max)");
 
@@ -78,37 +84,6 @@ namespace CarTradeCenter.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CarsDamaged");
-                });
-
-            modelBuilder.Entity("CarTradeCenter.Models.CarDamagedViewModel", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DamageDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateAuctionEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateAuctionStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ImageMini")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CarDamagedViewModel");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
