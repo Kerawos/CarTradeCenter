@@ -16,15 +16,16 @@ namespace CarTradeCenter.Data
         [Required]
         public DateTime DateAuctionEnd { get; set; }
         public DateTime DateAuctionStart { get; set; }
-        public string ImageMini { get; set; }
+        public Image ImageMini { get; set; }
         public string Url { get; set; }
+        public List<Image> Images { get; set; }
         
 
         protected Vehicle()
         {
         }
 
-        protected Vehicle(int id, int idExternal, string title, DateTime dateAuctionEnd, DateTime dateAuctionStart, string imageMini, string url)
+        protected Vehicle(int id, int idExternal, string title, DateTime dateAuctionEnd, DateTime dateAuctionStart, Image imageMini, string url)
         {
             Id = id;
             IdExternal = idExternal;
