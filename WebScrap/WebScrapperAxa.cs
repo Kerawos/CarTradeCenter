@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using CarTradeCenter.Data;
+using CarTradeCenter.Data.Models;
 using HtmlAgilityPack;
 
 
@@ -44,7 +45,7 @@ namespace CarTradeCenter.WebScrap
                             Title = NodeCutter(carNode, "at", "\"", true),
                             DateAuctionEnd = DateTime.Now.AddDays(30),
                             DateAuctionStart = DateTime.Now,
-                            ImageMini = new Image (URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true)),
+                            ImageMini = new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true)),
                             DamageDescription = "no damage",
                             Url = NodeCutter(carNode, "au", "\"", true),
                             IdExternal = Convert.ToInt32(NodeCutter(carNode, "id", ",", false)),

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarTradeCenter.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -16,24 +17,13 @@ namespace CarTradeCenter.Data
         [Required]
         public DateTime DateAuctionEnd { get; set; }
         public DateTime DateAuctionStart { get; set; }
-        public Image ImageMini { get; set; }
         public string Url { get; set; }
-        public List<Image> Images { get; set; }
-        
+        public Image ImageMini { get; set; }
+        public virtual IEnumerable<Image> Images { get; set; }
 
-        protected Vehicle()
+        public Vehicle()
         {
-        }
-
-        protected Vehicle(int id, int idExternal, string title, DateTime dateAuctionEnd, DateTime dateAuctionStart, Image imageMini, string url)
-        {
-            Id = id;
-            IdExternal = idExternal;
-            Title = title;
-            DateAuctionEnd = dateAuctionEnd;
-            DateAuctionStart = dateAuctionStart;
-            ImageMini = imageMini;
-            Url = url;
+            Images = new HashSet<Image>();
         }
     }
 }

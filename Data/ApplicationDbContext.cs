@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using CarTradeCenter.Models;
+using CarTradeCenter.Data.Models;
 
 namespace CarTradeCenter.Data
 {
@@ -16,6 +17,14 @@ namespace CarTradeCenter.Data
 
         public DbSet<Car> Cars { get; set; }
         public DbSet<CarDamaged> CarsDamaged { get; set; }
+        public DbSet<Image> Images { get; set; }
         //public DbSet<CarTradeCenter.Models.CarDamagedViewModel> CarDamagedViewModel { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Car>()
+                .
+            
+        }
     }
 }

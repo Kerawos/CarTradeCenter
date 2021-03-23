@@ -1,5 +1,6 @@
 ﻿using CarTradeCenter.Contracts;
 using CarTradeCenter.Data;
+using CarTradeCenter.Data.Models;
 using CarTradeCenter.Repository;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
