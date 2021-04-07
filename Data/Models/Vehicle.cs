@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,12 +19,30 @@ namespace CarTradeCenter.Data
         public DateTime DateAuctionEnd { get; set; }
         public DateTime DateAuctionStart { get; set; }
         public string Url { get; set; }
-        public Image ImageMini { get; set; }
+        
         public virtual IEnumerable<Image> Images { get; set; }
-
+        
         public Vehicle()
         {
             Images = new HashSet<Image>();
         }
+
+        public Image GetImageMini()
+        {
+            if (Images.Any())
+                return Images.First();
+            else
+                throw new System.Exception("In Car: " + Title + " there is any ImageMini available.");
+        }
+
+        public string GetImageMiniUrl()
+        {
+            if (Images.Any())
+                return Images.First().Url;
+            else
+                return "";
+        }
+            
+
     }
 }

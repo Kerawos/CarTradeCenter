@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarTradeCenter.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class DbRelationCarImage : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,7 @@ namespace CarTradeCenter.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Cars",
+                name: "Vehicle",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -56,31 +56,13 @@ namespace CarTradeCenter.Migrations
                     Title = table.Column<string>(nullable: false),
                     DateAuctionEnd = table.Column<DateTime>(nullable: false),
                     DateAuctionStart = table.Column<DateTime>(nullable: false),
-                    ImageMini = table.Column<string>(nullable: true),
-                    Url = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Cars", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "CarsDamaged",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IdExternal = table.Column<int>(nullable: false),
-                    Title = table.Column<string>(nullable: false),
-                    DateAuctionEnd = table.Column<DateTime>(nullable: false),
-                    DateAuctionStart = table.Column<DateTime>(nullable: false),
-                    ImageMini = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true),
+                    Discriminator = table.Column<string>(nullable: false),
                     DamageDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarsDamaged", x => x.Id);
+                    table.PrimaryKey("PK_Vehicle", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -189,6 +171,26 @@ namespace CarTradeCenter.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Url = table.Column<string>(nullable: false),
+                    VehicleId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_Vehicle_VehicleId",
+                        column: x => x.VehicleId,
+                        principalTable: "Vehicle",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -227,6 +229,11 @@ namespace CarTradeCenter.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_VehicleId",
+                table: "Images",
+                column: "VehicleId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -247,16 +254,16 @@ namespace CarTradeCenter.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Cars");
-
-            migrationBuilder.DropTable(
-                name: "CarsDamaged");
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "Vehicle");
         }
     }
 }

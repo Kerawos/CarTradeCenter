@@ -19,7 +19,28 @@ namespace CarTradeCenter.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CarTradeCenter.Data.Car", b =>
+            modelBuilder.Entity("CarTradeCenter.Data.Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("VehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("CarTradeCenter.Data.Vehicle", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -32,10 +53,11 @@ namespace CarTradeCenter.Migrations
                     b.Property<DateTime>("DateAuctionStart")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("IdExternal")
-                        .HasColumnType("int");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ImageMiniId")
+                    b.Property<int>("IdExternal")
                         .HasColumnType("int");
 
                     b.Property<string>("Title")
@@ -47,71 +69,9 @@ namespace CarTradeCenter.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ImageMiniId");
+                    b.ToTable("Vehicle");
 
-                    b.ToTable("Cars");
-                });
-
-            modelBuilder.Entity("CarTradeCenter.Data.CarDamaged", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("DamageDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("DateAuctionEnd")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("DateAuctionStart")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("IdExternal")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ImageMiniId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ImageMiniId");
-
-                    b.ToTable("CarsDamaged");
-                });
-
-            modelBuilder.Entity("CarTradeCenter.Data.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("CarDamagedId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("CarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CarDamagedId");
-
-                    b.HasIndex("CarId");
-
-                    b.ToTable("Image");
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Vehicle");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -316,27 +276,26 @@ namespace CarTradeCenter.Migrations
 
             modelBuilder.Entity("CarTradeCenter.Data.Car", b =>
                 {
-                    b.HasOne("CarTradeCenter.Data.Image", "ImageMini")
-                        .WithMany()
-                        .HasForeignKey("ImageMiniId");
+                    b.HasBaseType("CarTradeCenter.Data.Vehicle");
+
+                    b.HasDiscriminator().HasValue("Car");
                 });
 
             modelBuilder.Entity("CarTradeCenter.Data.CarDamaged", b =>
                 {
-                    b.HasOne("CarTradeCenter.Data.Image", "ImageMini")
-                        .WithMany()
-                        .HasForeignKey("ImageMiniId");
+                    b.HasBaseType("CarTradeCenter.Data.Vehicle");
+
+                    b.Property<string>("DamageDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasDiscriminator().HasValue("CarDamaged");
                 });
 
-            modelBuilder.Entity("CarTradeCenter.Data.Image", b =>
+            modelBuilder.Entity("CarTradeCenter.Data.Models.Image", b =>
                 {
-                    b.HasOne("CarTradeCenter.Data.CarDamaged", null)
+                    b.HasOne("CarTradeCenter.Data.Vehicle", "Vehicle")
                         .WithMany("Images")
-                        .HasForeignKey("CarDamagedId");
-
-                    b.HasOne("CarTradeCenter.Data.Car", null)
-                        .WithMany("Images")
-                        .HasForeignKey("CarId");
+                        .HasForeignKey("VehicleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

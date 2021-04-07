@@ -36,11 +36,11 @@
             @Html.DisplayFor(model => model.DateAuctionStart)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ImageMini)
+            @Html.DisplayNameFor(model => model.GetImageMini())
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ImageMini)
-            <img src="@Html.DisplayFor(model => model.ImageMini)" class="img-thumbnail" style="width: 100%">
+            @Html.DisplayFor(model => model.GetImageMini().Url)
+            <img src="@Html.DisplayFor(model => model.GetImageMini().Url)" class="img-thumbnail" style="width: 100%">
         </dd>
     </dl>
 </div>

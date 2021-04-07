@@ -22,9 +22,10 @@ namespace CarTradeCenter.Data
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Car>()
-                .
-            
+            builder.Entity<CarDamaged>()
+                   .HasMany(c => c.Images)
+                   .WithOne(i => (CarDamaged)i.Vehicle);
+            base.OnModelCreating(builder);
         }
     }
 }

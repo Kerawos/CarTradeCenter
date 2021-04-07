@@ -45,11 +45,11 @@ namespace CarTradeCenter.WebScrap
                             Title = NodeCutter(carNode, "at", "\"", true),
                             DateAuctionEnd = DateTime.Now.AddDays(30),
                             DateAuctionStart = DateTime.Now,
-                            ImageMini = new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true)),
                             DamageDescription = "no damage",
                             Url = NodeCutter(carNode, "au", "\"", true),
                             IdExternal = Convert.ToInt32(NodeCutter(carNode, "id", ",", false)),
                         };
+                        cd.Images.Append<Image>(new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true)));
                         carList.Add(cd);
 
                     }

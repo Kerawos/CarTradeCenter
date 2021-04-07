@@ -44,16 +44,16 @@ namespace CarTradeCenter.BackgroundServices
 
         public CarDamaged CreateDummyCar()
         {
-            return new CarDamaged
+            CarDamaged dummyCar = new CarDamaged
             {
                 Title = "Car " + rnd.Next(),
                 DateAuctionEnd = DateTime.Now.AddDays(30),
                 DateAuctionStart = DateTime.Now,
-                ImageMini = new Image(CreateDummyImage()),
                 DamageDescription = "brak uszkodzen",
                 Url = "google.com",
             };
-
+            dummyCar.Images.Append<Image>(new Image(CreateDummyImage()));
+            return dummyCar;
         }
 
         private string CreateDummyImage()
