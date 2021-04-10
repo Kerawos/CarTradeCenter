@@ -34,11 +34,23 @@ namespace CarTradeCenter.Repository
                 .First();
         }
 
+        
         public List<Image> GetImagesOfCar(int CarID)
         {
             return FindAll()
                 .Where(i => i.Vehicle.Id.Equals(CarID))
                 .ToList();
+        }
+
+        public List<Vehicle> UpdateAllImages(List<Vehicle> cars)
+        {
+            foreach (var car in cars)
+                car.Images = GetImagesOfCar(car.Id);
+            return cars;
+            //return cars.ForEach(c => c.Images = GetImagesOfCar(c.Id));
+
+    
+               
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CarTradeCenter.BackgroundServices;
+﻿using CarTradeCenter.BackgroundServices;
 using CarTradeCenter.Contracts;
 using CarTradeCenter.Data;
 using CarTradeCenter.Data.Models;
@@ -15,24 +14,27 @@ namespace CarTradeCenter.Controllers
 {
     public class CarDamagedController : Controller
     {
-        private readonly ICarDamagedRepository Repo;
+        private readonly ICarDamagedRepository RepoCarDmg;
+        private readonly IRepositoryImage RepoImg;
 
-        public CarDamagedController(ICarDamagedRepository carDamagedRepository)
+        public CarDamagedController(ICarDamagedRepository carDamagedRepository, IRepositoryImage repoImg)
         {
-            Repo = carDamagedRepository;
+            this.RepoCarDmg = carDamagedRepository;
+            this.RepoImg = repoImg;
         }
 
         // GET: CarDamagedController
         public ActionResult Index()
         {
-            IEnumerable<CarDamaged> carsDamaged = Repo.FindAll();
+            IEnumerable<CarDamaged> carsDamaged = RepoCarDmg.FindAll();
+
             return View(carsDamaged);
         }
 
         // GET: CarDamagedController/Details/5
         public ActionResult Details(int id)
         {
-            var car = Repo.FindById(id);
+            var car = RepoCarDmg.FindById(id);
             if (car == null)
                 return NotFound();
             return View(car);
@@ -53,7 +55,7 @@ namespace CarTradeCenter.Controllers
             dummyCar.Images.Add(im);
             dummyCar.DateAuctionStart = DateTime.Now;
             dummyCar.DateAuctionEnd = DateTime.Now.AddDays(5);
-            Repo.Create(dummyCar);
+            RepoCarDmg.Create(dummyCar);
             return RedirectToAction(nameof(Index));
         }
 
@@ -66,7 +68,7 @@ namespace CarTradeCenter.Controllers
             {
                 //var car = Mapper.Map<CarDamaged>(model);
                 car.DateAuctionStart = DateTime.Now;
-                if (!Repo.Create(car))
+                if (!RepoCarDmg.Create(car))
                 {
                     ModelState.AddModelError("", "Error during creating...");
                     return View(car);
@@ -83,7 +85,7 @@ namespace CarTradeCenter.Controllers
         // GET: CarDamagedController/Edit/5
         public ActionResult Edit(int id)
         {
-            var car = Repo.FindById(id);
+            var car = RepoCarDmg.FindById(id);
             if (car == null)
                 return NotFound();
             return View(car);
@@ -96,7 +98,7 @@ namespace CarTradeCenter.Controllers
         {
             try
             {
-                var isSuccess = Repo.Update(model);
+                var isSuccess = RepoCarDmg.Update(model);
                 if (!isSuccess)
                 {
                     ModelState.AddModelError("", "Error during updating...");
@@ -114,10 +116,10 @@ namespace CarTradeCenter.Controllers
         // GET: CarDamagedController/Delete/5
         public ActionResult Delete(int id)
         {
-            var car = Repo.FindById(id);
+            var car = RepoCarDmg.FindById(id);
             if (car == null)
                 return NotFound();
-            if (Repo.Delete(car))
+            if (RepoCarDmg.Delete(car))
                 return RedirectToAction(nameof(Index));
             return BadRequest();
         }
@@ -129,7 +131,7 @@ namespace CarTradeCenter.Controllers
         {
             try
             {
-                var isSuccess = Repo.Delete(model);
+                var isSuccess = RepoCarDmg.Delete(model);
                 if (!isSuccess)
                 {
                     ModelState.AddModelError("", "Error during deleting...");
