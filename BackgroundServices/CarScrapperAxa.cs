@@ -14,11 +14,11 @@ namespace CarTradeCenter.BackgroundServices
     public class CarScrapperAxa : BackgroundService, IHostedService
     {
         private readonly WebScrapperAxa scrapperAxa = new WebScrapperAxa();
-        private readonly ICarDamagedRepository Repo;
+        private readonly IRepositoryVehicle Repo;
 
         public CarScrapperAxa(IServiceScopeFactory factory)
         {
-            this.Repo = factory.CreateScope().ServiceProvider.GetRequiredService<ICarDamagedRepository>();
+            this.Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
         }
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
@@ -51,7 +51,7 @@ namespace CarTradeCenter.BackgroundServices
             {
                 try
                 {
-                    CarDamaged cd = GetUniqueCar();
+                    Vehicle cd = GetUniqueCar();
                     Repo.Create(cd);
                 }
                 catch
@@ -62,11 +62,11 @@ namespace CarTradeCenter.BackgroundServices
             }
         }
 
-        public CarDamaged GetUniqueCar()
+        public Vehicle GetUniqueCar()
         {
             string rawPage = scrapperAxa.GetPageTextRaw();
-            List<CarDamaged> cars = scrapperAxa.GetCarListFromMain(rawPage);
-            foreach (CarDamaged car in cars)
+            List<Vehicle> cars = scrapperAxa.GetCarListFromMain(rawPage);
+            foreach (Vehicle car in cars)
             {
                 try
                 {

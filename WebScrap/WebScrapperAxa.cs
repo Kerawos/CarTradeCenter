@@ -29,18 +29,18 @@ namespace CarTradeCenter.WebScrap
             return htmlDocument.Text.ToString();   
         }
 
-        public List<CarDamaged> GetCarListFromMain(string pageTextRaw)
+        public List<Vehicle> GetCarListFromMain(string pageTextRaw)
         {
-            List<CarDamaged> carList = new List<CarDamaged>();
+            List<Vehicle> carList = new List<Vehicle>();
             string[] carsNode = pageTextRaw.Split('{');
-            CarDamaged cd;
+            Vehicle cd;
             foreach (var carNode in carsNode)
             {
                 if (carNode.Contains("id"))
                 {
                     try
                     {
-                        cd = new CarDamaged
+                        cd = new Vehicle
                         {
                             Title = NodeCutter(carNode, "at", "\"", true),
                             DateAuctionEnd = DateTime.Now.AddDays(30),

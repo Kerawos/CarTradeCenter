@@ -34,8 +34,7 @@ namespace CarTradeCenter
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
             Configuration.GetConnectionString("DefaultConnection")));
-            services.AddScoped<ICarRepository, CarRepository>();
-            services.AddScoped<ICarDamagedRepository, CarDamagedRepository>();
+            services.AddScoped<IRepositoryVehicle, VehicleRepository>();
             //services.AddHostedService<CarScrapperAxa>();
             //services.AddHostedService<CarScrapperTest>();
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)

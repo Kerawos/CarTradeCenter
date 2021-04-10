@@ -15,13 +15,13 @@ namespace CarTradeCenter.BackgroundServices
     public class CarScrapperTest : BackgroundService, IHostedService
     {
         private readonly Random rnd;
-        private readonly ICarDamagedRepository Repo;
+        private readonly IRepositoryVehicle Repo;
 
 
         public CarScrapperTest(IServiceScopeFactory factory)
         {
             this.rnd = new Random();
-            this.Repo = factory.CreateScope().ServiceProvider.GetRequiredService<ICarDamagedRepository>();
+            this.Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -42,9 +42,9 @@ namespace CarTradeCenter.BackgroundServices
             }
         }
 
-        public CarDamaged CreateDummyCar()
+        public Vehicle CreateDummyCar()
         {
-            CarDamaged dummyCar = new CarDamaged
+            Vehicle dummyCar = new Vehicle
             {
                 Title = "Car " + rnd.Next(),
                 DateAuctionEnd = DateTime.Now.AddDays(30),

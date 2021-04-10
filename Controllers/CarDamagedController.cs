@@ -14,27 +14,27 @@ namespace CarTradeCenter.Controllers
 {
     public class CarDamagedController : Controller
     {
-        private readonly ICarDamagedRepository RepoCarDmg;
+        private readonly IRepositoryVehicle RepoVehicle;
         private readonly IRepositoryImage RepoImg;
 
-        public CarDamagedController(ICarDamagedRepository carDamagedRepository, IRepositoryImage repoImg)
+        public CarDamagedController(IRepositoryVehicle repoVehicle, IRepositoryImage repoImg)
         {
-            this.RepoCarDmg = carDamagedRepository;
+            this.RepoVehicle = repoVehicle;
             this.RepoImg = repoImg;
         }
 
         // GET: CarDamagedController
         public ActionResult Index()
         {
-            IEnumerable<CarDamaged> carsDamaged = RepoCarDmg.FindAll();
-
+            List<Vehicle> carsDamaged = RepoVehicle.FindAll().ToList();
+            RepoImg.UpdateAllImages(carsDamaged);
             return View(carsDamaged);
         }
 
         // GET: CarDamagedController/Details/5
         public ActionResult Details(int id)
         {
-            var car = RepoCarDmg.FindById(id);
+            var car = RepoVehicle.FindById(id);
             if (car == null)
                 return NotFound();
             return View(car);
@@ -49,26 +49,26 @@ namespace CarTradeCenter.Controllers
         [HttpGet]
         public ActionResult CreateAuto()
         {
-            CarDamaged dummyCar = new CarDamaged();
+            Vehicle dummyCar = new Vehicle();
             dummyCar.Title = "Test Car";
             Image im = new Image("https://cdn.group.renault.com/ren/master/renault-new-cars/product-plans/clio/bja-clio/hero-zone/640x600-mobile/renault-clio5-ph1-hero-zone-mobile-001.jpg.ximg.small.jpg/958ea02631.jpg");
             dummyCar.Images.Add(im);
             dummyCar.DateAuctionStart = DateTime.Now;
             dummyCar.DateAuctionEnd = DateTime.Now.AddDays(5);
-            RepoCarDmg.Create(dummyCar);
+            RepoVehicle.Create(dummyCar);
             return RedirectToAction(nameof(Index));
         }
 
         // POST: CarDamagedController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(CarDamaged car)
+        public ActionResult Create(Vehicle car)
         {
             try
             {
                 //var car = Mapper.Map<CarDamaged>(model);
                 car.DateAuctionStart = DateTime.Now;
-                if (!RepoCarDmg.Create(car))
+                if (!RepoVehicle.Create(car))
                 {
                     ModelState.AddModelError("", "Error during creating...");
                     return View(car);
@@ -85,7 +85,7 @@ namespace CarTradeCenter.Controllers
         // GET: CarDamagedController/Edit/5
         public ActionResult Edit(int id)
         {
-            var car = RepoCarDmg.FindById(id);
+            var car = RepoVehicle.FindById(id);
             if (car == null)
                 return NotFound();
             return View(car);
@@ -94,11 +94,11 @@ namespace CarTradeCenter.Controllers
         // POST: CarDamagedController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(CarDamaged model)
+        public ActionResult Edit(Vehicle model)
         {
             try
             {
-                var isSuccess = RepoCarDmg.Update(model);
+                var isSuccess = RepoVehicle.Update(model);
                 if (!isSuccess)
                 {
                     ModelState.AddModelError("", "Error during updating...");
@@ -116,10 +116,10 @@ namespace CarTradeCenter.Controllers
         // GET: CarDamagedController/Delete/5
         public ActionResult Delete(int id)
         {
-            var car = RepoCarDmg.FindById(id);
+            var car = RepoVehicle.FindById(id);
             if (car == null)
                 return NotFound();
-            if (RepoCarDmg.Delete(car))
+            if (RepoVehicle.Delete(car))
                 return RedirectToAction(nameof(Index));
             return BadRequest();
         }
@@ -127,11 +127,11 @@ namespace CarTradeCenter.Controllers
         // POST: CarDamagedController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(CarDamaged model)
+        public ActionResult Delete(Vehicle model)
         {
             try
             {
-                var isSuccess = RepoCarDmg.Delete(model);
+                var isSuccess = RepoVehicle.Delete(model);
                 if (!isSuccess)
                 {
                     ModelState.AddModelError("", "Error during deleting...");

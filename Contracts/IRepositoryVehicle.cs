@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace CarTradeCenter.Contracts
 {
-    public interface IRepositoryVehicle<T> : IRepositoryBase<T>
+    public interface IRepositoryVehicle : IRepositoryBase<Vehicle>
     {
-        IEnumerable<T> GetVehiclesByName(string name);
-        bool Create(T entity);
-        bool Update(T entity);
-        bool Delete(T entity);
+        IEnumerable<Vehicle> GetVehiclesByName(string name);
+        bool Create(Vehicle entity);
+        bool Update(Vehicle entity);
+        bool Delete(Vehicle entity);
         bool Save();
+        IEnumerable<Vehicle> FindAllByDamaged(bool isDamaged);
     }
 }

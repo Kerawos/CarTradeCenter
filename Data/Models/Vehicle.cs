@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarTradeCenter.Data
 {
-    public abstract class Vehicle
+    public class Vehicle
     {
         [Key]
         public int Id { get; set; }
@@ -19,6 +19,8 @@ namespace CarTradeCenter.Data
         public DateTime DateAuctionEnd { get; set; }
         public DateTime DateAuctionStart { get; set; }
         public string Url { get; set; }
+        public bool IsDamaged { get; set; }
+        public string DamageDescription { get; set; }
         
         public virtual List<Image> Images { get; set; }
         
