@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using CarTradeCenter.BackgroundServices;
 using CarTradeCenter.Contracts;
 using CarTradeCenter.Data;
+using CarTradeCenter.Data.Models;
 using CarTradeCenter.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +42,19 @@ namespace CarTradeCenter.Controllers
         public ActionResult Create()
         {
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult CreateAuto()
+        {
+            CarDamaged dummyCar = new CarDamaged();
+            dummyCar.Title = "Test Car";
+            Image im = new Image("https://cdn.group.renault.com/ren/master/renault-new-cars/product-plans/clio/bja-clio/hero-zone/640x600-mobile/renault-clio5-ph1-hero-zone-mobile-001.jpg.ximg.small.jpg/958ea02631.jpg");
+            dummyCar.Images.Add(im);
+            dummyCar.DateAuctionStart = DateTime.Now;
+            dummyCar.DateAuctionEnd = DateTime.Now.AddDays(5);
+            Repo.Create(dummyCar);
+            return RedirectToAction(nameof(Index));
         }
 
         // POST: CarDamagedController/Create

@@ -20,11 +20,11 @@ namespace CarTradeCenter.Data
         public DateTime DateAuctionStart { get; set; }
         public string Url { get; set; }
         
-        public virtual IEnumerable<Image> Images { get; set; }
+        public virtual List<Image> Images { get; set; }
         
         public Vehicle()
         {
-            Images = new HashSet<Image>();
+            Images = new List<Image>();
         }
 
         public Image GetImageMini()

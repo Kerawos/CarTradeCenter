@@ -7,9 +7,17 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Dodaj Nowy</a>
+    <a asp-action="Create">Dodaj Nowy Ręcznie</a>
 </p>
 <hr />
+
+<p>
+    <a asp-action="CreateAuto">Dodaj Nowy Automatycznie</a>
+</p>
+
+<hr />
+
+
 <table class="table">
     <thead>
         <tr>
@@ -21,14 +29,14 @@
     <tbody>
         @foreach (var car in Model)
         {
-        <tr>
-            <td>@car.Title</td>
-            <td> <img src="@car.GetImageMiniUrl()" class="img-thumbnail" style="width: 40%"> </td>
-            <td>@car.DateAuctionEnd</td>
-            <td> <a asp-action="Edit" asp-route-id="@car.Id">Edytuj</a> </td>
-            <td> <a asp-action="Details" asp-route-id="@car.Id">Detale</a></td>
-            <td> <a asp-action="Delete" asp-route-id="@car.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>
-        </tr>
+            <tr>
+                <td>@car.Title</td>
+                <td> <img src="@car.GetImageMiniUrl()" class="img-thumbnail" style="width: 40%"> </td>
+                <td>@car.DateAuctionEnd</td>
+                <td> <a asp-action="Edit" asp-route-id="@car.Id">Edytuj</a> </td>
+                <td> <a asp-action="Details" asp-route-id="@car.Id">Detale</a></td>
+                <td> <a asp-action="Delete" asp-route-id="@car.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>
+            </tr>
         }
     </tbody>
 </table>
