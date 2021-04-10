@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CarTradeCenter.Data
 {
@@ -21,7 +19,6 @@ namespace CarTradeCenter.Data
         public string Url { get; set; }
         public bool IsDamaged { get; set; }
         public string DamageDescription { get; set; }
-        
         public virtual List<Image> Images { get; set; }
         
         public Vehicle()

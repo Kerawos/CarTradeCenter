@@ -7,7 +7,7 @@ namespace CarTradeCenter.Contracts
 {
     public interface IRepositoryBase<T>
     {
-        IEnumerable<T> FindAll();
+        List<T> FindAll();
         T FindById(int id);
         T FindByIdExternal(int idExternal);
     }

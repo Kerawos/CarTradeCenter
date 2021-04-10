@@ -17,7 +17,7 @@ namespace CarTradeCenter.Repository
             Db = db;
         }
 
-        public IEnumerable<Image> FindAll()
+        public List<Image> FindAll()
         {
             return Db.Images.ToList();
         }

@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarTradeCenter.Migrations
 {
-    public partial class DbRelationCarImage : Migration
+    public partial class onlyVehicles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,7 +47,7 @@ namespace CarTradeCenter.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Vehicle",
+                name: "Vehicles",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -57,12 +57,12 @@ namespace CarTradeCenter.Migrations
                     DateAuctionEnd = table.Column<DateTime>(nullable: false),
                     DateAuctionStart = table.Column<DateTime>(nullable: false),
                     Url = table.Column<string>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
+                    IsDamaged = table.Column<bool>(nullable: false),
                     DamageDescription = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vehicle", x => x.Id);
+                    table.PrimaryKey("PK_Vehicles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -184,9 +184,9 @@ namespace CarTradeCenter.Migrations
                 {
                     table.PrimaryKey("PK_Images", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Images_Vehicle_VehicleId",
+                        name: "FK_Images_Vehicles_VehicleId",
                         column: x => x.VehicleId,
-                        principalTable: "Vehicle",
+                        principalTable: "Vehicles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -263,7 +263,7 @@ namespace CarTradeCenter.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Vehicle");
+                name: "Vehicles");
         }
     }
 }

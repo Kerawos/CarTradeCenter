@@ -27,7 +27,7 @@ namespace CarTradeCenter.Repository
             return Save();
         }
 
-        public IEnumerable<Vehicle> FindAll()
+        public List<Vehicle> FindAll()
         {
             return Db.Vehicles.ToList();
         }

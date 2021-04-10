@@ -3,6 +3,7 @@ using CarTradeCenter.Contracts;
 using CarTradeCenter.Data;
 using CarTradeCenter.Data.Models;
 using CarTradeCenter.Models;
+using CarTradeCenter.WebScrap;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -56,6 +57,16 @@ namespace CarTradeCenter.Controllers
             dummyCar.DateAuctionStart = DateTime.Now;
             dummyCar.DateAuctionEnd = DateTime.Now.AddDays(5);
             RepoVehicle.Create(dummyCar);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult CreateAutoAxa()
+        {
+            WebScrapper webScrapper = new WebScrapper();
+            WebScrapperAxa webScrapperAxa = new WebScrapperAxa();
+            Vehicle carAxa = webScrapper.GetUniqueCar(webScrapperAxa.GetCarListFromMain(webScrapperAxa.GetPageTextRaw()),
+                                                        RepoVehicle.FindAll());
+            RepoVehicle.Create(carAxa);
             return RedirectToAction(nameof(Index));
         }
 

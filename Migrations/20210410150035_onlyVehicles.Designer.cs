@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarTradeCenter.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210410113330_replaceListt")]
-    partial class replaceListt
+    [Migration("20210410150035_onlyVehicles")]
+    partial class onlyVehicles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,18 +49,20 @@ namespace CarTradeCenter.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("DamageDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("DateAuctionEnd")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DateAuctionStart")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("IdExternal")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsDamaged")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -71,9 +73,7 @@ namespace CarTradeCenter.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicle");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Vehicle");
+                    b.ToTable("Vehicles");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -274,23 +274,6 @@ namespace CarTradeCenter.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
-                });
-
-            modelBuilder.Entity("CarTradeCenter.Data.Car", b =>
-                {
-                    b.HasBaseType("CarTradeCenter.Data.Vehicle");
-
-                    b.HasDiscriminator().HasValue("Car");
-                });
-
-            modelBuilder.Entity("CarTradeCenter.Data.CarDamaged", b =>
-                {
-                    b.HasBaseType("CarTradeCenter.Data.Vehicle");
-
-                    b.Property<string>("DamageDescription")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("CarDamaged");
                 });
 
             modelBuilder.Entity("CarTradeCenter.Data.Models.Image", b =>
