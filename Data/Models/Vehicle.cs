@@ -23,7 +23,9 @@ namespace CarTradeCenter.Data
         public bool IsDamaged { get; set; }
         public string DamageDescription { get; set; }
         public virtual List<Image> Images { get; set; }
-        
+        [Required]
+        public string CompanyProvider { get; set; }
+
         public Vehicle()
         {
             Images = new List<Image>();
