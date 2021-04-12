@@ -49,7 +49,9 @@ namespace CarTradeCenter.WebScrap
                             Url = NodeCutter(carNode, "au", "\"", true),
                             IdExternal = Convert.ToInt32(NodeCutter(carNode, "id", ",", false)),
                         };
-                        cd.Images.Append<Image>(new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true)));
+                        Image im = new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + NodeCutter(carNode, "is", "\"", true));
+                        //cd.Images.Append<Image>(im);
+                        cd.Images.Add(im);
                         carList.Add(cd);
 
                     }

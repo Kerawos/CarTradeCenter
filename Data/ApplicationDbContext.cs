@@ -21,8 +21,9 @@ namespace CarTradeCenter.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.Entity<Vehicle>()
-                   .HasMany(v => v.Images)
-                   .WithOne(i => i.Vehicle);
+                   .HasMany<Image>(v => v.Images)
+                   .WithOne(i => i.Vehicle)
+                   .OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(builder);
         }
     }

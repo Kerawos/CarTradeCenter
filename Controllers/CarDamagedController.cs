@@ -66,7 +66,9 @@ namespace CarTradeCenter.Controllers
             WebScrapperAxa webScrapperAxa = new WebScrapperAxa();
             Vehicle carAxa = webScrapper.GetUniqueCar(webScrapperAxa.GetCarListFromMain(webScrapperAxa.GetPageTextRaw()),
                                                         RepoVehicle.FindAll());
+
             RepoVehicle.Create(carAxa);
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -130,6 +132,10 @@ namespace CarTradeCenter.Controllers
             var car = RepoVehicle.FindById(id);
             if (car == null)
                 return NotFound();
+
+            foreach (Image im in RepoImg.GetImagesOfCar(car.Id))
+                RepoImg.Delete(im);
+
             if (RepoVehicle.Delete(car))
                 return RedirectToAction(nameof(Index));
             return BadRequest();

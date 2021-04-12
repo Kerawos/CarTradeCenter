@@ -11,8 +11,6 @@ namespace CarTradeCenter.Contracts
         IEnumerable<Vehicle> GetVehiclesByName(string name);
         bool Create(Vehicle entity);
         bool Update(Vehicle entity);
-        bool Delete(Vehicle entity);
-        bool Save();
         IEnumerable<Vehicle> FindAllByDamaged(bool isDamaged);
     }
 }

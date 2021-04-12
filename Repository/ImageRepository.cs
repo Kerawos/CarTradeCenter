@@ -17,6 +17,12 @@ namespace CarTradeCenter.Repository
             Db = db;
         }
 
+        public bool Delete(Image entity)
+        {
+            Db.Images.Remove(entity);
+            return Save();
+        }
+
         public List<Image> FindAll()
         {
             return Db.Images.ToList();
@@ -51,6 +57,11 @@ namespace CarTradeCenter.Repository
 
     
                
+        }
+
+        public bool Save()
+        {
+            return Db.SaveChanges() > 0;
         }
     }
 }

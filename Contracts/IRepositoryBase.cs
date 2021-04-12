@@ -10,5 +10,7 @@ namespace CarTradeCenter.Contracts
         List<T> FindAll();
         T FindById(int id);
         T FindByIdExternal(int idExternal);
+        bool Delete(T entity);
+        bool Save();
     }
 }

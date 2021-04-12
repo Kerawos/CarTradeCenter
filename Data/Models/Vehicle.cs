@@ -17,6 +17,9 @@ namespace CarTradeCenter.Data
         public DateTime DateAuctionEnd { get; set; }
         public DateTime DateAuctionStart { get; set; }
         public string Url { get; set; }
+        public string Info { get; set; }
+        public string Description { get; set; }
+        public string Equipment { get; set; }
         public bool IsDamaged { get; set; }
         public string DamageDescription { get; set; }
         public virtual List<Image> Images { get; set; }
