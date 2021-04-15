@@ -1,50 +1,116 @@
 ﻿@model CarTradeCenter.Data.Vehicle
-
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
+<h1>Detale</h1>
 
+@*Important Info*@
 <div>
-    <h4>CarDamaged</h4>
+    <h4>model.Title</h4>
+
+    <center><h5>mode.CompanyProvider</h5></center>
+
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DamageDescription)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DamageDescription)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateAuctionEnd)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateAuctionEnd)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateAuctionStart)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateAuctionStart)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.GetImageMini())
+        <dt class="col-sm-2">
+            Koniec Aukcji (@Html.DisplayNameFor(model => model.DateAuctionEnd))
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.GetImageMini().Url)
-            <img src="@Html.DisplayFor(model => model.GetImageMini().Url)" class="img-thumbnail" style="width: 100%">
+            @Html.DisplayFor(model => model.DateAuctionEnd)
         </dd>
+        <dt class="col-sm-2">
+            Początek Aukcji (@Html.DisplayNameFor(model => model.DateAuctionStart))
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateAuctionStart)
+        </dd>
+        <dt class="col-sm-2">
+            Numer Auckji (@Html.DisplayNameFor(model => model.Id))
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+        <dt class="col-sm-2">
+            Stan
+        </dt>
+        @if (Model.IsDamaged)
+        {
+            <dd class="col-sm-10">
+                Uszkodzony
+            </dd>
+        }
+        else
+        {
+            <dd class="col-sm-10">
+                Nieuszkodzony
+            </dd>
+        }
     </dl>
+    <hr />
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    @*Images*@
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Zdjęcia
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var img in Model.Images)
+            {
+                <tr>
+                    <td>
+                        <img src="@img.Url" class="img-thumbnail" style="width: 100%">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<div>
+    @*Detailed Info*@
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Wyposarzenie Standardowe (@Html.DisplayNameFor(model => model.InfoBasic))
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InfoBasic)
+        </dd>
+        <dt class="col-sm-2">
+            Wyposarzenie Opcjonalne (@Html.DisplayNameFor(model => model.InfoExtra))
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InfoExtra)
+        </dd>
+        @if (Model.IsDamaged)
+        {
+            <dt class="col-sm-2">
+                Uszkodzenia (@Html.DisplayNameFor(model => model.InfoDamage))
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InfoDamage)
+            </dd>
+            <dt class="col-sm-2">
+                Części nieuszkodzone (@Html.DisplayNameFor(model => model.InfoUsableParts))
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.InfoUsableParts)
+            </dd>
+        }
+
+    </dl>
+    <hr />
+</div>
+
+
+<div>
     <a asp-action="Index">Back to List</a>
 </div>
