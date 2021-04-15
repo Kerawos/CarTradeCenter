@@ -42,6 +42,8 @@ namespace CarTradeCenter.WebScrap
 
         public bool IsCarUnique(List<Vehicle> vehiclesFromDB, Vehicle vehicleToCheck)
         {
+            if (vehiclesFromDB == null)
+                return true;
             return !vehiclesFromDB.Any(v => v.IdExternal == vehicleToCheck.IdExternal);
         }
 

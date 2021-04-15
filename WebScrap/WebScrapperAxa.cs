@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using CarTradeCenter.Data;
 using CarTradeCenter.Data.Models;
-using HtmlAgilityPack;
 
 
 namespace CarTradeCenter.WebScrap
@@ -45,7 +41,6 @@ namespace CarTradeCenter.WebScrap
 
         public Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
         {
-            Vehicle vhc = new Vehicle();
             string[] vehiclesNode = pageTextRaw.Split('{');
             foreach (string vehicleNode in vehiclesNode)
             {
@@ -63,7 +58,7 @@ namespace CarTradeCenter.WebScrap
                     }
                 }
             }
-            throw new Exception("No unique car found in main");
+            throw new System.Exception("No unique car found in main");
         }
 
 
@@ -134,7 +129,7 @@ namespace CarTradeCenter.WebScrap
             }
             catch
             {
-                throw new Exception("Cannot get externall ID");
+                throw new System.Exception("Cannot get externall ID");
             }
         }
 
@@ -150,7 +145,7 @@ namespace CarTradeCenter.WebScrap
             }
             catch
             {
-                throw new Exception("Cannot get auction end time");
+                throw new System.Exception("Cannot get auction end time");
             }
         }
 
