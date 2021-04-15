@@ -62,38 +62,23 @@ namespace CarTradeCenter.Controllers
 
         public ActionResult CreateAutoAxa()
         {
-            WebScrapper webScrapper = new WebScrapper();
-            WebScrapperAxa webScrapperAxa = new WebScrapperAxa();
-            Vehicle carAxa = webScrapper.GetUniqueCar(webScrapperAxa.GetCarListFromMain(webScrapperAxa.GetPageTextRaw()),
-                                                        RepoVehicle.FindAll());
-
-            RepoVehicle.Create(carAxa);
-
-            return RedirectToAction(nameof(Index));
-        }
-
-        // POST: CarDamagedController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(Vehicle car)
-        {
+            WebScrapper wScrp = new WebScrapper();
+            WebScrapperAxa wScrpAxa = new WebScrapperAxa();
+            string mainPageRaw = wScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
+            List<Vehicle> VehiclesFromMainPage = wScrpAxa.GetVehicleListFromMain(mainPageRaw);
+            List<Vehicle> VehiclesFromDb = RepoVehicle.FindAll();
             try
             {
-                //var car = Mapper.Map<CarDamaged>(model);
-                car.DateAuctionStart = DateTime.Now;
-                if (!RepoVehicle.Create(car))
-                {
-                    ModelState.AddModelError("", "Error during creating...");
-                    return View(car);
-                }
-
-                return RedirectToAction(nameof(Index));
+                Vehicle vehicleUnique = wScrp.GetUniqueCar(VehiclesFromMainPage, VehiclesFromDb);
+                RepoVehicle.Create(vehicleUnique);
             }
             catch
             {
-                return View(car);
+                //no new car will be created
             }
+            return RedirectToAction(nameof(Index));
         }
+
 
         // GET: CarDamagedController/Edit/5
         public ActionResult Edit(int id)
