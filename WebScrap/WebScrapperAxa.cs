@@ -14,11 +14,11 @@ namespace CarTradeCenter.WebScrap
     {
         public const string URL_AXA = "https://carauction.axa.ch/";
         public const string URL_AXA_LIST = URL_AXA + "auction/list/EN";
-        private readonly WebScrapper webScrapper;
+        private readonly WebScrapper WebScrp;
 
         public WebScrapperAxa()
         {
-            this.webScrapper = new WebScrapper();
+            this.WebScrp = new WebScrapper();
         }
 
         public List<Vehicle> GetVehicleListFromMain(string pageTextRaw)
@@ -46,14 +46,12 @@ namespace CarTradeCenter.WebScrap
         private Vehicle GetVehicleFromNode(string vehicleNode)
         {
             Vehicle vhc = new Vehicle();
-            
-            vhc.Title = webScrapper.NodeCutter(vehicleNode, "at\":\"", "\",\"");
-            vhc.Url = URL_AXA + webScrapper.NodeCutter(vehicleNode, "au\":\"", "\",\"");
+            vhc.Title = WebScrp.NodeCutter(vehicleNode, "at\":\"", "\",\"");
+            vhc.Url = URL_AXA + WebScrp.NodeCutter(vehicleNode, "au\":\"", "\",\"");
             vhc.IdExternal = GetExternalId(vehicleNode);
-            Image im = new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + webScrapper.NodeCutter(vehicleNode, "is\":\"", "\",\""));
-            vhc.Images.Add(im);
-
-            string subPage = GetPageTextRaw(vhc.Url);
+            Image imMini = new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + WebScrp.NodeCutter(vehicleNode, "is\":\"", "\",\""));
+            vhc.Images.Add(imMini);
+            string subPage = WebScrp.GetPageTextRaw(vhc.Url);
             vhc.DateAuctionStart = DateTime.Now;
             vhc.DateAuctionEnd = GetAuctionEndTime(subPage);
             vhc.InfoBasic = GetEquipmenSeriesDescription(subPage);
@@ -61,7 +59,6 @@ namespace CarTradeCenter.WebScrap
             vhc.InfoDamage = GetDamageDescription(subPage);
             vhc.InfoUsableParts = GetUsableParts(subPage);
             vhc.IsDamaged = vhc.InfoDamage != "";
-
             vhc.Images.AddRange(GetImagesOfVehicle(subPage, 25));
             return vhc;
         }
@@ -69,8 +66,7 @@ namespace CarTradeCenter.WebScrap
 
         public List<Image> GetImagesOfVehicle(string subPageRaw, int maxImages)
         {
-
-            string galleryRaw = NodeCutter(subPageRaw, "<!-- Gallery -->", "</ul>");
+            string galleryRaw = WebScrp.NodeCutter(subPageRaw, "<!-- Gallery -->", "</ul>");
             string[] galleryRawImages = galleryRaw.Split(new string[] { "<li" }, StringSplitOptions.None);
             List<Image> images = new List<Image>();
             string imUrl; int i = 1;
@@ -81,8 +77,7 @@ namespace CarTradeCenter.WebScrap
                 try
                 {
                     i++;
-                    imUrl = NodeCutter(s, "src=", "alt=");
-                    imUrl = imUrl + "";
+                    imUrl = WebScrp.NodeCutter(s, "src=", "alt=");
                     imUrl = imUrl.Replace("\"", "");
                     imUrl = imUrl.Replace("amp;", "");
                     imUrl = imUrl.Replace("/", "");
@@ -102,7 +97,7 @@ namespace CarTradeCenter.WebScrap
         {
             try
             {
-                string idExt = NodeCutter(carNode, "id\":\"", ",");
+                string idExt = WebScrp.NodeCutter(carNode, "id\":\"", ",");
                 idExt = idExt.Replace(":", "");
                 idExt = idExt.Replace("\"", "");
                 return Convert.ToInt32(idExt);
@@ -118,7 +113,7 @@ namespace CarTradeCenter.WebScrap
         {
             try
             {
-                string endTimeRaw = NodeCutter(subpageRaw, "data-seconds=", ">");
+                string endTimeRaw = WebScrp.NodeCutter(subpageRaw, "data-seconds=", ">");
                 endTimeRaw = endTimeRaw.Replace("\"", "");
                 endTimeRaw = endTimeRaw.Replace("seconds=", "");
                 return DateTime.Now.AddSeconds(Int32.Parse(endTimeRaw));
@@ -130,63 +125,42 @@ namespace CarTradeCenter.WebScrap
         }
 
 
-        public string GetDamageDescription(string subpageRaw)
+        public string GetTextFromSubPageBasedOnPanelBodyDiv(string subpageRaw, string startNode, string endNode)
         {
             try
             {
-                string desc = NodeCutter(subpageRaw, "<!-- DAMAGE -->", "<!-- PRE DAMAGES -->");
-                desc = NodeCutter(desc, "<div class=\"panel-body\">", "</div>");
+                string desc = WebScrp.NodeCutter(subpageRaw, startNode, endNode);
+                desc = WebScrp.NodeCutter(desc, "<div class=\"panel-body\">", "</div>");
                 return desc;
             }
             catch
             {
                 return "";
             }
+        }
+
+
+        public string GetDamageDescription(string subpageRaw)
+        {
+            return GetTextFromSubPageBasedOnPanelBodyDiv(subpageRaw, "<!-- DAMAGE -->", "<!-- PRE DAMAGES -->");
         }
 
 
         public string GetUsableParts(string subpageRaw)
         {
-            try
-            {
-                string desc = NodeCutter(subpageRaw, "<!-- USABLE PART -->", "<!-- Fahrzeugbeschreibung -->");
-                desc = NodeCutter(desc, "<div class=\"panel-body\">", "</div>");
-                return desc;
-            }
-            catch
-            {
-                return "";
-            }
+            return GetTextFromSubPageBasedOnPanelBodyDiv(subpageRaw, "<!-- USABLE PART -->", "<!-- Fahrzeugbeschreibung -->");
         }
 
 
         public string GetEquipmentOptionDescription(string subpageRaw)
         {
-            try
-            {
-                string desc = NodeCutter(subpageRaw, "<!-- Sonder -->", "<!-- Ausstattung -->");
-                desc = NodeCutter(desc, "<div class=\"panel-body\">", "</div>");
-                return desc;
-            }
-            catch
-            {
-                return "";
-            }
+            return GetTextFromSubPageBasedOnPanelBodyDiv(subpageRaw, "<!-- Sonder -->", "<!-- Ausstattung -->");
         }
 
 
         public string GetEquipmenSeriesDescription(string subpageRaw)
         {
-            try
-            {
-                string desc = NodeCutter(subpageRaw, "<!-- Serien -->", "<!-- Sonder -->");
-                desc = NodeCutter(desc, "<div class=\"panel-body\">", "</div>");
-                return desc;
-            }
-            catch
-            {
-                return "";
-            }
+            return GetTextFromSubPageBasedOnPanelBodyDiv(subpageRaw, "<!-- Serien -->", "<!-- Sonder -->");
         }
 
     }
