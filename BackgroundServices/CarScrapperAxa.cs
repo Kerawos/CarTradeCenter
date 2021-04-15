@@ -87,6 +87,12 @@ namespace CarTradeCenter.BackgroundServices
             throw new Exception("Unique car not found");
         }
 
+        public List<string> GetAllImagesOfVehicleFromPage()
+        {
+
+            return "";
+        }
+
 
     }
 }
