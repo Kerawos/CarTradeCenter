@@ -31,7 +31,7 @@ namespace CarTradeCenter.WebScrap
                 {
                     try
                     {
-                        vehicleList.Add(GetVehicleFromNode(vehicleNode));
+                        //vehicleList.Add(GetVehicleFromNode(vehicleNode));
                     }
                     catch
                     {
@@ -42,8 +42,32 @@ namespace CarTradeCenter.WebScrap
             return vehicleList;
         }
 
-        
-        private Vehicle GetVehicleFromNode(string vehicleNode)
+
+        public Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
+        {
+            Vehicle vhc = new Vehicle();
+            string[] vehiclesNode = pageTextRaw.Split('{');
+            foreach (string vehicleNode in vehiclesNode)
+            {
+                if (vehicleNode.Contains("id"))
+                {
+                    try
+                    {
+                        Vehicle vhcIncomplete = GetVehicleMainFromNode(vehicleNode);
+                        if(WebScrp.IsCarUnique(vehiclesFromDb, vhcIncomplete))
+                            return UpdateVehicleByExtras(vhcIncomplete);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            throw new Exception("No unique car found in main");
+        }
+
+
+        private Vehicle GetVehicleMainFromNode(string vehicleNode)
         {
             Vehicle vhc = new Vehicle();
             vhc.Title = WebScrp.NodeCutter(vehicleNode, "at\":\"", "\",\"");
@@ -51,6 +75,12 @@ namespace CarTradeCenter.WebScrap
             vhc.IdExternal = GetExternalId(vehicleNode);
             Image imMini = new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + WebScrp.NodeCutter(vehicleNode, "is\":\"", "\",\""));
             vhc.Images.Add(imMini);
+            return vhc;
+        }
+
+        
+        private Vehicle UpdateVehicleByExtras(Vehicle vhc)
+        {
             string subPage = WebScrp.GetPageTextRaw(vhc.Url);
             vhc.DateAuctionStart = DateTime.Now;
             vhc.DateAuctionEnd = GetAuctionEndTime(subPage);

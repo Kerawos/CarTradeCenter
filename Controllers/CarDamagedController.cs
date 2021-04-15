@@ -65,11 +65,10 @@ namespace CarTradeCenter.Controllers
             WebScrapper wScrp = new WebScrapper();
             WebScrapperAxa wScrpAxa = new WebScrapperAxa();
             string mainPageRaw = wScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
-            List<Vehicle> VehiclesFromMainPage = wScrpAxa.GetVehicleListFromMain(mainPageRaw);
             List<Vehicle> VehiclesFromDb = RepoVehicle.FindAll();
             try
             {
-                Vehicle vehicleUnique = wScrp.GetUniqueCar(VehiclesFromMainPage, VehiclesFromDb);
+                Vehicle vehicleUnique = wScrpAxa.GetUniqueVehicleFromMain(mainPageRaw, VehiclesFromDb);
                 RepoVehicle.Create(vehicleUnique);
             }
             catch
