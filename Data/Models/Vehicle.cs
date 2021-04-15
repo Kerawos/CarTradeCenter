@@ -10,12 +10,14 @@ namespace CarTradeCenter.Data
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public int IdExternal { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]
         public DateTime DateAuctionEnd { get; set; }
         public DateTime DateAuctionStart { get; set; }
+        [Required]
         public string Url { get; set; }
         public string InfoBasic { get; set; }
         public string InfoExtra { get; set; }
@@ -26,10 +28,12 @@ namespace CarTradeCenter.Data
         [Required]
         public string CompanyProvider { get; set; }
 
+
         public Vehicle()
         {
             Images = new List<Image>();
         }
+
 
         public Image GetImageMini()
         {
@@ -38,6 +42,7 @@ namespace CarTradeCenter.Data
             else
                 throw new System.Exception("In Car: " + Title + " there is any ImageMini available.");
         }
+
 
         public string GetImageMiniUrl()
         {
