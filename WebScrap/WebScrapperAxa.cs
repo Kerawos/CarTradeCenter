@@ -70,6 +70,7 @@ namespace CarTradeCenter.WebScrap
             vhc.IdExternal = GetExternalId(vehicleNode);
             Image imMini = new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + WebScrp.NodeCutter(vehicleNode, "is\":\"", "\",\""));
             vhc.Images.Add(imMini);
+            vhc.CompanyProvider = "Axa";
             return vhc;
         }
 
@@ -105,7 +106,8 @@ namespace CarTradeCenter.WebScrap
                     imUrl = WebScrp.NodeCutter(s, "src=", "alt=");
                     imUrl = imUrl.Replace("\"", "");
                     imUrl = imUrl.Replace("amp;", "");
-                    imUrl = imUrl.Replace("/", "");
+                    if (imUrl.Substring(0, 1) == "/")                     
+                        imUrl = imUrl.Remove(0, 1);
                     imUrl = URL_AXA + imUrl;
                     images.Add(new Image(imUrl));
                 }

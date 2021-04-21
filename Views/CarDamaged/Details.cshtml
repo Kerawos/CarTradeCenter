@@ -8,9 +8,9 @@
 
 @*Important Info*@
 <div>
-    <h4>model.Title</h4>
+    <h4>@Model.Title</h4>
 
-    <center><h5>mode.CompanyProvider</h5></center>
+    <center><h5>@Model.CompanyProvider</h5></center>
 
     <hr />
     <dl class="row">
@@ -83,12 +83,15 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InfoBasic)
+            <hr />
         </dd>
+        
         <dt class="col-sm-2">
             Wyposarzenie Opcjonalne (@Html.DisplayNameFor(model => model.InfoExtra))
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InfoExtra)
+            <hr />
         </dd>
         @if (Model.IsDamaged)
         {
@@ -97,12 +100,14 @@
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.InfoDamage)
+                <hr />
             </dd>
             <dt class="col-sm-2">
                 Części nieuszkodzone (@Html.DisplayNameFor(model => model.InfoUsableParts))
             </dt>
             <dd class="col-sm-10">
                 @Html.DisplayFor(model => model.InfoUsableParts)
+                <hr />
             </dd>
         }
 

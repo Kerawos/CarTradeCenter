@@ -35,10 +35,11 @@ namespace CarTradeCenter.Controllers
         // GET: CarDamagedController/Details/5
         public ActionResult Details(int id)
         {
-            var car = RepoVehicle.FindById(id);
-            if (car == null)
+            Vehicle vhc = RepoVehicle.FindById(id);
+            vhc.Images = RepoImg.GetImagesOfCar(vhc.Id);
+            if (vhc == null)
                 return NotFound();
-            return View(car);
+            return View(vhc);
         }
 
         // GET: CarDamagedController/Create
@@ -71,8 +72,10 @@ namespace CarTradeCenter.Controllers
                 Vehicle vehicleUnique = wScrpAxa.GetUniqueVehicleFromMain(mainPageRaw, VehiclesFromDb);
                 RepoVehicle.Create(vehicleUnique);
             }
-            catch
+            catch (Exception ex)
             {
+                string temp = ex.Message;
+                temp = temp + "";
                 //no new car will be created
             }
             return RedirectToAction(nameof(Index));
