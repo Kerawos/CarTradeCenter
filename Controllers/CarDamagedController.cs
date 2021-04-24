@@ -27,9 +27,9 @@ namespace CarTradeCenter.Controllers
         // GET: CarDamagedController
         public ActionResult Index()
         {
-            List<Vehicle> carsDamaged = RepoVehicle.FindAll().ToList();
-            RepoImg.UpdateAllImages(carsDamaged);
-            return View(carsDamaged);
+            List<Vehicle> vehiclesDamaged = RepoVehicle.FindAll();
+            RepoImg.UpdateAllImages(vehiclesDamaged);
+            return View(vehiclesDamaged);
         }
 
         // GET: CarDamagedController/Details/5

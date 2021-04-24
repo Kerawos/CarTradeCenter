@@ -109,6 +109,7 @@ namespace CarTradeCenter.WebScrap
                     if (imUrl.Substring(0, 1) == "/")                     
                         imUrl = imUrl.Remove(0, 1);
                     imUrl = URL_AXA + imUrl;
+                    imUrl = imUrl.Replace("&wmk=&pfdrid_c=true", "");
                     images.Add(new Image(imUrl));
                 }
                 catch

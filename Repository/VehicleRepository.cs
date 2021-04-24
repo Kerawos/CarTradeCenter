@@ -34,25 +34,25 @@ namespace CarTradeCenter.Repository
 
         public IEnumerable<Vehicle> FindAllByDamaged(bool isDamaged)
         {
-            return Db.Vehicles
+            return FindAll()
                 .Where(v => v.IsDamaged == isDamaged)
                 .ToList();
         }
 
         public Vehicle FindById(int id)
         {
-            return Db.Vehicles.Find(id);
+            return FindAll().Find(v=> v.Id==id);
         }
 
         public Vehicle FindByIdExternal(int idExternal)
         {
-            Vehicle cd = Db.Vehicles.Where(c => c.IdExternal == idExternal).First();
+            Vehicle cd = FindAll().Where(c => c.IdExternal == idExternal).First();
             return cd;   
         }
 
         public IEnumerable<Vehicle> GetVehiclesByName(string name)
         {
-            return from c in Db.Vehicles
+            return from c in FindAll()
                    where
                     c.Title.ToLower().Contains(name.ToLower())
                    select c;

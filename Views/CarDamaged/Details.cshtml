@@ -4,16 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Detale</h1>
+<h1>@Model.Title</h1>
 
 @*Important Info*@
 <div>
-    <h4>@Model.Title</h4>
-
     <center><h5>@Model.CompanyProvider</h5></center>
+
 
     <hr />
     <dl class="row">
+        <dt class="col-sm-2">
+            Link do aukcji
+        </dt>
+        <dd class="col-sm-10">
+            <a href="@Html.DisplayFor(model => model.Url)">Link</a>
+        </dd>
         <dt class="col-sm-2">
             Koniec Aukcji (@Html.DisplayNameFor(model => model.DateAuctionEnd))
         </dt>
