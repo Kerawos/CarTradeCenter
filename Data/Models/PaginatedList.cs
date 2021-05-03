@@ -29,10 +29,10 @@ namespace CarTradeCenter.Data.Models
             get { return PageIndex < TotalPages; }
         }
 
-        public static async Task<PaginatedList<T>> CreateAsync (IQueryable<T> source, int pageIndex, int pageSize)
+        public static List<T> CreateList (List<T> models, int pageIndex, int pageSize)
         {
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
+            var count = models.Count();
+            var items = models.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
 

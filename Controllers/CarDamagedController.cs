@@ -25,11 +25,14 @@ namespace CarTradeCenter.Controllers
         }
 
         // GET: CarDamagedController
-        public ActionResult Index()
+        public ActionResult Index(int pageNumber = 1)
         {
             List<Vehicle> vehiclesDamaged = RepoVehicle.FindAll();
             RepoImg.UpdateAllImages(vehiclesDamaged);
-            return View(vehiclesDamaged);
+            //return View(vehiclesDamaged);
+            return View(await PaginatedList<Vehicle>.CreateAsync(vehiclesDamaged, pageNumber, 5));
+
+
         }
 
         // GET: CarDamagedController/Details/5
