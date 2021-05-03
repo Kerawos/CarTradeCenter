@@ -19,6 +19,7 @@ namespace CarTradeCenter.Data
         public DateTime DateAuctionStart { get; set; }
         [Required]
         public string Url { get; set; }
+        public string InfoGeneralDesc { get; set; }
         public string InfoBasic { get; set; }
         public string InfoExtra { get; set; }
         public string InfoUsableParts { get; set; }

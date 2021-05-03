@@ -2,21 +2,21 @@
 
 namespace CarTradeCenter.Migrations
 {
-    public partial class VehicleCompanyProvider : Migration
+    public partial class VehicleInfoGeneralDesc : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<string>(
-                name: "CompanyProvider",
+                name: "InfoGeneralDesc",
                 table: "Vehicles",
-                nullable: false,
-                defaultValue: "");
+                type: "nvarchar(max)",
+                nullable: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "CompanyProvider",
+                name: "InfoGeneralDesc",
                 table: "Vehicles");
         }
     }
