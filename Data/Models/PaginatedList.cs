@@ -4,12 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CarTradeCenter.Data.Models
+namespace CarTradeCenter.Data
 {
     public class PaginatedList<T> : List<T>
     {
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
+
+        public PaginatedList()
+        {
+
+        }
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
@@ -29,7 +34,7 @@ namespace CarTradeCenter.Data.Models
             get { return PageIndex < TotalPages; }
         }
 
-        public static List<T> CreateList (List<T> models, int pageIndex, int pageSize)
+        public List<T> CreateList (List<T> models, int pageIndex, int pageSize)
         {
             var count = models.Count();
             var items = models.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();

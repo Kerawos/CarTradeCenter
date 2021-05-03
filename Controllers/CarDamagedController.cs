@@ -30,8 +30,8 @@ namespace CarTradeCenter.Controllers
             List<Vehicle> vehiclesDamaged = RepoVehicle.FindAll();
             RepoImg.UpdateAllImages(vehiclesDamaged);
             //return View(vehiclesDamaged);
-            return View(await PaginatedList<Vehicle>.CreateAsync(vehiclesDamaged, pageNumber, 5));
-
+            PaginatedList<Vehicle> paginatedList = new PaginatedList<Vehicle>();
+            return View(paginatedList.CreateList(vehiclesDamaged, pageNumber, 20));
 
         }
 

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CarTradeCenter.Data.Vehicle>
+﻿@model CarTradeCenter.Data.PaginatedList<CarTradeCenter.Data.Vehicle>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -25,16 +25,30 @@
     <tbody>
         @foreach (var car in Model)
         {
-        <tr>
-            <td>@car.Title</td>
-            <td> <img src="@car.GetImageMiniUrl()"  style="max-height: 300px; width:auto"> </td>
-            <td>@car.DateAuctionEnd</td>
-            @*<td> <a asp-action="Details" asp-route-id="@car.Id">Detale</a></td>*@
-            <td> <a href="@car.Url">Oryginalna Aukcja</a></td>
-            <td> @car.CompanyProvider </td>
-            <td> <a asp-action="Usuń Aukcje" asp-route-id="@car.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>
-        </tr>
+            <tr>
+                <td style="width: 500px">@car.Title</td>
+                <td> <img src="@car.GetImageMiniUrl()" style="max-height: 300px; width:auto"> </td>
+                <td>@car.DateAuctionEnd</td>
+                @*<td> <a asp-action="Details" asp-route-id="@car.Id">Detale</a></td>*@
+                <td> <a href="@car.Url">Oryginalna Aukcja</a></td>
+                <td> @car.CompanyProvider </td>
+                <td> <a asp-action="Usuń Aukcje" asp-route-id="@car.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>
+            </tr>
         }
     </tbody>
 </table>
+
+<hr />
+<div>
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="@(i == Model.PageIndex ? "page-item active" : "page-item")">
+                <a class="page-link" href="@Url.Action("Index", new { page = i })">@i</a>
+            </li>
+
+        }
+    </ul>
+</div>
+
 
