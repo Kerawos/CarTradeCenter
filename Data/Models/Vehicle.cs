@@ -36,19 +36,12 @@ namespace CarTradeCenter.Data
         }
 
 
-        public Image GetImageMini()
-        {
-            if (Images.Any())
-                return Images.First();
-            else
-                throw new System.Exception("In Car: " + Title + " there is any ImageMini available.");
-        }
-
-
         public string GetImageMiniUrl()
         {
             if (Images.Any())
-                return Images.First().Url;
+                return Images
+                    .Where(i => i.Url.Contains("PREMIUM"))
+                    .First().Url;
             else
                 return "";
         }

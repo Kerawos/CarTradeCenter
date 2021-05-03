@@ -94,6 +94,7 @@ namespace CarTradeCenter.Controllers
                 {
                     Vehicle vehicleUnique = wScrpAxa.GetUniqueVehicleFromMain(mainPageRaw, VehiclesFromDb);
                     RepoVehicle.Create(vehicleUnique);
+                    VehiclesFromDb.Add(vehicleUnique);
                 }
                 catch (Exception ex)
                 {
