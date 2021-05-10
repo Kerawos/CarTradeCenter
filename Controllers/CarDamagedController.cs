@@ -17,25 +17,20 @@ namespace CarTradeCenter.Controllers
     {
         private readonly IRepositoryVehicle RepoVehicle;
         private readonly IRepositoryImage RepoImg;
-        //private PaginatedList<Vehicle> PaginatedList;
 
         public CarDamagedController(IRepositoryVehicle repoVehicle, IRepositoryImage repoImg)
         {
             this.RepoVehicle = repoVehicle;
             this.RepoImg = repoImg;
-           // this.PaginatedList = new PaginatedList<Vehicle>();
+
         }
 
         // GET: CarDamagedController
-        public ActionResult Index(int currentPage = 1)
+        public ActionResult Index(int pageNumber = 1)
         {
             List<Vehicle> vehiclesDamaged = RepoVehicle.FindAll();
             RepoImg.UpdateAllImages(vehiclesDamaged);
-            //return View(vehiclesDamaged);
-            //currentPage = PaginatedList.PageIndex;
-            PaginatedList<Vehicle> paginatedList = new PaginatedList<Vehicle>();
-            return View(paginatedList.CreateList(vehiclesDamaged, currentPage, 10));
-
+            return View(new PaginatedList<Vehicle>().CreateList(vehiclesDamaged, pageNumber, 10));
         }
 
         // GET: CarDamagedController/Details/5
