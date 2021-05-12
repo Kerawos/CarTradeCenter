@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
+
 namespace CarTradeCenter.Data.Models
 {
     public class PaginatedList<T> : List<T>

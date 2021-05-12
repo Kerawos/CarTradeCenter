@@ -1,10 +1,9 @@
-﻿using CarTradeCenter.Data;
+﻿using CarTradeCenter.Data.Models;
 using HtmlAgilityPack;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
+
 
 namespace CarTradeCenter.WebScrap
 {
