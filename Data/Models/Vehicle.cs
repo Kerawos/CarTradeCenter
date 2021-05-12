@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
-namespace CarTradeCenter.Data
+namespace CarTradeCenter.Data.Models
 {
     public class Vehicle
     {

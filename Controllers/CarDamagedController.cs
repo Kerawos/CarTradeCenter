@@ -1,15 +1,10 @@
-﻿using CarTradeCenter.BackgroundServices;
-using CarTradeCenter.Contracts;
-using CarTradeCenter.Data;
+﻿using CarTradeCenter.Contracts;
 using CarTradeCenter.Data.Models;
-using CarTradeCenter.Models;
 using CarTradeCenter.WebScrap;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace CarTradeCenter.Controllers
 {
