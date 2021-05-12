@@ -12,5 +12,6 @@ namespace CarTradeCenter.Contracts
         bool Create(Vehicle entity);
         bool Update(Vehicle entity);
         IEnumerable<Vehicle> FindAllByDamaged(bool isDamaged);
+        Vehicle FindByIdExternal(int idExternal);
     }
 }

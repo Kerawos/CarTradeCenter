@@ -11,5 +11,6 @@ namespace CarTradeCenter.Contracts
     {
         List<Image> GetImagesOfCar(int CarID);
         List<Vehicle> UpdateAllImages(List<Vehicle> cars);
+        Image FindByIdExternal(int idExternal);
     }
 }

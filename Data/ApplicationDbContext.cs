@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using CarTradeCenter.Models;
 using CarTradeCenter.Data.Models;
 
 namespace CarTradeCenter.Data
@@ -17,6 +13,7 @@ namespace CarTradeCenter.Data
 
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<Image> Images { get; set; }
+        public DbSet<User> UsersApp { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
