@@ -1,5 +1,5 @@
 ﻿using CarTradeCenter.Data.Models;
-
+using System.Collections.Generic;
 
 namespace CarTradeCenter.Contracts
 {
@@ -11,5 +11,8 @@ namespace CarTradeCenter.Contracts
         bool ConfirmPhoneNumber(User entity);
         bool ConfirmEmail(User entity);
         bool BidVehicle(User entity, Vehicle vehicle, double amount);
+        List<Vehicle> GetAllCarsWhichBid(User entity);
+        double GetAmountOfBidedCar(User entity, Vehicle vehicle);
+        bool BanUser(User entity);
     }
 }
