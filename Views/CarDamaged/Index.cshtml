@@ -18,7 +18,7 @@
             <th>Nazwa</th>
             <th>Zdjecie</th>
             <th>Koniec Aukcji</th>
-            <th>Oryginalny Link</th>
+            <th>Czas Do Zakończenia</th>
             <th>Firma</th>
         </tr>
     </thead>
@@ -26,11 +26,11 @@
         @foreach (var car in Model)
         {
             <tr>
-                <td style="width: 500px">@car.Title</td>
-                <td> <img src="@car.GetImageMiniUrl()" style="max-height: 300px; width:auto"> </td>
-                <td>@car.DateAuctionEnd</td>
+                <td style="width: 500px"> <a href="@car.Url" target="_blank">@car.Title</a></td>
+                <td> <a href="@car.Url" target="_blank"> <img src="@car.GetImageMiniUrl()" style="max-height: 300px; width:auto"> </a> </td>
+                <td>@car.DateAuctionEnd.ToString("dd.MM.yyyy HH:mm")</td>
                 @*<td> <a asp-action="Details" asp-route-id="@car.Id">Detale</a></td>*@
-                <td> <a href="@car.Url">Oryginalna Aukcja</a></td>
+                <td>@Math.Round(((car.DateAuctionEnd-System.DateTime.Now).TotalHours),0) godzin</td>
                 <td> @car.CompanyProvider </td>
                 <td> <a asp-action="Usuń Aukcje" asp-route-id="@car.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>
             </tr>

@@ -27,6 +27,8 @@ namespace CarTradeCenter.Data.Models
         public virtual List<Image> Images { get; set; }
         [Required]
         public string CompanyProvider { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsArchived { get; set; }
 
 
         public Vehicle()
