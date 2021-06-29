@@ -77,6 +77,33 @@ namespace CarTradeCenter.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public ActionResult CreateAutoAxa(int carsToAdd)
+        {
+            WebScrapper wScrp = new WebScrapper();
+            WebScrapperAxa wScrpAxa = new WebScrapperAxa();
+            string mainPageRaw = wScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
+            List<Vehicle> VehiclesFromDb = RepoVehicle.FindAll();
+
+            for (int i = 0; i < carsToAdd; i++)
+            {
+                try
+                {
+                    Vehicle vehicleUnique = wScrpAxa.GetUniqueVehicleFromMain(mainPageRaw, VehiclesFromDb);
+                    RepoVehicle.Create(vehicleUnique);
+                    VehiclesFromDb.Add(vehicleUnique);
+                }
+                catch (Exception ex)
+                {
+                    string temp = ex.Message;
+                    temp = temp + "";
+                    //no new car will be created
+                }
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+
         public ActionResult CreateAutoAxa10()
         {
             WebScrapper wScrp = new WebScrapper();
@@ -103,7 +130,7 @@ namespace CarTradeCenter.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-       
+
 
 
         // GET: CarDamagedController/Edit/5
