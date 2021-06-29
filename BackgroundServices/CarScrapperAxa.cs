@@ -30,9 +30,8 @@ namespace CarTradeCenter.BackgroundServices
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                //TryToAddVehicleDamagedFromAxa(20);
-                TryToAddVehicles(10, CarLimit);
-                await Task.Delay(60000);
+                TryToAddVehicles(1, CarLimit);
+                await Task.Delay(1200000);//every 20min
             }
         }
 
@@ -40,10 +39,9 @@ namespace CarTradeCenter.BackgroundServices
         {
             string mainPageRaw = WebScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
             List<Vehicle> VehiclesFromDb = Repo.FindAll();
-            int carInDb = Repo.FindAll().Count();
             for (int i = 0; i < vehiclesToAdd; i++)
             {
-                if (carInDb < carsLimit)
+                if (Repo.FindAll().Count()>=carsLimit)
                     return;
                 try
                 {
