@@ -40,7 +40,7 @@ namespace CarTradeCenter.BackgroundServices
             int i = 0;
             foreach (Vehicle vhc in vehiclesFromDb)
             {
-                if (vhc.DateAuctionEnd > DateTime.Now)
+                if (vhc.DateAuctionEnd < DateTime.Now)
                 {
                     vhc.IsActive = false;
                     vhc.IsArchived = true;
