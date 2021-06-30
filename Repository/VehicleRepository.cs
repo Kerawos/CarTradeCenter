@@ -68,5 +68,19 @@ namespace CarTradeCenter.Repository
             Db.Vehicles.Update(entity);
             return Save();
         }
+
+        public List<Vehicle> FindAllActive()
+        {
+            return FindAll()
+                .Where(v => v.IsActive == true)
+                .ToList();
+        }
+
+        public List<Vehicle> c
+        {
+            return FindAll()
+                .Where(v => v.IsArchived == true)
+                .ToList();
+        }
     }
 }

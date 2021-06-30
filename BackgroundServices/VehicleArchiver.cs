@@ -1,4 +1,5 @@
 ﻿using CarTradeCenter.Contracts;
+using CarTradeCenter.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -34,7 +35,7 @@ namespace CarTradeCenter.BackgroundServices
 
         private void TryToArchiveVehicles(int vehiclesToArchive)
         {
-
+            List<Vehicle> VehiclesFromDb = Repo.FindAll();
         }
     }
 }
