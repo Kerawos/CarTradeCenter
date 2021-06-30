@@ -76,7 +76,7 @@ namespace CarTradeCenter.Repository
                 .ToList();
         }
 
-        public List<Vehicle> c
+        public List<Vehicle> FindAllArchived()
         {
             return FindAll()
                 .Where(v => v.IsArchived == true)

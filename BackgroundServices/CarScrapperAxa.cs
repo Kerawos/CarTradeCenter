@@ -41,7 +41,7 @@ namespace CarTradeCenter.BackgroundServices
         public void TryToAddVehicles(int vehiclesToAdd, int carsLimit)
         {
             string mainPageRaw = WebScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
-            List<Vehicle> VehiclesFromDb = Repo.FindAll();
+            List<Vehicle> VehiclesFromDb = Repo.FindAllActive();
             for (int i = 0; i < vehiclesToAdd; i++)
             {
                 if (Repo.FindAll().Count()>=carsLimit)

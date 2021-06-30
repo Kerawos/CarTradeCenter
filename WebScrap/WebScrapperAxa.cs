@@ -71,6 +71,8 @@ namespace CarTradeCenter.WebScrap
             Image imMini = new Image(URL_AXA.Substring(0, URL_AXA.Length - 1) + WebScrp.NodeCutter(vehicleNode, "is\":\"", "\",\""));
             vhc.Images.Add(imMini);
             vhc.CompanyProvider = "Axa";
+            vhc.IsActive = true;
+            vhc.IsArchived = false;
             return vhc;
         }
 
