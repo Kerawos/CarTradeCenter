@@ -1,5 +1,4 @@
 ﻿using CarTradeCenter.Contracts;
-using CarTradeCenter.Data;
 using CarTradeCenter.Data.Models;
 using CarTradeCenter.WebScrap;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +17,8 @@ namespace CarTradeCenter.BackgroundServices
         private readonly WebScrapperAxa WebScrpAxa;
         private readonly IRepositoryVehicle Repo;
         private readonly int CarLimit = 9999;
+        private readonly int Time20min = 1200000;
+
 
         public CarScrapperAxa(IServiceScopeFactory factory)
         {
@@ -26,14 +27,16 @@ namespace CarTradeCenter.BackgroundServices
             this.WebScrpAxa = new WebScrapperAxa();
         }
 
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
                 TryToAddVehicles(1, CarLimit);
-                await Task.Delay(1200000);//every 20min
+                await Task.Delay(Time20min);
             }
         }
+
 
         public void TryToAddVehicles(int vehiclesToAdd, int carsLimit)
         {
@@ -57,71 +60,5 @@ namespace CarTradeCenter.BackgroundServices
                 }
             }
         }
-
-        //public void TryToAddVehicleDamagedFromAxa(int limitCarsInTheDb)
-        //{
-        //    int carInDb;
-        //    try
-        //    {
-        //        carInDb = Repo.FindAll().Count();
-        //        if (carInDb < limitCarsInTheDb)
-        //        {
-        //            try
-        //            {
-        //                Repo.Create(GetUniqueCar());
-        //            }
-        //            catch
-        //            {
-
-        //            }
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        try
-        //        {
-        //            Vehicle cd = GetUniqueCar();
-        //            Repo.Create(cd);
-        //        }
-        //        catch
-        //        {
-
-        //        }
-
-        //    }
-        //}
-
-        //public Vehicle GetUniqueCar()
-        //{
-        //    string rawPage = scrapperAxa.GetPageTextRaw();
-        //    List<Vehicle> cars = scrapperAxa.GetCarListFromMain(rawPage);
-        //    foreach (Vehicle car in cars)
-        //    {
-        //        try
-        //        {
-        //            var f = Repo.FindByIdExternal(car.IdExternal);
-        //            bool found = !Repo.FindByIdExternal(car.IdExternal).Equals(null);
-
-        //            if (!found)
-        //            {
-        //                return car;
-        //            }
-        //        }
-        //        catch
-        //        {
-        //            return car;
-        //        }
-
-        //    }
-        //    throw new Exception("Unique car not found");
-        //}
-
-        //public List<string> GetAllImagesOfVehicleFromPage()
-        //{
-
-        //    return "";
-        //}
-
-
     }
 }
