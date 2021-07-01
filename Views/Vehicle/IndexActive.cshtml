@@ -58,11 +58,11 @@
     }
     <hr />
     Strona  |
-    <a asp-action="Index" asp-route-pageNumber="1" class="btn btn-default">Pierwsza</a> |
-    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">Poprzednia</a>
+    <a asp-action="IndexActive" asp-route-pageNumber="1" class="btn btn-default">Pierwsza</a> |
+    <a asp-action="IndexActive" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">Poprzednia</a>
     |  @Model.PageIndex z @Model.TotalPages |
-    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Następna</a> |
-    <a asp-action="Index" asp-route-pageNumber="@(Model.TotalPages)" class="btn btn-default">Ostatnia</a>
+    <a asp-action="IndexActive" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Następna</a> |
+    <a asp-action="IndexActive" asp-route-pageNumber="@(Model.TotalPages)" class="btn btn-default">Ostatnia</a>
 </div>
 
 
