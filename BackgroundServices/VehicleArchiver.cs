@@ -44,6 +44,7 @@ namespace CarTradeCenter.BackgroundServices
                 {
                     vhc.IsActive = false;
                     vhc.IsArchived = true;
+                    Repo.Update(vhc);
                     i++;
                 }
                 if (i > vehiclesToArchive)
