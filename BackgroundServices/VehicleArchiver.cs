@@ -3,8 +3,7 @@ using CarTradeCenter.Data.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Collections.Generic
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -14,8 +13,7 @@ namespace CarTradeCenter.BackgroundServices
     {
         private readonly IRepositoryVehicle Repo;
         private readonly int Time1h = 6000000;
-        private readonly int Time1min = 600000;
-        private readonly int CarLimit = 9;
+        private readonly int CarLimit = 999;
 
 
         public VehicleArchiver(IServiceScopeFactory factory)
@@ -29,7 +27,7 @@ namespace CarTradeCenter.BackgroundServices
             while (!stoppingToken.IsCancellationRequested)
             {
                 TryToArchiveVehicles(CarLimit);
-                await Task.Delay(Time1min);
+                await Task.Delay(Time1h);
             }
         }
 
