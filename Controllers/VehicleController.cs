@@ -8,19 +8,19 @@ using System.Collections.Generic;
 
 namespace CarTradeCenter.Controllers
 {
-    public class CarDamagedController : Controller
+    public class VehicleController : Controller
     {
         private readonly IRepositoryVehicle RepoVehicle;
         private readonly IRepositoryImage RepoImg;
 
-        public CarDamagedController(IRepositoryVehicle repoVehicle, IRepositoryImage repoImg)
+        public VehicleController(IRepositoryVehicle repoVehicle, IRepositoryImage repoImg)
         {
             this.RepoVehicle = repoVehicle;
             this.RepoImg = repoImg;
 
         }
 
-        // GET: CarDamagedController
+        // GET: VehicleController
         public ActionResult Index(int pageNumber = 1)
         {
             List<Vehicle> vehiclesDamaged = RepoVehicle.FindAllActive();
@@ -28,7 +28,17 @@ namespace CarTradeCenter.Controllers
             return View(new PaginatedList<Vehicle>().CreateList(vehiclesDamaged, pageNumber, 10));
         }
 
-        // GET: CarDamagedController/Details/5
+
+        
+        public ActionResult IndexActice(int pageNumber = 1)
+        {
+            List<Vehicle> vehiclesDamaged = RepoVehicle.FindAllActive();
+            RepoImg.UpdateAllImages(vehiclesDamaged);
+            return View(new PaginatedList<Vehicle>().CreateList(vehiclesDamaged, pageNumber, 10));
+        }
+
+
+        // GET: VehicleController/Details/5
         public ActionResult Details(int id)
         {
             Vehicle vhc = RepoVehicle.FindById(id);
@@ -38,7 +48,7 @@ namespace CarTradeCenter.Controllers
             return View(vhc);
         }
 
-        // GET: CarDamagedController/Create
+        // GET: VehicleController/Create
         public ActionResult Create()
         {
             return View();
@@ -133,7 +143,7 @@ namespace CarTradeCenter.Controllers
 
 
 
-        // GET: CarDamagedController/Edit/5
+        // GET: VehicleController/Edit/5
         public ActionResult Edit(int id)
         {
             var car = RepoVehicle.FindById(id);
@@ -142,7 +152,7 @@ namespace CarTradeCenter.Controllers
             return View(car);
         }
 
-        // POST: CarDamagedController/Edit/5
+        // POST: VehicleController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Vehicle model)
@@ -164,7 +174,7 @@ namespace CarTradeCenter.Controllers
         }
 
         //hard delete. Soft delete = inactivity in database
-        // GET: CarDamagedController/Delete/5
+        // GET: VehicleController/Delete/5
         public ActionResult Delete(int id)
         {
             var car = RepoVehicle.FindById(id);
@@ -179,7 +189,7 @@ namespace CarTradeCenter.Controllers
             return BadRequest();
         }
 
-        // POST: CarDamagedController/Delete/5
+        // POST: VehicleController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(Vehicle model)
