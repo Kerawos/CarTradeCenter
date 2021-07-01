@@ -12,6 +12,7 @@ namespace CarTradeCenter.Controllers
     {
         private readonly IRepositoryVehicle RepoVehicle;
         private readonly IRepositoryImage RepoImg;
+        private readonly int PageSizeDefault = 30;
 
         public VehicleController(IRepositoryVehicle repoVehicle, IRepositoryImage repoImg)
         {
@@ -25,7 +26,7 @@ namespace CarTradeCenter.Controllers
         {
             List<Vehicle> vehicles = RepoVehicle.FindAll();
             RepoImg.UpdateAllImages(vehicles);
-            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, 10));
+            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }
 
 
@@ -33,7 +34,7 @@ namespace CarTradeCenter.Controllers
         {
             List<Vehicle> vehiclesActive = RepoVehicle.FindAllActive();
             RepoImg.UpdateAllImages(vehiclesActive);
-            return View(new PaginatedList<Vehicle>().CreateList(vehiclesActive, pageNumber, 10));
+            return View(new PaginatedList<Vehicle>().CreateList(vehiclesActive, pageNumber, PageSizeDefault));
         }
 
 
@@ -41,7 +42,7 @@ namespace CarTradeCenter.Controllers
         {
             List<Vehicle> vehiclesArchived = RepoVehicle.FindAllArchived();
             RepoImg.UpdateAllImages(vehiclesArchived);
-            return View(new PaginatedList<Vehicle>().CreateList(vehiclesArchived, pageNumber, 10));
+            return View(new PaginatedList<Vehicle>().CreateList(vehiclesArchived, pageNumber, PageSizeDefault));
         }
 
 
