@@ -1,10 +1,10 @@
-﻿@model CarTradeCenter.Data.Models.PaginatedList<CarTradeCenter.Data.Models.Vehicle >
+﻿@model CarTradeCenter.Data.Models.PaginatedList<CarTradeCenter.Data.Models.Vehicle>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Pojazdy</h1>
+<h1>Zakończone</h1>
 
 <p>
     <a asp-action="CreateAutoAxa">Dodaj Nowy Axa</a>
@@ -30,18 +30,18 @@
                 <td style="width: 500px"> <a href="@vehicle.Url" target="_blank">@vehicle.Title</a></td>
                 <td> <a href="@vehicle.Url" target="_blank"> <img src="@vehicle.GetImageMiniUrl()" style="max-height: 300px; width:auto"> </a> </td>
                 <td>@vehicle.DateAuctionEnd.ToString("dd.MM.yyyy HH:mm")</td>
-                @*<td> <a asp-action="Details" asp-route-id="@vehicle.Id">Detale</a></td>*@
-            
+
                 @if (Math.Round(((vehicle.DateAuctionEnd - System.DateTime.Now).TotalHours), 0) > 0)
                 {
                     <td style="align-content:center">@Math.Round(((vehicle.DateAuctionEnd - System.DateTime.Now).TotalHours), 0) godzin</td>
-                } else
+                }
+                else
                 {
                     <td style="color:red">zakończona @(Math.Round(((vehicle.DateAuctionEnd - System.DateTime.Now).TotalHours), 0) * -1) godzin temu</td>
                 }
-            
+
                 <td> @vehicle.CompanyProvider </td>
-                @*<td> <a asp-action="Usuń Aukcje" asp-route-id="@vehicle.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>*@
+                
                 <td>@vehicle.Id</td>
             </tr>
         }
@@ -62,7 +62,7 @@
     <a asp-action="Index" asp-route-pageNumber="1" class="btn btn-default">Pierwsza</a> |
     <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex - 1)" class="btn btn-default @prevDisabled">Poprzednia</a>
     |  @Model.PageIndex z @Model.TotalPages |
-    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Następna</a> | 
+    <a asp-action="Index" asp-route-pageNumber="@(Model.PageIndex + 1)" class="btn btn-default @nextDisabled">Następna</a> |
     <a asp-action="Index" asp-route-pageNumber="@(Model.TotalPages)" class="btn btn-default">Ostatnia</a>
 </div>
 
