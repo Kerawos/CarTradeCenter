@@ -50,12 +50,12 @@ namespace CarTradeCenter.Repository
             return vhc;   
         }
 
-        public IEnumerable<Vehicle> GetVehiclesByName(string name)
+        public List<Vehicle> GetVehiclesByName(string name)
         {
-            return from v in FindAll()
-                   where v.Title.ToLower().Contains(name.ToLower())
-                   orderby v.Title
-                   select v;
+            return Db.Vehicles
+                .Where(v => v.Title.ToLower().Contains(name.ToLower()))
+                .OrderBy(v => v.Title)
+                .ToList();    
         }
 
         public bool Save()

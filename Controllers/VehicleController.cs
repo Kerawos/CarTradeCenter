@@ -29,6 +29,13 @@ namespace CarTradeCenter.Controllers
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }
 
+        public ActionResult OnGet(string searchTerm, int pageNumber = 1)
+        {
+            List<Vehicle> vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
+            RepoImg.UpdateAllImages(vehicles);
+            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
+        }
+
 
         public ActionResult IndexActive(int pageNumber = 1)
         {
