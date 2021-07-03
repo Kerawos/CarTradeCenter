@@ -46,16 +46,16 @@ namespace CarTradeCenter.Repository
 
         public Vehicle FindByIdExternal(int idExternal)
         {
-            Vehicle cd = FindAll().Where(c => c.IdExternal == idExternal).First();
-            return cd;   
+            Vehicle vhc = FindAll().Where(v => v.IdExternal == idExternal).First();
+            return vhc;   
         }
 
         public IEnumerable<Vehicle> GetVehiclesByName(string name)
         {
-            return from c in FindAll()
-                   where
-                    c.Title.ToLower().Contains(name.ToLower())
-                   select c;
+            return from v in FindAll()
+                   where v.Title.ToLower().Contains(name.ToLower())
+                   orderby v.Title
+                   select v;
         }
 
         public bool Save()
