@@ -50,6 +50,7 @@ namespace CarTradeCenter.Controllers
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }
 
+
         [HttpGet]
         public ActionResult IndexActive(string searchTerm, int pageNumber = 1)
         {
@@ -68,8 +69,7 @@ namespace CarTradeCenter.Controllers
                 }
                 else
                 {
-                    vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
-                    vehicles.
+                    vehicles = RepoVehicle.GetVehiclesByName(searchTerm, true);
                 }
 
             }
@@ -77,13 +77,14 @@ namespace CarTradeCenter.Controllers
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }
 
+
         [HttpGet]
-        public ActionResult Index(string searchTerm, int pageNumber = 1)
+        public ActionResult IndexArchived(string searchTerm, int pageNumber = 1)
         {
             List<Vehicle> vehicles = new List<Vehicle>();
             if (String.IsNullOrEmpty(searchTerm))
             {
-                vehicles = RepoVehicle.FindAll();
+                vehicles = RepoVehicle.FindAllArchived();
             }
             else
             {
@@ -95,28 +96,12 @@ namespace CarTradeCenter.Controllers
                 }
                 else
                 {
-                    vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
+                    vehicles = RepoVehicle.GetVehiclesByName(searchTerm, false);
                 }
 
             }
             RepoImg.UpdateAllImages(vehicles);
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
-        }
-
-        [HttpGet]
-        public ActionResult IndexActive(int pageNumber = 1)
-        {
-            List<Vehicle> vehiclesActive = RepoVehicle.FindAllActive();
-            RepoImg.UpdateAllImages(vehiclesActive);
-            return View(new PaginatedList<Vehicle>().CreateList(vehiclesActive, pageNumber, PageSizeDefault));
-        }
-
-
-        public ActionResult IndexArchived(int pageNumber = 1)
-        {
-            List<Vehicle> vehiclesArchived = RepoVehicle.FindAllArchived();
-            RepoImg.UpdateAllImages(vehiclesArchived);
-            return View(new PaginatedList<Vehicle>().CreateList(vehiclesArchived, pageNumber, PageSizeDefault));
         }
 
 
