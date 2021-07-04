@@ -40,22 +40,19 @@ namespace CarTradeCenter.Repository
         }
 
         
-        public List<Image> GetImagesOfCar(int CarID)
+        public List<Image> GetImagesOfVehicle(int vehicleID)
         {
-            return FindAll()
-                .Where(i => i.Vehicle.Id.Equals(CarID))
+            List<Image> images = FindAll();
+            return images
+                .Where(i => i.Vehicle.Id.Equals(vehicleID))
                 .ToList();
         }
 
-        public List<Vehicle> UpdateAllImages(List<Vehicle> cars)
+        public List<Vehicle> UpdateAllImages(List<Vehicle> vehicles)
         {
-            foreach (var car in cars)
-                car.Images = GetImagesOfCar(car.Id);
-            return cars;
-            //return cars.ForEach(c => c.Images = GetImagesOfCar(c.Id));
-
-    
-               
+            foreach (var vhc in vehicles)
+                vhc.Images = GetImagesOfVehicle(vhc.Id);
+            return vehicles;      
         }
 
         public bool Save()

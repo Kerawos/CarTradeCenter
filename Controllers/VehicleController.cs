@@ -29,9 +29,18 @@ namespace CarTradeCenter.Controllers
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }
 
-        public ActionResult OnGet(string searchTerm, int pageNumber = 1)
+
+        [HttpGet]
+        public ActionResult Index(string searchTerm, int pageNumber = 1)
         {
-            List<Vehicle> vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
+            List<Vehicle> vehicles;
+            if (String.IsNullOrEmpty(searchTerm))
+            {
+                vehicles = RepoVehicle.FindAll();
+            } else
+            {
+                vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
+            }
             RepoImg.UpdateAllImages(vehicles);
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }
@@ -57,7 +66,7 @@ namespace CarTradeCenter.Controllers
         public ActionResult Details(int id)
         {
             Vehicle vhc = RepoVehicle.FindById(id);
-            vhc.Images = RepoImg.GetImagesOfCar(vhc.Id);
+            vhc.Images = RepoImg.GetImagesOfVehicle(vhc.Id);
             if (vhc == null)
                 return NotFound();
             return View(vhc);
@@ -196,7 +205,7 @@ namespace CarTradeCenter.Controllers
             if (car == null)
                 return NotFound();
 
-            foreach (Image im in RepoImg.GetImagesOfCar(car.Id))
+            foreach (Image im in RepoImg.GetImagesOfVehicle(car.Id))
                 RepoImg.Delete(im);
 
             if (RepoVehicle.Delete(car))

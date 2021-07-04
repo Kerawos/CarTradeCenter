@@ -6,7 +6,7 @@ namespace CarTradeCenter.Contracts
 {
     public interface IRepositoryImage : IRepositoryBase<Image>
     {
-        List<Image> GetImagesOfCar(int CarID);
+        List<Image> GetImagesOfVehicle(int CarID);
         List<Vehicle> UpdateAllImages(List<Vehicle> cars);
         Image FindByIdExternal(int idExternal);
     }
