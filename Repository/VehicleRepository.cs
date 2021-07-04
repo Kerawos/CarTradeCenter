@@ -58,6 +58,25 @@ namespace CarTradeCenter.Repository
                 .ToList();  
         }
 
+        public List<Vehicle> GetVehiclesByName(string name, bool active)
+        {
+            if (active)
+            {
+                return FindAllActive()
+                                .Where(v => v.Title.ToLower().Contains(name.ToLower()))
+                                .OrderBy(v => v.Title)
+                                .ToList();
+            }
+            else
+            {
+                return FindAllArchived()
+                .Where(v => v.Title.ToLower().Contains(name.ToLower()))
+                .OrderBy(v => v.Title)
+                .ToList();
+            }
+            
+        }
+
         public bool Save()
         {
             return Db.SaveChanges() > 0;

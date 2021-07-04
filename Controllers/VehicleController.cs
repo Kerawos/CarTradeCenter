@@ -50,7 +50,60 @@ namespace CarTradeCenter.Controllers
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }
 
+        [HttpGet]
+        public ActionResult IndexActive(string searchTerm, int pageNumber = 1)
+        {
+            List<Vehicle> vehicles = new List<Vehicle>();
+            if (String.IsNullOrEmpty(searchTerm))
+            {
+                vehicles = RepoVehicle.FindAllActive();
+            }
+            else
+            {
+                if (int.TryParse(searchTerm, out int auction))
+                {
+                    Vehicle vhcByID = RepoVehicle.FindById(auction);
+                    if (vhcByID != null)
+                        vehicles.Add(vhcByID);
+                }
+                else
+                {
+                    vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
+                    vehicles.
+                }
 
+            }
+            RepoImg.UpdateAllImages(vehicles);
+            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
+        }
+
+        [HttpGet]
+        public ActionResult Index(string searchTerm, int pageNumber = 1)
+        {
+            List<Vehicle> vehicles = new List<Vehicle>();
+            if (String.IsNullOrEmpty(searchTerm))
+            {
+                vehicles = RepoVehicle.FindAll();
+            }
+            else
+            {
+                if (int.TryParse(searchTerm, out int auction))
+                {
+                    Vehicle vhcByID = RepoVehicle.FindById(auction);
+                    if (vhcByID != null)
+                        vehicles.Add(vhcByID);
+                }
+                else
+                {
+                    vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
+                }
+
+            }
+            RepoImg.UpdateAllImages(vehicles);
+            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
+        }
+
+        [HttpGet]
         public ActionResult IndexActive(int pageNumber = 1)
         {
             List<Vehicle> vehiclesActive = RepoVehicle.FindAllActive();

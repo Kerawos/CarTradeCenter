@@ -7,6 +7,7 @@ namespace CarTradeCenter.Contracts
     public interface IRepositoryVehicle : IRepositoryBase<Vehicle>
     {
         List<Vehicle> GetVehiclesByName(string name);
+        List<Vehicle> GetVehiclesByName(string name, bool active);
         bool Create(Vehicle entity);
         bool Update(Vehicle entity);
         IEnumerable<Vehicle> FindAllByDamaged(bool isDamaged);
