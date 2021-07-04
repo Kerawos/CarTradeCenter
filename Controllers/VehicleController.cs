@@ -121,8 +121,9 @@ namespace CarTradeCenter.Controllers
             return View();
         }
 
+
         [HttpGet]
-        public ActionResult CreateAuto()
+        public ActionResult CreateAuto() //for quick test 
         {
             Vehicle dummyCar = new Vehicle();
             dummyCar.Title = "Test Car";
@@ -134,7 +135,7 @@ namespace CarTradeCenter.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public ActionResult CreateAutoAxa()
+        public ActionResult CreateAutoAxa() //for quick test 
         {
             WebScrapper wScrp = new WebScrapper();
             WebScrapperAxa wScrpAxa = new WebScrapperAxa();

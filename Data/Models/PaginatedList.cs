@@ -27,7 +27,6 @@ namespace CarTradeCenter.Data.Models
         public bool IsPreviousPage
         {
             get { return PageIndex > 1; }
-            
         }
 
 

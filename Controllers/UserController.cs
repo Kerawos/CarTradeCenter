@@ -11,10 +11,5 @@ namespace CarTradeCenter.Controllers
             return View();
         }
 
-        
-
-
-
-
     }
 }

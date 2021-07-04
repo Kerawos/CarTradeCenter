@@ -1,6 +1,7 @@
 ﻿using CarTradeCenter.Data.Models;
 using System.Collections.Generic;
 
+
 namespace CarTradeCenter.Contracts
 {
     public interface IRepositoryUser : IRepositoryBase<User>
