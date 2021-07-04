@@ -27,13 +27,22 @@ namespace CarTradeCenter.Controllers
         [HttpGet]
         public ActionResult Index(string searchTerm, int pageNumber = 1)
         {
-            List<Vehicle> vehicles;
+            List<Vehicle> vehicles = new List<Vehicle>();
             if (String.IsNullOrEmpty(searchTerm))
             {
                 vehicles = RepoVehicle.FindAll();
-            } else
+            } 
+            else
             {
-                vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
+                if (int.TryParse(searchTerm, out int auction))
+                {
+                    vehicles.Add(RepoVehicle.FindById(auction));
+                }
+                else
+                {
+                    vehicles = RepoVehicle.GetVehiclesByName(searchTerm);
+                }
+                
             }
             RepoImg.UpdateAllImages(vehicles);
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
