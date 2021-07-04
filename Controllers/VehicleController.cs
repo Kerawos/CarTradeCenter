@@ -36,7 +36,9 @@ namespace CarTradeCenter.Controllers
             {
                 if (int.TryParse(searchTerm, out int auction))
                 {
-                    vehicles.Add(RepoVehicle.FindById(auction));
+                    Vehicle vhcByID = RepoVehicle.FindById(auction);
+                    if (vhcByID != null)
+                        vehicles.Add(vhcByID); 
                 }
                 else
                 {
