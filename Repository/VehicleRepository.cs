@@ -52,10 +52,10 @@ namespace CarTradeCenter.Repository
 
         public List<Vehicle> GetVehiclesByName(string name)
         {
-            return Db.Vehicles
+            return FindAll()
                 .Where(v => v.Title.ToLower().Contains(name.ToLower()))
                 .OrderBy(v => v.Title)
-                .ToList();    
+                .ToList();  
         }
 
         public bool Save()
