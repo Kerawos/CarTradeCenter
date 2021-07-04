@@ -10,7 +10,6 @@ namespace CarTradeCenter.Data.Models
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
 
-
         public PaginatedList()
         {
 

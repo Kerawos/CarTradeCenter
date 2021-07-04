@@ -12,21 +12,15 @@ namespace CarTradeCenter.Controllers
     {
         private readonly IRepositoryVehicle RepoVehicle;
         private readonly IRepositoryImage RepoImg;
-        private readonly int PageSizeDefault = 30;
+        public readonly int PageSizeDefault = 30;
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+        
 
         public VehicleController(IRepositoryVehicle repoVehicle, IRepositoryImage repoImg)
         {
             this.RepoVehicle = repoVehicle;
             this.RepoImg = repoImg;
-
-        }
-
-        // GET: VehicleController
-        public ActionResult Index(int pageNumber = 1)
-        {
-            List<Vehicle> vehicles = RepoVehicle.FindAll();
-            RepoImg.UpdateAllImages(vehicles);
-            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }
 
 
