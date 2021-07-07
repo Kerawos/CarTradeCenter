@@ -12,7 +12,7 @@ namespace CarTradeCenter.BackgroundServices
     public class VehicleArchiver : BackgroundService, IHostedService
     {
         private readonly IRepositoryVehicle Repo;
-        private readonly int Time1h = 3600000;
+        private readonly int Time100min = 6000000;
         private readonly int CarLimit = 999;
 
 
@@ -27,7 +27,7 @@ namespace CarTradeCenter.BackgroundServices
             while (!stoppingToken.IsCancellationRequested)
             {
                 TryToArchiveVehicles(CarLimit);
-                await Task.Delay(Time1h);
+                await Task.Delay(Time100min);
             }
         }
 

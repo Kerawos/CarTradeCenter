@@ -17,7 +17,7 @@ namespace CarTradeCenter.BackgroundServices
         private readonly WebScrapperAxa WebScrpAxa;
         private readonly IRepositoryVehicle Repo;
         private readonly int CarLimit = 9999;
-        private readonly int Time20min = 1200000;
+        private readonly int Time45min = 2700000;
         private readonly int VehiclesToAddAtOnce = 20;
 
 
@@ -34,7 +34,7 @@ namespace CarTradeCenter.BackgroundServices
             while (!stoppingToken.IsCancellationRequested)
             {
                 TryToAddVehicles(VehiclesToAddAtOnce, CarLimit);
-                await Task.Delay(Time20min);
+                await Task.Delay(Time45min);
             }
         }
 
