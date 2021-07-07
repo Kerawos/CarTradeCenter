@@ -29,7 +29,14 @@ namespace CarTradeCenter.Repository
 
         public List<Vehicle> FindAll()
         {
-            return Db.Vehicles.OrderBy(v=>v.DateAuctionEnd).ToList();
+            try
+            {
+                return Db.Vehicles.OrderBy(v => v.DateAuctionEnd).ToList();
+            }
+            catch
+            {
+                return new List<Vehicle>(); //return empty list, if there is nothing in database
+            }
         }
 
         public IEnumerable<Vehicle> FindAllByDamaged(bool isDamaged)
