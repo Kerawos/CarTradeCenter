@@ -12,7 +12,7 @@ namespace CarTradeCenter.BackgroundServices
     public class VehicleArchiver : BackgroundService, IHostedService
     {
         private readonly IRepositoryVehicle Repo;
-        private readonly int Time1h = 6000000;
+        private readonly int Time1h = 3600000;
         private readonly int CarLimit = 999;
 
 
