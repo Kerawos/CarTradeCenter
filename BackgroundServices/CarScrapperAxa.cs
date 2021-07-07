@@ -55,9 +55,7 @@ namespace CarTradeCenter.BackgroundServices
                 }
                 catch (Exception ex)
                 {
-                    string temp = ex.Message;
-                    temp = temp + "";
-                    //no new car will be created
+                    string temp = ex.Message; //no new car will be created
                 }
             }
         }
