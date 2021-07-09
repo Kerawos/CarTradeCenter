@@ -38,6 +38,7 @@ namespace CarTradeCenter
             services.AddScoped<IRepositoryImage, ImageRepository>();
             services.AddHostedService<CarScrapperAxa>(); 
             services.AddHostedService<VehicleArchiver>();
+            services.AddHostedService<VehicleRemover>();
             //services.AddHostedService<CarScrapperTest>();
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
