@@ -51,7 +51,7 @@
                 }
 
                 <td> @vehicle.CompanyProvider </td>
-                @*<td> <a asp-action="Usuń Aukcje" asp-route-id="@vehicle.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>*@
+                <td> <a asp-action="Delete" asp-route-id="@vehicle.Id" onclick="confirm('Czy jestes pewien ze chcesz usunac?')">Usun</a></td>
                 <td>@vehicle.Id</td>
             </tr>
         }
