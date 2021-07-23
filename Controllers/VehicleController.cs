@@ -1,4 +1,5 @@
 ﻿using CarTradeCenter.Contracts;
+using CarTradeCenter.Data;
 using CarTradeCenter.Data.Models;
 using CarTradeCenter.WebScrap;
 using Microsoft.AspNetCore.Mvc;
@@ -15,9 +16,10 @@ namespace CarTradeCenter.Controllers
         public readonly int PageSizeDefault = 30;
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
+
         
 
-        public VehicleController(IRepositoryVehicle repoVehicle, IRepositoryImage repoImg)
+        public VehicleController(IRepositoryVehicle repoVehicle, IRepositoryImage repoImg, ApplicationDbContext db)
         {
             this.RepoVehicle = repoVehicle;
             this.RepoImg = repoImg;
@@ -82,6 +84,7 @@ namespace CarTradeCenter.Controllers
         public ActionResult IndexArchived(string searchTerm, int pageNumber = 1)
         {
             List<Vehicle> vehicles = new List<Vehicle>();
+            List<Image> images = RepoImg.FindAll();
             if (String.IsNullOrEmpty(searchTerm))
             {
                 vehicles = RepoVehicle.FindAllArchived();
@@ -100,6 +103,7 @@ namespace CarTradeCenter.Controllers
                 }
 
             }
+            List<Image> images2 = RepoImg.FindAll();
             RepoImg.UpdateAllImages(vehicles);
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
         }

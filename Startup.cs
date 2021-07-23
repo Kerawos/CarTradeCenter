@@ -32,13 +32,12 @@ namespace CarTradeCenter
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-            Configuration.GetConnectionString("DefaultConnection")));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IRepositoryVehicle, VehicleRepository>();
             services.AddScoped<IRepositoryImage, ImageRepository>();
             services.AddHostedService<CarScrapperAxa>(); 
             services.AddHostedService<VehicleArchiver>();
-            services.AddHostedService<VehicleRemover>();
+            //services.AddHostedService<VehicleRemover>();
             //services.AddHostedService<CarScrapperTest>();
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //    .AddEntityFrameworkStores<ApplicationDbContext>();

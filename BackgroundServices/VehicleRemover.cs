@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+
 namespace CarTradeCenter.BackgroundServices
 {
     public class VehicleRemover : BackgroundService, IHostedService
@@ -38,17 +39,34 @@ namespace CarTradeCenter.BackgroundServices
 
         private void RemoveVehiclesOlderThan(int days, int carLimit)
         {
-            List<Vehicle> vehicleArchived = RepoVehicle.FindAllArchived();
-            for (int i = 0; i < vehicleArchived.Count || i > carLimit; i++)
+            try
             {
-                if (vehicleArchived[i].DateAuctionEnd.AddDays(days) < DateTime.Now)
+                
+                List<Vehicle> vehicleArchived = new List<Vehicle>();
+                List<Image> images = RepoImg.FindAll();
+                vehicleArchived = RepoVehicle.FindAllArchived();
+                List<Image> images2 = RepoImg.FindAll();
+                Image imw = images2.FirstOrDefault();
+                List<Vehicle> vehiclesAll = RepoVehicle.FindAll();
+                RepoImg.UpdateAllImages(vehicleArchived);
+                List<Image> images3 = RepoImg.FindAll();
+                for (int i = 0; i < vehicleArchived.Count || i > carLimit; i++)
                 {
-                    foreach (Image im in RepoImg.GetImagesOfVehicle(vehicleArchived[i].Id))
-                        RepoImg.Delete(im);
-                    RepoVehicle.Delete(vehicleArchived[i]);
+                    if (vehicleArchived[i].DateAuctionEnd.AddDays(days) < DateTime.Now)
+                    {
+                        foreach (Image im in RepoImg.GetImagesOfVehicle(vehicleArchived[i].Id))
+                            RepoImg.Delete(im);
+                        RepoVehicle.Delete(vehicleArchived[i]);
+                    }
                 }
+
             }
-            
+            catch (Exception ex)
+            {
+                string exDet = ex.Message;
+            }
+
+
         }
     }
 }

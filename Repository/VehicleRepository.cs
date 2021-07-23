@@ -3,6 +3,7 @@ using CarTradeCenter.Data.Models;
 using CarTradeCenter.Data;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CarTradeCenter.Repository
 {
@@ -31,7 +32,8 @@ namespace CarTradeCenter.Repository
         {
             try
             {
-                return Db.Vehicles.OrderBy(v => v.DateAuctionEnd).ToList();
+                return Db.Vehicles.IgnoreAutoIncludes()
+                    .OrderBy(v => v.DateAuctionEnd).ToList();
             }
             catch
             {
