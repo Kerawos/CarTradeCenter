@@ -69,7 +69,7 @@ namespace CarTradeCenter
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Contact}/{id?}");
                 endpoints.MapRazorPages();
 
                 //two below lines are responsible for reroute  register provided by asp.net by default to my register

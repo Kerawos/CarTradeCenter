@@ -13,7 +13,8 @@ namespace CarTradeCenter.Controllers
     {
         private readonly IRepositoryVehicle RepoVehicle;
         private readonly IRepositoryImage RepoImg;
-        public readonly int PageSizeDefault = 30;
+        public readonly int PageSizeArchivedDefault = 50;
+        public readonly int PageSizeActiveDefault = 300;
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
 
@@ -49,7 +50,7 @@ namespace CarTradeCenter.Controllers
                 
             }
             RepoImg.UpdateAllImages(vehicles);
-            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
+            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeActiveDefault));
         }
 
 
@@ -76,7 +77,7 @@ namespace CarTradeCenter.Controllers
 
             }
             RepoImg.UpdateAllImages(vehicles);
-            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
+            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeActiveDefault));
         }
 
 
@@ -105,7 +106,7 @@ namespace CarTradeCenter.Controllers
             }
             List<Image> images2 = RepoImg.FindAll();
             RepoImg.UpdateAllImages(vehicles);
-            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeDefault));
+            return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeArchivedDefault));
         }
 
 
