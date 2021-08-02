@@ -20,6 +20,7 @@ namespace CarTradeCenter.Data
             builder.Entity<Vehicle>()
                    .HasMany<Image>(v => v.Images)
                    .WithOne(i => i.Vehicle)
+                   .HasForeignKey(x=> x.Id)
                    .OnDelete(DeleteBehavior.Cascade);
             base.OnModelCreating(builder);
         }

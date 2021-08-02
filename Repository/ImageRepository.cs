@@ -3,6 +3,7 @@ using CarTradeCenter.Data;
 using CarTradeCenter.Data.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace CarTradeCenter.Repository
@@ -24,7 +25,21 @@ namespace CarTradeCenter.Repository
 
         public List<Image> FindAll()
         {
-            return Db.Images.ToList();
+            //return Db.Images.ToList();
+
+            try
+            {
+                //return Db.Images.IgnoreAutoIncludes().ToList();
+                return Db.Images.Include("Vehicle").ToList();
+            }
+            catch (System.Exception ex)
+            {
+                string exz = ex.Message;
+
+                return new List<Image>(); //return empty list, if there is nothing in database
+            }
+
+
         }
 
         public Image FindById(int id)
