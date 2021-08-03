@@ -33,8 +33,9 @@ namespace CarTradeCenter.Repository
         {
             try
             {
-                return Db.Vehicles.IgnoreAutoIncludes()
-                    .OrderBy(v => v.DateAuctionEnd).ToList();
+                return Db.Vehicles.Include(vehicle => vehicle.Images).OrderBy(vehicle => vehicle.DateAuctionEnd).ToList();
+                //return Db.Vehicles.IgnoreAutoIncludes()
+                //    .OrderBy(v => v.DateAuctionEnd).ToList();
             }
             catch
             {
@@ -89,7 +90,13 @@ namespace CarTradeCenter.Repository
 
         public bool Save()
         {
-            return Db.SaveChanges() > 0;
+            Db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Vehicles] ON");
+            Db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Images] ON");
+            Db.SaveChanges();
+            Db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Vehicles] OFF");
+            Db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Images] OFF");
+            return true;
+            //return Db.SaveChanges() > 0;
         }
 
         public bool Update(Vehicle entity)

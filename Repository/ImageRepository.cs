@@ -17,29 +17,27 @@ namespace CarTradeCenter.Repository
             Db = db;
         }
 
+
         public bool Delete(Image entity)
         {
             Db.Images.Remove(entity);
             return Save();
         }
 
+
         public List<Image> FindAll()
         {
-            //return Db.Images.ToList();
-
             try
             {
-                //return Db.Images.IgnoreAutoIncludes().ToList();
-                return Db.Images.Include("Vehicle").ToList();
+                List<Image> im = Db.Images.Include("Vehicle").ToList();
+                List<Image> im2 = Db.Images.ToList();
+                List<Image> im3 = Db.Images.Include(x => x.Vehicle).ToList();
+                return im2;
             }
-            catch (System.Exception ex)
+            catch
             {
-                string exz = ex.Message;
-
-                return new List<Image>(); //return empty list, if there is nothing in database
+                return Db.Images.ToList();
             }
-
-
         }
 
         public Image FindById(int id)
@@ -57,10 +55,14 @@ namespace CarTradeCenter.Repository
         
         public List<Image> GetImagesOfVehicle(int vehicleID)
         {
+
             List<Image> images = FindAll();
-            return images
-                .Where(i => i.Vehicle.Id.Equals(vehicleID))
-                .ToList();
+            images = images.Where(i => i.Vehicle.Id.Equals(vehicleID)).ToList();
+            return images;
+
+            //return FindAll()
+            //    .Where(i => i.Vehicle.Id.Equals(vehicleID))
+            //    .ToList();
         }
 
         public List<Vehicle> UpdateAllImages(List<Vehicle> vehicles)

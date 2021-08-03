@@ -41,21 +41,15 @@ namespace CarTradeCenter.BackgroundServices
         {
             try
             {
-                
-                List<Vehicle> vehicleArchived = new List<Vehicle>();
-                List<Image> images = RepoImg.FindAll();
-                vehicleArchived = RepoVehicle.FindAllArchived();
-                List<Image> images2 = RepoImg.FindAll();
-                Image imw = images2.FirstOrDefault();
-                List<Vehicle> vehiclesAll = RepoVehicle.FindAll();
+                List<Vehicle> vehicleArchived = RepoVehicle.FindAllArchived();
                 RepoImg.UpdateAllImages(vehicleArchived);
-                List<Image> images3 = RepoImg.FindAll();
                 for (int i = 0; i < vehicleArchived.Count || i > carLimit; i++)
                 {
                     if (vehicleArchived[i].DateAuctionEnd.AddDays(days) < DateTime.Now)
                     {
                         foreach (Image im in RepoImg.GetImagesOfVehicle(vehicleArchived[i].Id))
                             RepoImg.Delete(im);
+
                         RepoVehicle.Delete(vehicleArchived[i]);
                     }
                 }
