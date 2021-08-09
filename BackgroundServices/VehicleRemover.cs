@@ -42,6 +42,7 @@ namespace CarTradeCenter.BackgroundServices
             try
             {
                 List<Vehicle> vehicleArchived = RepoVehicle.FindAllArchived();
+                vehicleArchived = RepoVehicle.FindAll();
                 RepoImg.UpdateAllImages(vehicleArchived);
                 for (int i = 0; i < vehicleArchived.Count || i > carLimit; i++)
                 {

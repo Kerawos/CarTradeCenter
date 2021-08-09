@@ -37,8 +37,9 @@ namespace CarTradeCenter.Repository
                 //return Db.Vehicles.IgnoreAutoIncludes()
                 //    .OrderBy(v => v.DateAuctionEnd).ToList();
             }
-            catch
+            catch (System.Exception ex)
             {
+
                 return new List<Vehicle>(); //return empty list, if there is nothing in database
             }
         }

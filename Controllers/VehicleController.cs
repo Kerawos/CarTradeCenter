@@ -76,7 +76,7 @@ namespace CarTradeCenter.Controllers
                 }
 
             }
-            RepoImg.UpdateAllImages(vehicles);
+            //RepoImg.UpdateAllImages(vehicles);
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeActiveDefault));
         }
 
@@ -85,7 +85,7 @@ namespace CarTradeCenter.Controllers
         public ActionResult IndexArchived(string searchTerm, int pageNumber = 1)
         {
             List<Vehicle> vehicles = new List<Vehicle>();
-            List<Image> images = RepoImg.FindAll();
+            //List<Image> images = RepoImg.FindAll();
             if (String.IsNullOrEmpty(searchTerm))
             {
                 vehicles = RepoVehicle.FindAllArchived();
@@ -104,8 +104,8 @@ namespace CarTradeCenter.Controllers
                 }
 
             }
-            List<Image> images2 = RepoImg.FindAll();
-            RepoImg.UpdateAllImages(vehicles);
+            //List<Image> images2 = RepoImg.FindAll();
+            //RepoImg.UpdateAllImages(vehicles);
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeArchivedDefault));
         }
 
