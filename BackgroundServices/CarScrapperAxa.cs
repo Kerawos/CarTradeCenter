@@ -16,7 +16,7 @@ namespace CarTradeCenter.BackgroundServices
         private readonly WebScrapper WebScrp;
         private readonly WebScrapperAxa WebScrpAxa;
         private readonly IRepositoryVehicle Repo;
-        private readonly int CarLimit = 9999;
+        private readonly int VehicleLimit = 9999;
         private readonly int Time45min = 2700000;
         private readonly int VehiclesToAddAtOnce = 20;
 
@@ -33,25 +33,27 @@ namespace CarTradeCenter.BackgroundServices
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                TryToAddVehicles(VehiclesToAddAtOnce, CarLimit);
+                TryToAddVehicles(VehiclesToAddAtOnce, VehicleLimit);
                 await Task.Delay(Time45min);
             }
         }
 
 
-        public void TryToAddVehicles(int vehiclesToAdd, int carsLimit)
+        public void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
         {
             string mainPageRaw = WebScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
-            List<Vehicle> VehiclesFromDb = Repo.FindAllActive();
+            List<Vehicle> vehiclesFromDb = Repo.FindAllActive();
+            int vehicleActiveTotal = vehiclesFromDb.Count();
             for (int i = 0; i < vehiclesToAdd; i++)
             {
-                if (Repo.FindAll().Count()>=carsLimit)
+                if (vehicleActiveTotal >= vehicleLimit)
                     return;
                 try
                 {
-                    Vehicle vehicleUnique = WebScrpAxa.GetUniqueVehicleFromMain(mainPageRaw, VehiclesFromDb);
+                    Vehicle vehicleUnique = WebScrpAxa.GetUniqueVehicleFromMain(mainPageRaw, vehiclesFromDb);
                     Repo.Create(vehicleUnique);
-                    VehiclesFromDb.Add(vehicleUnique);
+                    vehiclesFromDb.Add(vehicleUnique);
+                    vehicleActiveTotal++;
                 }
                 catch (Exception ex)
                 {
