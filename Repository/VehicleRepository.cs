@@ -29,6 +29,13 @@ namespace CarTradeCenter.Repository
             return Save();
         }
 
+
+        public bool DeleteById(int entityID)
+        {
+            Db.Vehicles.Remove(FindById(entityID));
+            return Save();
+        }
+
         public List<Vehicle> FindAll()
         {
             try
@@ -91,13 +98,11 @@ namespace CarTradeCenter.Repository
 
         public bool Save()
         {
-            Db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Vehicles] ON");
-            Db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Images] ON");
-            Db.SaveChanges();
-            Db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Vehicles] OFF");
-            Db.Database.ExecuteSqlRaw("SET IDENTITY_INSERT [dbo].[Images] OFF");
-            return true;
-            //return Db.SaveChanges() > 0;
+            
+            //Db.SaveChanges();
+            
+            //return true;
+            return Db.SaveChanges() > 0;
         }
 
         public bool Update(Vehicle entity)

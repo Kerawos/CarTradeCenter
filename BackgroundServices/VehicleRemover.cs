@@ -17,7 +17,7 @@ namespace CarTradeCenter.BackgroundServices
         private readonly IRepositoryVehicle RepoVehicle;
         private readonly IRepositoryImage RepoImg;
         private readonly int TimeFrequency = 3600000 * 24; //1day
-        private readonly int TimeVehileAfterToBeRemovedInDays = 10;
+        private readonly int TimeVehileAfterToBeRemovedInDays = 1;
         private readonly int CarLimit = 999;
 
 
@@ -37,21 +37,33 @@ namespace CarTradeCenter.BackgroundServices
             }
         }
 
+
         private void RemoveVehiclesOlderThan(int days, int carLimit)
         {
             try
             {
                 List<Vehicle> vehicleArchived = RepoVehicle.FindAllArchived();
-                vehicleArchived = RepoVehicle.FindAll();
-                RepoImg.UpdateAllImages(vehicleArchived);
                 for (int i = 0; i < vehicleArchived.Count || i > carLimit; i++)
                 {
                     if (vehicleArchived[i].DateAuctionEnd.AddDays(days) < DateTime.Now)
                     {
-                        foreach (Image im in RepoImg.GetImagesOfVehicle(vehicleArchived[i].Id))
-                            RepoImg.Delete(im);
-
                         RepoVehicle.Delete(vehicleArchived[i]);
+                        //foreach (Image im in RepoImg.GetImagesOfVehicle(vehicleArchived[i].Id))
+                        //foreach (Image im in vehicleArchived[i].Images)
+                        //    RepoImg.Delete(im);
+                        //RepoImg.Save();
+
+                        //Image[] imagesToDelete = new Image[vehicleArchived[i].Images.Count];
+                        //vehicleArchived[i].Images.CopyTo(imagesToDelete);
+
+                        //foreach (Image im in imagesToDelete)
+                        //{
+                        //    Image imageToDelete = im;
+                        //    RepoImg.Delete(imageToDelete);
+                        //}
+
+                        //RepoVehicle.Update(vehicleArchived[i]);
+                        //RepoVehicle.Delete(vehicleArchived[i]);
                     }
                 }
 

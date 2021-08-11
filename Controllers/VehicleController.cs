@@ -49,7 +49,7 @@ namespace CarTradeCenter.Controllers
                 }
                 
             }
-            RepoImg.UpdateAllImages(vehicles);
+            //RepoImg.UpdateAllImages(vehicles);
             return View(new PaginatedList<Vehicle>().CreateList(vehicles, pageNumber, PageSizeActiveDefault));
         }
 

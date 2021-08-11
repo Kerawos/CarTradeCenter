@@ -8,6 +8,7 @@ namespace CarTradeCenter.Contracts
         List<T> FindAll();
         T FindById(int id);
         bool Delete(T entity);
+        bool DeleteById(int entityId);
         bool Save();
     }
 }

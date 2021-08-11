@@ -21,7 +21,7 @@ namespace CarTradeCenter.Repository
         public bool Delete(Image entity)
         {
             Db.Images.Remove(entity);
-            return Save();
+            return true;
         }
 
 
@@ -31,10 +31,10 @@ namespace CarTradeCenter.Repository
             {
 
 
-                List<Image> im = Db.Images.Include("Vehicle").ToList();
+                //List<Image> im = Db.Images.Include("Vehicle").ToList();
                 List<Image> im2 = Db.Images.ToList();
-                List<Image> im3 = Db.Images.Include(x => x.Vehicle).ToList();
-                List<Image> im4 = Db.Images.Include(x => x.Vehicle.Images).ToList();
+                //List<Image> im3 = Db.Images.Include(x => x.Vehicle).ToList();
+                //List<Image> im4 = Db.Images.Include(x => x.Vehicle.Images).ToList();
                 //List<Image> im5 = Db.Images.Include(x => x.Vehicle.Id).ThenInclude
                 //List<Image> im6 = Db.Images.Include(x=> x.Vehicle.Select(y=>y.))
                 return im2;
@@ -60,14 +60,9 @@ namespace CarTradeCenter.Repository
         
         public List<Image> GetImagesOfVehicle(int vehicleID)
         {
-
-            List<Image> images = FindAll();
-            images = images.Where(i => i.Vehicle.Id.Equals(vehicleID)).ToList();
-            return images;
-
-            //return FindAll()
-            //    .Where(i => i.Vehicle.Id.Equals(vehicleID))
-            //    .ToList();
+            return FindAll()
+                .Where(i => i.Vehicle.Id.Equals(vehicleID))
+                .ToList();
         }
 
         public List<Vehicle> UpdateAllImages(List<Vehicle> vehicles)
@@ -80,6 +75,12 @@ namespace CarTradeCenter.Repository
         public bool Save()
         {
             return Db.SaveChanges() > 0;
+        }
+
+        public bool DeleteById(int entityId)
+        {
+            Db.Images.Remove(FindById(entityId));
+            return true;
         }
     }
 }
