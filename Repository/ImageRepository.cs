@@ -29,15 +29,7 @@ namespace CarTradeCenter.Repository
         {
             try
             {
-
-
-                //List<Image> im = Db.Images.Include("Vehicle").ToList();
-                List<Image> im2 = Db.Images.ToList();
-                //List<Image> im3 = Db.Images.Include(x => x.Vehicle).ToList();
-                //List<Image> im4 = Db.Images.Include(x => x.Vehicle.Images).ToList();
-                //List<Image> im5 = Db.Images.Include(x => x.Vehicle.Id).ThenInclude
-                //List<Image> im6 = Db.Images.Include(x=> x.Vehicle.Select(y=>y.))
-                return im2;
+                return Db.Images.ToList();
             }
             catch
             {

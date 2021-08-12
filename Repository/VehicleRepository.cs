@@ -41,12 +41,9 @@ namespace CarTradeCenter.Repository
             try
             {
                 return Db.Vehicles.Include(vehicle => vehicle.Images).OrderBy(vehicle => vehicle.DateAuctionEnd).ToList();
-                //return Db.Vehicles.IgnoreAutoIncludes()
-                //    .OrderBy(v => v.DateAuctionEnd).ToList();
             }
-            catch (System.Exception ex)
+            catch
             {
-
                 return new List<Vehicle>(); //return empty list, if there is nothing in database
             }
         }
@@ -65,8 +62,7 @@ namespace CarTradeCenter.Repository
 
         public Vehicle FindByIdExternal(int idExternal)
         {
-            Vehicle vhc = FindAll().Where(v => v.IdExternal == idExternal).First();
-            return vhc;   
+            return FindAll().Where(v => v.IdExternal == idExternal).First();
         }
 
         public List<Vehicle> GetVehiclesByName(string name)
@@ -82,26 +78,22 @@ namespace CarTradeCenter.Repository
             if (active)
             {
                 return FindAllActive()
-                                .Where(v => v.Title.ToLower().Contains(name.ToLower()))
-                                .OrderBy(v => v.Title)
-                                .ToList();
+                    .Where(v => v.Title.ToLower().Contains(name.ToLower()))
+                    .OrderBy(v => v.Title)
+                    .ToList();
             }
             else
             {
                 return FindAllArchived()
-                .Where(v => v.Title.ToLower().Contains(name.ToLower()))
-                .OrderBy(v => v.Title)
-                .ToList();
+                    .Where(v => v.Title.ToLower().Contains(name.ToLower()))
+                    .OrderBy(v => v.Title)
+                    .ToList();
             }
             
         }
 
         public bool Save()
         {
-            
-            //Db.SaveChanges();
-            
-            //return true;
             return Db.SaveChanges() > 0;
         }
 

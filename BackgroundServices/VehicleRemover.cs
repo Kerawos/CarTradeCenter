@@ -46,27 +46,8 @@ namespace CarTradeCenter.BackgroundServices
                 for (int i = 0; i < vehicleArchived.Count || i > carLimit; i++)
                 {
                     if (vehicleArchived[i].DateAuctionEnd.AddDays(days) < DateTime.Now)
-                    {
-                        RepoVehicle.Delete(vehicleArchived[i]);
-                        //foreach (Image im in RepoImg.GetImagesOfVehicle(vehicleArchived[i].Id))
-                        //foreach (Image im in vehicleArchived[i].Images)
-                        //    RepoImg.Delete(im);
-                        //RepoImg.Save();
-
-                        //Image[] imagesToDelete = new Image[vehicleArchived[i].Images.Count];
-                        //vehicleArchived[i].Images.CopyTo(imagesToDelete);
-
-                        //foreach (Image im in imagesToDelete)
-                        //{
-                        //    Image imageToDelete = im;
-                        //    RepoImg.Delete(imageToDelete);
-                        //}
-
-                        //RepoVehicle.Update(vehicleArchived[i]);
-                        //RepoVehicle.Delete(vehicleArchived[i]);
-                    }
+                        RepoVehicle.Delete(vehicleArchived[i]); //cascade deleting (images)
                 }
-
             }
             catch (Exception ex)
             {
