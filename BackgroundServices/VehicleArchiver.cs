@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace CarTradeCenter.BackgroundServices
 {
+    //to separate expired auction from active ones
     public class VehicleArchiver : BackgroundService, IHostedService
     {
         private readonly IRepositoryVehicle Repo;
-        private readonly int Time100min = 6000000;
+        private readonly int TimeFrequency = 6000000; //100min
         private readonly int CarLimit = 999;
 
 
@@ -27,7 +28,7 @@ namespace CarTradeCenter.BackgroundServices
             while (!stoppingToken.IsCancellationRequested)
             {
                 TryToArchiveVehicles(CarLimit);
-                await Task.Delay(Time100min);
+                await Task.Delay(TimeFrequency);
             }
         }
 

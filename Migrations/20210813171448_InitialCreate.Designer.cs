@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarTradeCenter.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210805161903_RemovevehicleIDToImage")]
-    partial class RemovevehicleIDToImage
+    [Migration("20210813171448_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,9 @@ namespace CarTradeCenter.Migrations
             modelBuilder.Entity("CarTradeCenter.Data.Models.Image", b =>
                 {
                     b.Property<int>("Id")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Url")
                         .IsRequired()
@@ -34,6 +36,8 @@ namespace CarTradeCenter.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("VehicleId");
 
                     b.ToTable("Images");
                 });
@@ -325,7 +329,7 @@ namespace CarTradeCenter.Migrations
                 {
                     b.HasOne("CarTradeCenter.Data.Models.Vehicle", "Vehicle")
                         .WithMany("Images")
-                        .HasForeignKey("Id")
+                        .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

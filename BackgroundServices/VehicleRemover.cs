@@ -13,18 +13,15 @@ namespace CarTradeCenter.BackgroundServices
 {
     public class VehicleRemover : BackgroundService, IHostedService
     {
-
         private readonly IRepositoryVehicle RepoVehicle;
-        private readonly IRepositoryImage RepoImg;
         private readonly int TimeFrequency = 3600000 * 24; //1day
-        private readonly int TimeVehileAfterToBeRemovedInDays = 1;
+        private readonly int TimeVehileAfterToBeRemovedInDays = 7;
         private readonly int CarLimit = 999;
 
 
         public VehicleRemover(IServiceScopeFactory factory)
         {
             this.RepoVehicle = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
-            this.RepoImg = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryImage>();
         }
 
 
@@ -49,12 +46,10 @@ namespace CarTradeCenter.BackgroundServices
                         RepoVehicle.Delete(vehicleArchived[i]); //cascade deleting (images)
                 }
             }
-            catch (Exception ex)
+            catch 
             {
-                string exDet = ex.Message;
+                //do nothing, app working is more important than removing
             }
-
-
         }
     }
 }

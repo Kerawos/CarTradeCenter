@@ -10,11 +10,8 @@ namespace CarTradeCenter.Data.Models
         public int PageIndex { get; set; }
         public int TotalPages { get; set; }
 
-        public PaginatedList()
-        {
 
-        }
-
+        public PaginatedList() { }
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
@@ -42,8 +39,6 @@ namespace CarTradeCenter.Data.Models
             var items = models.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
-
-
 
     }
 }

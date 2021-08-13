@@ -47,6 +47,5 @@ namespace CarTradeCenter.Data.Models
                 return "";
         }
             
-
     }
 }
