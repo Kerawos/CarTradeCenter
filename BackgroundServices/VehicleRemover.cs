@@ -15,7 +15,7 @@ namespace CarTradeCenter.BackgroundServices
     {
         private readonly IRepositoryVehicle RepoVehicle;
         private readonly int TimeFrequency = 3600000 * 24; //1day
-        private readonly int TimeVehileAfterToBeRemovedInDays = 7;
+        private readonly int TimeVehicleAfterToBeRemovedInDays = 7;
         private readonly int CarLimit = 999;
 
 
@@ -29,7 +29,7 @@ namespace CarTradeCenter.BackgroundServices
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                RemoveVehiclesOlderThan(TimeVehileAfterToBeRemovedInDays, CarLimit);
+                RemoveVehiclesOlderThan(TimeVehicleAfterToBeRemovedInDays, CarLimit);
                 await Task.Delay(TimeFrequency);
             }
         }
