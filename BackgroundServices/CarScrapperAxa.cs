@@ -41,9 +41,10 @@ namespace CarTradeCenter.BackgroundServices
 
         public void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
         {
+            string mainPageRaw;
             try
             {
-                string mainPageRaw = WebScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
+                mainPageRaw = WebScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
             } catch (Exception ex)
             {
                 string excDetails = ex.Message; // axa page probably does not responding
