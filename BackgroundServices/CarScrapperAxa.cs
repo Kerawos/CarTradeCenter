@@ -45,7 +45,8 @@ namespace CarTradeCenter.BackgroundServices
             try
             {
                 mainPageRaw = WebScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
-            } catch (Exception ex)
+            } 
+            catch (Exception ex)
             {
                 string excDetails = ex.Message; // axa page probably does not responding
                 return;

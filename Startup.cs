@@ -29,7 +29,8 @@ namespace CarTradeCenter
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IRepositoryVehicle, VehicleRepository>();
             services.AddScoped<IRepositoryImage, ImageRepository>();
-            services.AddHostedService<CarScrapperAxa>(); 
+            //services.AddHostedService<CarScrapperAxa>(); //axa stopped working on 01.2022
+            services.AddHostedService<CarScrapperSwissCars>();
             services.AddHostedService<VehicleArchiver>();
             services.AddHostedService<VehicleRemover>();
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
