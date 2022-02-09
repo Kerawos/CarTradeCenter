@@ -10,7 +10,7 @@ namespace CarTradeCenter.BackgroundServices
 {
     public abstract class CarScrapper : BackgroundService, IHostedService, ICarScrapper
     {
-        protected WebScrapper WebScrp;
+        protected Scrapper WebScrp;
         protected IRepositoryVehicle Repo;
         protected int VehicleLimit = 9999;
         protected int TimeFrequency;

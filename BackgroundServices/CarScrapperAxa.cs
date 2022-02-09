@@ -21,7 +21,7 @@ namespace CarTradeCenter.BackgroundServices
             TimeFrequency = 2700000; //45min
             VehiclesToAddAtOnce = 20;
             Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
-            WebScrp = new WebScrapper();
+            WebScrp = new Scrapper();
             this.WebScrpAxa = new WebScrapperAxa();
         }
 
