@@ -1,4 +1,5 @@
 ﻿using CarTradeCenter.Contracts;
+using CarTradeCenter.Data.Models;
 using CarTradeCenter.WebScrap;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -33,7 +34,7 @@ namespace CarTradeCenter.BackgroundServices
             }
         }
 
-        protected override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
+        public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
         {
             string mainPageRaw = GetMainPageRaw();
         }
@@ -49,5 +50,28 @@ namespace CarTradeCenter.BackgroundServices
                 throw new System.Exception("Swiss page probably does not responding.");
             }
         }
+
+        public Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
+        {
+            string[] vehiclesNode = pageTextRaw.Split('{');
+            foreach (string vehicleNode in vehiclesNode)
+            {
+                if (vehicleNode.Contains("id"))
+                {
+                    try
+                    {
+                        Vehicle vhcIncomplete = GetVehicleMainFromNode(vehicleNode);
+                        if (WebScrp.IsCarUnique(vehiclesFromDb, vhcIncomplete))
+                            return UpdateVehicleByExtras(vhcIncomplete);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            throw new System.Exception("No unique car found in main");
+        }
+
     }
 }

@@ -11,20 +11,17 @@ using System.Threading.Tasks;
 
 namespace CarTradeCenter.BackgroundServices
 {
-    public class CarScrapperAxa : BackgroundService, IHostedService
+    public class CarScrapperAxa : CarScrapper
     {
-        private readonly WebScrapper WebScrp;
-        private readonly WebScrapperAxa WebScrpAxa;
-        private readonly IRepositoryVehicle Repo;
-        private readonly int VehicleLimit = 9999;
-        private readonly int TimeFrequency = 2700000; //45min
-        private readonly int VehiclesToAddAtOnce = 20;
 
+        private readonly WebScrapperAxa WebScrpAxa;
 
         public CarScrapperAxa(IServiceScopeFactory factory)
         {
-            this.Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
-            this.WebScrp = new WebScrapper();
+            TimeFrequency = 2700000; //45min
+            VehiclesToAddAtOnce = 20;
+            Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
+            WebScrp = new WebScrapper();
             this.WebScrpAxa = new WebScrapperAxa();
         }
 
@@ -39,7 +36,7 @@ namespace CarTradeCenter.BackgroundServices
         }
 
 
-        public void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
+        public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
         {
             string mainPageRaw;
             try

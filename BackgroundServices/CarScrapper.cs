@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CarTradeCenter.BackgroundServices
 {
-    public abstract class CarScrapper : BackgroundService, IHostedService
+    public abstract class CarScrapper : BackgroundService, IHostedService, ICarScrapper
     {
         protected WebScrapper WebScrp;
         protected IRepositoryVehicle Repo;
@@ -16,6 +16,6 @@ namespace CarTradeCenter.BackgroundServices
         protected int TimeFrequency;
         protected int VehiclesToAddAtOnce;
 
-        protected abstract void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit);
+        public abstract void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit);
     }
 }
