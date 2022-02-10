@@ -7,7 +7,7 @@ namespace CarTradeCenter.WebScrap
 {
     public class WebScrapper
     {
-        protected string URL;
-        protected Scrapper Scrp;
+        public string URL;
+        public Scrapper Scrp;
     }
 }

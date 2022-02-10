@@ -41,7 +41,7 @@ namespace CarTradeCenter.BackgroundServices
             string mainPageRaw;
             try
             {
-                mainPageRaw = WebScrp.GetPageTextRaw(WebScrapperAxa.URL_AXA_LIST);
+                mainPageRaw = WebScrp.GetPageTextRaw(WebScrpAxa.URL);
             } 
             catch (Exception ex)
             {

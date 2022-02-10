@@ -13,8 +13,7 @@ namespace CarTradeCenter.BackgroundServices
 {
     public class CarScrapperSwissCars : CarScrapper
     {
-        private readonly WebScrapperSwissCars WebScrapperSwiss;
-
+        private readonly WebScrapperSwissCars WebScrpSwiss;
 
         public CarScrapperSwissCars(IServiceScopeFactory factory)
         {
@@ -22,7 +21,7 @@ namespace CarTradeCenter.BackgroundServices
             VehiclesToAddAtOnce = 20;
             Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
             WebScrp = new Scrapper();
-            this.WebScrapperSwiss = new WebScrapperSwissCars();
+            this.WebScrpSwiss = new WebScrapperSwissCars();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -43,11 +42,11 @@ namespace CarTradeCenter.BackgroundServices
         {
             try
             {
-                return WebScrp.GetPageTextRaw(WebScrapperSwissCars.URL_SWISS);
+                return WebScrp.GetPageTextRaw(WebScrpSwiss.URL);
             }
             catch (Exception ex)
             {
-                throw new System.Exception("Swiss page probably does not responding.");
+                throw new System.Exception("Swiss page probably does not responding. Error: " + ex.Message);
             }
         }
 
@@ -60,7 +59,7 @@ namespace CarTradeCenter.BackgroundServices
                 {
                     try
                     {
-                        Vehicle vhcIncomplete = GetVehicleMainFromNode(vehicleNode);
+                        Vehicle vhcIncomplete = WebScrpSwiss.GetVehicleMainFromNode(vehicleNode);
                         if (WebScrp.IsCarUnique(vehiclesFromDb, vhcIncomplete))
                             return UpdateVehicleByExtras(vhcIncomplete);
                     }
