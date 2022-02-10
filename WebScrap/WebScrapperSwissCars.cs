@@ -80,9 +80,47 @@ namespace CarTradeCenter.WebScrap
             throw new NotImplementedException();
         }
 
+        public List<Vehicle> GetVehicleListFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
+        {
+            Vehicle vhc = new Vehicle();
+            string[] vehiclesNode = pageTextRaw.Split("<!--- Post Starts -->");
+            foreach (string vehicleNode in vehiclesNode)
+            {
+                if (vehicleNode.Contains("DATA ZAKONCZENIA AUKCJI"))
+                {
+                    try
+                    {
+                        Vehicle vhcIncomplete = GetVehicleMainFromNode(vehicleNode);
+                        if (vhc.IsCarUnique(vehiclesFromDb, vhcIncomplete))
+                            return vehiclesFromDb;// UpdateVehicleByExtras(vhcIncomplete);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            throw new System.Exception("No unique car found in main");
+        }
+
         public List<Vehicle> GetVehicleListFromMain(string pageTextRaw)
         {
             throw new NotImplementedException();
+        }
+
+        public Vehicle GetVehicleMainFromNode(string vehicleNode)
+        {
+            Vehicle vhc = new Vehicle();
+            string preTitle = Scrp.NodeCutter(vehicleNode, "<a href=", ">");
+            vhc.Title = Scrp.NodeCutter(preTitle, "title=\"");
+            vhc.Url = URL + Scrp.NodeCutter(vehicleNode, "au\":\"", "\",\"");
+            vhc.IdExternal = GetExternalId(vehicleNode);
+            Image imMini = new Image(URL.Substring(0, URL.Length - 1) + Scrp.NodeCutter(vehicleNode, "is\":\"", "\",\""));
+            vhc.Images.Add(imMini);
+            vhc.CompanyProvider = GetCompanyProviderDescription(vehicleNode);
+            vhc.IsActive = true;
+            vhc.IsArchived = false;
+            return vhc;
         }
     }
 }

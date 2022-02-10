@@ -35,5 +35,11 @@ namespace CarTradeCenter.WebScrap
             return nodePart.Substring(0, cutEndPosition);
         }
 
+
+        public string NodeCutter(string node, string start)
+        {
+            int cutStartPosition = node.IndexOf(start) + start.Length;
+            return node.Substring(cutStartPosition, node.Length - 1 - cutStartPosition);
+        }
     }
 }

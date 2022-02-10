@@ -36,6 +36,7 @@ namespace CarTradeCenter.BackgroundServices
         public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
         {
             string mainPageRaw = GetMainPageRaw();
+            WebScrpSwiss.GetVehicleListFromMain(mainPageRaw, new List<Vehicle>());
         }
 
         private string GetMainPageRaw()
@@ -59,9 +60,9 @@ namespace CarTradeCenter.BackgroundServices
                 {
                     try
                     {
-                        Vehicle vhcIncomplete = WebScrpSwiss.GetVehicleMainFromNode(vehicleNode);
-                        if (WebScrp.IsCarUnique(vehiclesFromDb, vhcIncomplete))
-                            return UpdateVehicleByExtras(vhcIncomplete);
+                        Vehicle vhcIncomplete = new Vehicle();// WebScrpSwiss.GetVehicleMainFromNode(vehicleNode);
+                        if (vhcIncomplete.IsCarUnique(vehiclesFromDb, vhcIncomplete))
+                            return vhcIncomplete;// UpdateVehicleByExtras(vhcIncomplete);
                     }
                     catch
                     {

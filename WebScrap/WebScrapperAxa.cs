@@ -64,7 +64,7 @@ namespace CarTradeCenter.WebScrap
         }
 
 
-        private Vehicle GetVehicleMainFromNode(string vehicleNode)
+        public Vehicle GetVehicleMainFromNode(string vehicleNode)
         {
             Vehicle vhc = new Vehicle();
             vhc.Title = Scrp.NodeCutter(vehicleNode, "at\":\"", "\",\"");
@@ -219,5 +219,6 @@ namespace CarTradeCenter.WebScrap
         {
             throw new NotImplementedException();
         }
+
     }
 }

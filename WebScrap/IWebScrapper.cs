@@ -11,7 +11,9 @@ namespace CarTradeCenter.WebScrap
         List<Vehicle> GetVehicleListFromMain(string pageTextRaw);
         Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb);
         Vehicle GetVehicleFromSubpage(string vehicleNode);
-        
+        Vehicle GetVehicleMainFromNode(string vehicleNode);
+
+
         string GetCompanyProviderDescription(string subpageRaw);
         int GetExternalId(string carNode);
         string GetCarNameDescription(string subpageRaw);
