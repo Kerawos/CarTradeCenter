@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace CarTradeCenter.BackgroundServices
 {
-    public class CarScrapperSwissCars : CarScrapper
+    public class CarScrapperSwissCarsAxa : CarScrapper
     {
-        private readonly WebScrapperSwissCars WebScrpSwiss;
+        private readonly WebScrapperSwissCarsAxa WebScrpSwiss;
 
-        public CarScrapperSwissCars(IServiceScopeFactory factory)
+        public CarScrapperSwissCarsAxa(IServiceScopeFactory factory)
         {
             TimeFrequency = 2850000; //47min
             VehiclesToAddAtOnce = 20;
             Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
             WebScrp = new Scrapper();
-            this.WebScrpSwiss = new WebScrapperSwissCars();
+            this.WebScrpSwiss = new WebScrapperSwissCarsAxa();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -36,7 +36,25 @@ namespace CarTradeCenter.BackgroundServices
         public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
         {
             string mainPageRaw = GetMainPageRaw();
-            WebScrpSwiss.GetVehicleListFromMain(mainPageRaw, new List<Vehicle>());
+            //WebScrpSwiss.GetVehicleListFromMain(mainPageRaw, new List<Vehicle>());
+            List<Vehicle> vehiclesFromDb = Repo.FindAllActive();
+            int vehicleActiveTotal = vehiclesFromDb.Count();
+            for (int i = 0; i < vehiclesToAdd; i++)
+            {
+                if (vehicleActiveTotal >= vehicleLimit)
+                    return;
+                try
+                {
+                    Vehicle vehicleUnique = WebScrpSwiss.GetUniqueVehicleFromMain(mainPageRaw, vehiclesFromDb);
+                    Repo.Create(vehicleUnique);
+                    vehiclesFromDb.Add(vehicleUnique);
+                    vehicleActiveTotal++;
+                }
+                catch (Exception ex)
+                {
+                    string excDetails = ex.Message; //no new car will be created
+                }
+            }
         }
 
         private string GetMainPageRaw()

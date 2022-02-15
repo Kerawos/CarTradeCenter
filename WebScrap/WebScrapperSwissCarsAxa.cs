@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CarTradeCenter.WebScrap
 {
-    public class WebScrapperSwissCars : WebScrapper, IWebScrapper
+    public class WebScrapperSwissCarsAxa : WebScrapper, IWebScrapper
     {
 
-        public WebScrapperSwissCars()
+        public WebScrapperSwissCarsAxa()
         {
             Scrp = new Scrapper();
             URL = "https://swisscars.pl/";
@@ -22,17 +22,19 @@ namespace CarTradeCenter.WebScrap
 
         public DateTime GetAuctionEndTime(string subpageRaw)
         {
-            throw new NotImplementedException();
+            String auctionEndS = Scrp.NodeCutter(subpageRaw, "DATA ZAKONCZENIA AUKCJI:", "<");
+            return System.DateTime.Parse(auctionEndS);
         }
 
         public string GetCarNameDescription(string subpageRaw)
         {
-            throw new NotImplementedException();
+            string preTitle = Scrp.NodeCutter(subpageRaw, "<a href=", ">");
+            return Scrp.NodeCutter(preTitle, "title=\"");
         }
 
         public string GetCompanyProviderDescription(string subpageRaw)
         {
-            throw new NotImplementedException();
+            return "Axa";
         }
 
         public string GetDamageDescription(string subpageRaw)
@@ -52,7 +54,7 @@ namespace CarTradeCenter.WebScrap
 
         public int GetExternalId(string carNode)
         {
-            throw new NotImplementedException();
+            return Int32.Parse(Scrp.NodeCutter(carNode, "samochody/", "/"));
         }
 
         public List<Image> GetImagesOfVehicle(string subPageRaw, int maxImages)
@@ -67,7 +69,29 @@ namespace CarTradeCenter.WebScrap
 
         public Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
         {
-            throw new NotImplementedException();
+            string[] vehiclesNode = pageTextRaw.Split("<!--- Post Starts -->");
+            foreach (string vehicleNode in vehiclesNode)
+            {
+                if (vehicleNode.Contains("DATA ZAKONCZENIA AUKCJI"))
+                {
+                    try
+                    {
+                        Vehicle vhcIncomplete = GetVehicleMainFromNode(vehicleNode);
+                        if (vhcIncomplete.IsCarUnique(vehiclesFromDb, vhcIncomplete))
+                            return vhcIncomplete;// UpdateVehicleByExtras(vhcIncomplete);
+                    }
+                    catch
+                    {
+                        continue;
+                    }
+                }
+            }
+            throw new System.Exception("No unique car found in main");
+        }
+
+        public string GetURL(string vehicleNode)
+        {
+            return Scrp.NodeCutter(vehicleNode, "href=\"", "\">");
         }
 
         public string GetUsableParts(string subpageRaw)
@@ -80,28 +104,6 @@ namespace CarTradeCenter.WebScrap
             throw new NotImplementedException();
         }
 
-        public List<Vehicle> GetVehicleListFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
-        {
-            Vehicle vhc = new Vehicle();
-            string[] vehiclesNode = pageTextRaw.Split("<!--- Post Starts -->");
-            foreach (string vehicleNode in vehiclesNode)
-            {
-                if (vehicleNode.Contains("DATA ZAKONCZENIA AUKCJI"))
-                {
-                    try
-                    {
-                        Vehicle vhcIncomplete = GetVehicleMainFromNode(vehicleNode);
-                        if (vhc.IsCarUnique(vehiclesFromDb, vhcIncomplete))
-                            return vehiclesFromDb;// UpdateVehicleByExtras(vhcIncomplete);
-                    }
-                    catch
-                    {
-                        continue;
-                    }
-                }
-            }
-            throw new System.Exception("No unique car found in main");
-        }
 
         public List<Vehicle> GetVehicleListFromMain(string pageTextRaw)
         {
@@ -111,11 +113,10 @@ namespace CarTradeCenter.WebScrap
         public Vehicle GetVehicleMainFromNode(string vehicleNode)
         {
             Vehicle vhc = new Vehicle();
-            string preTitle = Scrp.NodeCutter(vehicleNode, "<a href=", ">");
-            vhc.Title = Scrp.NodeCutter(preTitle, "title=\"");
-            vhc.Url = URL + Scrp.NodeCutter(vehicleNode, "au\":\"", "\",\"");
+            vhc.Title = GetCarNameDescription(vehicleNode);
+            vhc.Url = URL + GetURL(vehicleNode); URL wkleja podwojne slash
             vhc.IdExternal = GetExternalId(vehicleNode);
-            Image imMini = new Image(URL.Substring(0, URL.Length - 1) + Scrp.NodeCutter(vehicleNode, "is\":\"", "\",\""));
+            dodac funkcje - Image imMini = new Image(URL.Substring(0, URL.Length - 1) + Scrp.NodeCutter(vehicleNode, "<img src=\"", "\""));
             vhc.Images.Add(imMini);
             vhc.CompanyProvider = GetCompanyProviderDescription(vehicleNode);
             vhc.IsActive = true;

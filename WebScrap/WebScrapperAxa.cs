@@ -220,5 +220,9 @@ namespace CarTradeCenter.WebScrap
             throw new NotImplementedException();
         }
 
+        public string GetURL(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
