@@ -28,6 +28,34 @@
     </table>
 </div>
 
+@*Detailed Info*@
+<hr />
+
+<div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">1sza Rej</th>
+                <th scope="col">Przebieg</th>
+                <th scope="col">Skrzynia</th>
+                <th scope="col">Napęd</th>
+                <th scope="col">Paliwo</th>
+                <th scope="col">Silnik</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Registration1stDate)</td>
+                <td>@Html.DisplayFor(model => model.Mileage)</td>
+                <td>@Html.DisplayFor(model => model.Gearbox)</td>
+                <td>@Html.DisplayFor(model => model.Drive)</td>
+                <td>@Html.DisplayFor(model => model.GasType)</td>
+                <td>@Html.DisplayFor(model => model.Engine)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
 <hr />
 
 <div>
@@ -52,13 +80,13 @@
             }
 
             @*@foreach (var img in Model.Images)
-        {
-            <tr>
-                <td>
-                    <img src="@img.Url" class="img-thumbnail" style="width: 100%">
-                </td>
-            </tr>
-        }*@
+                {
+                    <tr>
+                        <td>
+                            <img src="@img.Url" class="img-thumbnail" style="width: 100%">
+                        </td>
+                    </tr>
+                }*@
         </tbody>
     </table>
 </div>
