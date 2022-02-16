@@ -26,5 +26,6 @@ namespace CarTradeCenter.WebScrap
         string GetEquipmenSeriesDescription(string vehicleNode);
         string GetURL(string vehicleNode);
         List<Image> GetImagesOfVehicle(string vehicleNode, int maxImages);
+        Image GetImageMini(string vehicleNode);
     }
 }

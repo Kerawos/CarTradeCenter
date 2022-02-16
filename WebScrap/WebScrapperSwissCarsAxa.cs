@@ -57,6 +57,11 @@ namespace CarTradeCenter.WebScrap
             return Int32.Parse(Scrp.NodeCutter(carNode, "samochody/", "/"));
         }
 
+        public Image GetImageMini(string vehicleNode)
+        {
+            return new Image(URL.Substring(0, URL.Length - 1) + Scrp.NodeCutter(vehicleNode, "<img src=\"", "\""));
+        }
+
         public List<Image> GetImagesOfVehicle(string subPageRaw, int maxImages)
         {
             throw new NotImplementedException();
@@ -114,10 +119,9 @@ namespace CarTradeCenter.WebScrap
         {
             Vehicle vhc = new Vehicle();
             vhc.Title = GetCarNameDescription(vehicleNode);
-            vhc.Url = URL + GetURL(vehicleNode); URL wkleja podwojne slash
+            vhc.Url = URL + GetURL(vehicleNode); //URL wkleja podwojne slash
             vhc.IdExternal = GetExternalId(vehicleNode);
-            dodac funkcje - Image imMini = new Image(URL.Substring(0, URL.Length - 1) + Scrp.NodeCutter(vehicleNode, "<img src=\"", "\""));
-            vhc.Images.Add(imMini);
+            vhc.Images.Add(GetImageMini(vehicleNode));
             vhc.CompanyProvider = GetCompanyProviderDescription(vehicleNode);
             vhc.IsActive = true;
             vhc.IsArchived = false;
