@@ -20,6 +20,12 @@ namespace CarTradeCenter.Data.Models
         public string Url { get; set; }
         public string InfoGeneralDesc { get; set; }
         public string InfoBasic { get; set; }
+        public string Registration1stDate { get; set; }
+        public string Mileage { get; set; }
+        public string Gearbox { get; set; }
+        public string Drive { get; set; }
+        public string GasType { get; set; }
+        public string Engine { get; set; }
         public string InfoExtra { get; set; }
         public string InfoUsableParts { get; set; }
         public bool IsDamaged { get; set; }
