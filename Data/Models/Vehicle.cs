@@ -41,7 +41,7 @@ namespace CarTradeCenter.Data.Models
         {
             if (Images.Any())
                 return Images
-                    .Where(i => i.Url.Contains("PREMIUM"))
+                    //.Where(i => i.Url.Contains("PREMIUM"))
                     .First().Url;
             else
                 return "";

@@ -30,7 +30,7 @@ namespace CarTradeCenter
             services.AddScoped<IRepositoryVehicle, VehicleRepository>();
             services.AddScoped<IRepositoryImage, ImageRepository>();
             //services.AddHostedService<CarScrapperAxa>(); //axa stopped working on 01.2022
-            services.AddHostedService<CarScrapperSwissCarsAxa>();
+            //services.AddHostedService<CarScrapperSwissCarsAxa>();
             services.AddHostedService<VehicleArchiver>();
             //services.AddHostedService<VehicleRemover>();
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
