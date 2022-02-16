@@ -11,13 +11,13 @@
 <div>
     <h4>CarDamaged</h4>
     <hr />
-    <dl class="row">
-        @*<dt class = "col-sm-2">
+    @*<dl class="row">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.DamageDescription)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DamageDescription)
-        </dd>*@
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Title)
         </dt>
@@ -42,7 +42,7 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.GetImageMiniUrl())
         </dd>
-    </dl>
+    </dl>*@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="Id" />

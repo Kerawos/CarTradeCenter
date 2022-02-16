@@ -113,6 +113,16 @@ namespace CarTradeCenter.Controllers
                 return NotFound();
             return View(vhc);
         }
- 
+
+
+        public ActionResult Delete(int id)
+        {
+            Vehicle vhc = RepoVehicle.FindById(id);
+            if (vhc == null)
+                return RedirectToAction("Index");
+            RepoVehicle.Delete(vhc);
+            return RedirectToAction("Index");
+        }
+
     }
 }

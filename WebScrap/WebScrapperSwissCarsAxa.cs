@@ -13,6 +13,7 @@ namespace CarTradeCenter.WebScrap
         {
             Scrp = new Scrapper();
             URL = "https://swisscars.pl/";
+            MaxImg = 20;
         }
 
         public string Get1stRegDescription(string subpageRaw)
@@ -127,6 +128,14 @@ namespace CarTradeCenter.WebScrap
             vhc.IsActive = true;
             vhc.IsArchived = false;
             return vhc;
+        }
+
+
+        public Vehicle UpdateVehicleFromSubpage(Vehicle vhcToUpdate, string subpageTextRaw)
+        {
+            vhcToUpdate.Images.AddRange(GetImagesOfVehicle(subpageTextRaw, MaxImg));
+            return vhcToUpdate;
+                
         }
     }
 }

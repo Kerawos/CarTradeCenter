@@ -68,5 +68,10 @@ namespace CarTradeCenter.BackgroundServices
                 }
             }
         }
+
+        public override string GetPageRaw(string url)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

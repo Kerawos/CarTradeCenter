@@ -18,7 +18,7 @@ namespace CarTradeCenter.BackgroundServices
         public CarScrapperSwissCarsAxa(IServiceScopeFactory factory)
         {
             TimeFrequency = 2850000; //47min
-            VehiclesToAddAtOnce = 20;
+            VehiclesToAddAtOnce = 1;
             Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
             WebScrp = new Scrapper();
             this.WebScrpSwiss = new WebScrapperSwissCarsAxa();
@@ -35,8 +35,8 @@ namespace CarTradeCenter.BackgroundServices
 
         public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
         {
-            string mainPageRaw = GetMainPageRaw();
-            //WebScrpSwiss.GetVehicleListFromMain(mainPageRaw, new List<Vehicle>());
+            string mainPageRaw = GetPageRaw(WebScrpSwiss.URL);
+            string subPageRaw;
             List<Vehicle> vehiclesFromDb = Repo.FindAllActive();
             int vehicleActiveTotal = vehiclesFromDb.Count();
             for (int i = 0; i < vehiclesToAdd; i++)
@@ -46,6 +46,8 @@ namespace CarTradeCenter.BackgroundServices
                 try
                 {
                     Vehicle vehicleUnique = WebScrpSwiss.GetUniqueVehicleFromMain(mainPageRaw, vehiclesFromDb);
+                    subPageRaw = GetPageRaw(vehicleUnique.Url);
+                    WebScrpSwiss.UpdateVehicleFromSubpage(vehicleUnique, subPageRaw);
                     Repo.Create(vehicleUnique);
                     vehiclesFromDb.Add(vehicleUnique);
                     vehicleActiveTotal++;
@@ -57,17 +59,19 @@ namespace CarTradeCenter.BackgroundServices
             }
         }
 
-        private string GetMainPageRaw()
+
+        public override string GetPageRaw(string url)
         {
             try
             {
-                return WebScrp.GetPageTextRaw(WebScrpSwiss.URL);
+                return WebScrp.GetPageTextRaw(url);
             }
             catch (Exception ex)
             {
                 throw new System.Exception("Swiss page probably does not responding. Error: " + ex.Message);
             }
         }
+
 
         public Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
         {
@@ -91,5 +95,6 @@ namespace CarTradeCenter.BackgroundServices
             throw new System.Exception("No unique car found in main");
         }
 
+       
     }
 }

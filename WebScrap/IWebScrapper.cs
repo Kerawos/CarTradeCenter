@@ -10,6 +10,7 @@ namespace CarTradeCenter.WebScrap
     {
         //List<Vehicle> GetVehicleListFromMain(string pageTextRaw);
         Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb);
+        Vehicle UpdateVehicleFromSubpage(Vehicle vhcToUpdate, string subpageTextRaw);
         Vehicle GetVehicleFromSubpage(string vehicleNode);
         Vehicle GetVehicleMainFromNode(string vehicleNode);
 

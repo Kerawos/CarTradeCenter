@@ -229,5 +229,15 @@ namespace CarTradeCenter.WebScrap
         {
             throw new NotImplementedException();
         }
+
+        public Vehicle UpdateVehicleFromSubpage(string subpageTextRaw)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vehicle UpdateVehicleFromSubpage(Vehicle vhcToUpdate, string subpageTextRaw)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

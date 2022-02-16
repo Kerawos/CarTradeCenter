@@ -7,54 +7,28 @@
 <h1>@Model.Title</h1>
 
 @*Important Info*@
+<hr />
+
 <div>
-    <center><h5>@Model.CompanyProvider</h5></center>
-
-
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            Link do aukcji
-        </dt>
-        <dd class="col-sm-10">
-            <a href="@Html.DisplayFor(model => model.Url)">Link</a>
-        </dd>
-        <dt class="col-sm-2">
-            Koniec Aukcji (@Html.DisplayNameFor(model => model.DateAuctionEnd))
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateAuctionEnd)
-        </dd>
-        <dt class="col-sm-2">
-            Początek Aukcji (@Html.DisplayNameFor(model => model.DateAuctionStart))
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DateAuctionStart)
-        </dd>
-        <dt class="col-sm-2">
-            Numer Auckji (@Html.DisplayNameFor(model => model.Id))
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Id)
-        </dd>
-        <dt class="col-sm-2">
-            Stan
-        </dt>
-        @if (Model.IsDamaged)
-        {
-            <dd class="col-sm-10">
-                Uszkodzony
-            </dd>
-        }
-        else
-        {
-            <dd class="col-sm-10">
-                Nieuszkodzony
-            </dd>
-        }
-    </dl>
-    <hr />
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Koniec Aukcji</th>
+                <th scope="col">Numer Auckji</th>
+                <th scope="col">Dostawca</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.DateAuctionEnd)</td>
+                <td>@Html.DisplayFor(model => model.Id)</td>
+                <td>@Model.CompanyProvider</td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<hr />
 
 <div>
     @*Images*@
@@ -67,14 +41,24 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var img in Model.Images)
+            @*start from 1 to skip image mini*@
+            @for (var i = 1; i < @Model.Images.Count; i++)
             {
                 <tr>
                     <td>
-                        <img src="@img.Url" class="img-thumbnail" style="width: 100%">
+                        <img src="@Model.Images[i].Url" class="img-thumbnail" style="width: 100%">
                     </td>
                 </tr>
             }
+
+            @*@foreach (var img in Model.Images)
+        {
+            <tr>
+                <td>
+                    <img src="@img.Url" class="img-thumbnail" style="width: 100%">
+                </td>
+            </tr>
+        }*@
         </tbody>
     </table>
 </div>
@@ -90,7 +74,7 @@
             @Html.DisplayFor(model => model.InfoBasic)
             <hr />
         </dd>
-        
+
         <dt class="col-sm-2">
             Wyposarzenie Opcjonalne (@Html.DisplayNameFor(model => model.InfoExtra))
         </dt>
@@ -121,6 +105,6 @@
 </div>
 
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@*<div>
+        <button type="button" class="btn btn-primary" asp-action="Index">Powrót</button>
+    </div>*@

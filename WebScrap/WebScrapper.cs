@@ -9,5 +9,6 @@ namespace CarTradeCenter.WebScrap
     {
         public string URL;
         public Scrapper Scrp;
+        public int MaxImg;
     }
 }
