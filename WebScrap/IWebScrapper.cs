@@ -26,6 +26,13 @@ namespace CarTradeCenter.WebScrap
         string GetEquipmentOptionDescription(string vehicleNode);
         string GetEquipmenSeriesDescription(string vehicleNode);
         string GetURL(string vehicleNode);
+        string GetRegistration1stDate(string vehicleNode);
+        string GetMileage(string vehicleNode);
+        string GetGearbox(string vehicleNode);
+        string GetDrive(string vehicleNode);
+        string GetGasType(string vehicleNode);
+        string GetEngine(string vehicleNode);
+        string GetNewPrice(string vehicleNode);
         List<Image> GetImagesOfVehicle(string vehicleNode, int maxImages);
         Image GetImageMini(string vehicleNode);
     }

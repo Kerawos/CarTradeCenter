@@ -43,6 +43,16 @@ namespace CarTradeCenter.WebScrap
             throw new NotImplementedException();
         }
 
+        public string GetDrive(string vehicleNode)
+        {
+            return GetDetailedInfo(vehicleNode, "Antrieb ");
+        }
+
+        public string GetEngine(string vehicleNode)
+        {
+            return GetDetailedInfo(vehicleNode, "Hubraum");
+        }
+
         public string GetEquipmenSeriesDescription(string subpageRaw)
         {
             throw new NotImplementedException();
@@ -56,6 +66,16 @@ namespace CarTradeCenter.WebScrap
         public int GetExternalId(string carNode)
         {
             return Int32.Parse(Scrp.NodeCutter(carNode, "samochody/", "/"));
+        }
+
+        public string GetGasType(string vehicleNode)
+        {
+            return GetDetailedInfo(vehicleNode, "Treibstoff");
+        }
+
+        public string GetGearbox(string vehicleNode)
+        {
+            return GetDetailedInfo(vehicleNode, "Getriebe");
         }
 
         public Image GetImageMini(string vehicleNode)
@@ -77,9 +97,33 @@ namespace CarTradeCenter.WebScrap
             return images;
         }
 
+
+        public string GetDetailedInfo(string node, string detail)
+        {
+            string[] trs = node.Split("<tr>");
+            foreach (string tr in trs)
+            {
+                if (tr.Contains(detail))
+                {
+                    return Scrp.NodeCutter(tr, detail +"</td><td>", "</td>");
+                }
+            }
+            return "";
+        }
+
+        public string GetMileage(string vehicleNode)
+        {
+            return GetDetailedInfo(vehicleNode, "Kilometerstand");
+        }
+
         public string GetMileageDescription(string subpageRaw)
         {
             throw new NotImplementedException();
+        }
+
+        public string GetRegistration1stDate(string vehicleNode)
+        {
+            return GetDetailedInfo(vehicleNode, "1. Inv.");
         }
 
         public Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
@@ -143,8 +187,22 @@ namespace CarTradeCenter.WebScrap
         public Vehicle UpdateVehicleFromSubpage(Vehicle vhcToUpdate, string subpageTextRaw)
         {
             vhcToUpdate.Images.AddRange(GetImagesOfVehicle(subpageTextRaw, MaxImg));
+            string detailNode = Scrp.NodeCutter(subpageTextRaw, "articledetail", "table");
+            vhcToUpdate.Registration1stDate = GetRegistration1stDate(detailNode);
+            vhcToUpdate.Mileage = GetMileage(detailNode);
+            vhcToUpdate.Gearbox = GetGearbox(detailNode);
+            vhcToUpdate.Drive = GetDrive(detailNode);
+            vhcToUpdate.GasType = GetGasType(detailNode);
+            vhcToUpdate.Engine = GetEngine(detailNode);
+            
+
             return vhcToUpdate;
                 
+        }
+
+        public string GetNewPrice(string vehicleNode)
+        {
+            return GetDetailedInfo(vehicleNode, "Fahrzeug-Neupreis");
         }
     }
 }

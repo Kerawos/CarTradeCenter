@@ -239,5 +239,40 @@ namespace CarTradeCenter.WebScrap
         {
             throw new NotImplementedException();
         }
+
+        public string GetRegistration1stDate(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetMileage(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetGearbox(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetDrive(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetGasType(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetEngine(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string GetNewPrice(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
