@@ -65,7 +65,16 @@ namespace CarTradeCenter.WebScrap
 
         public List<Image> GetImagesOfVehicle(string subPageRaw, int maxImages)
         {
-            throw new NotImplementedException();
+            List<Image> images = new List<Image>();
+            string[] nodes = subPageRaw.Split("<img class=");
+            foreach (string node in nodes)
+            {
+                if (node.Contains("aligncenter size-full"))
+                {
+                    images.Add(new Image(URL + Scrp.NodeCutter(node, "src=\"/", "\"")));
+                }
+            }
+            return images;
         }
 
         public string GetMileageDescription(string subpageRaw)
