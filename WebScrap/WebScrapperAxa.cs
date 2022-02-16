@@ -224,5 +224,10 @@ namespace CarTradeCenter.WebScrap
         {
             throw new NotImplementedException();
         }
+
+        public Image GetImageMini(string vehicleNode)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

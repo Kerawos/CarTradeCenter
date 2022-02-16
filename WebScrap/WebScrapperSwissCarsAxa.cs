@@ -96,7 +96,7 @@ namespace CarTradeCenter.WebScrap
 
         public string GetURL(string vehicleNode)
         {
-            return Scrp.NodeCutter(vehicleNode, "href=\"", "\">");
+            return Scrp.NodeCutter(vehicleNode, "<a href=\"/", "/\"");
         }
 
         public string GetUsableParts(string subpageRaw)
@@ -123,6 +123,7 @@ namespace CarTradeCenter.WebScrap
             vhc.IdExternal = GetExternalId(vehicleNode);
             vhc.Images.Add(GetImageMini(vehicleNode));
             vhc.CompanyProvider = GetCompanyProviderDescription(vehicleNode);
+            vhc.DateAuctionEnd = GetAuctionEndTime(vehicleNode);
             vhc.IsActive = true;
             vhc.IsArchived = false;
             return vhc;
