@@ -274,5 +274,10 @@ namespace CarTradeCenter.WebScrap
         {
             throw new NotImplementedException();
         }
+
+        public string DeleteWhiteChars(string blackText)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

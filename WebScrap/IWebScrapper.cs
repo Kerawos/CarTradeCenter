@@ -35,5 +35,6 @@ namespace CarTradeCenter.WebScrap
         string GetNewPrice(string vehicleNode);
         List<Image> GetImagesOfVehicle(string vehicleNode, int maxImages);
         Image GetImageMini(string vehicleNode);
+        string DeleteWhiteChars(string blackText);
     }
 }

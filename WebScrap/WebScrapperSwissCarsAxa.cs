@@ -45,7 +45,7 @@ namespace CarTradeCenter.WebScrap
 
         public string GetDrive(string vehicleNode)
         {
-            return GetDetailedInfo(vehicleNode, "Antrieb ");
+            return GetDetailedInfo(vehicleNode, "Antrieb");
         }
 
         public string GetEngine(string vehicleNode)
@@ -123,7 +123,7 @@ namespace CarTradeCenter.WebScrap
 
         public string GetRegistration1stDate(string vehicleNode)
         {
-            return GetDetailedInfo(vehicleNode, "1. Inv.");
+            return GetDetailedInfo(vehicleNode, "1.Inv.");
         }
 
         public Vehicle GetUniqueVehicleFromMain(string pageTextRaw, List<Vehicle> vehiclesFromDb)
@@ -173,7 +173,7 @@ namespace CarTradeCenter.WebScrap
         {
             Vehicle vhc = new Vehicle();
             vhc.Title = GetCarNameDescription(vehicleNode);
-            vhc.Url = URL + GetURL(vehicleNode); //URL wkleja podwojne slash
+            vhc.Url = URL + GetURL(vehicleNode);
             vhc.IdExternal = GetExternalId(vehicleNode);
             vhc.Images.Add(GetImageMini(vehicleNode));
             vhc.CompanyProvider = GetCompanyProviderDescription(vehicleNode);
@@ -188,12 +188,13 @@ namespace CarTradeCenter.WebScrap
         {
             vhcToUpdate.Images.AddRange(GetImagesOfVehicle(subpageTextRaw, MaxImg));
             string detailNode = Scrp.NodeCutter(subpageTextRaw, "articledetail", "table");
-            vhcToUpdate.Registration1stDate = GetRegistration1stDate(detailNode);
-            vhcToUpdate.Mileage = GetMileage(detailNode);
-            vhcToUpdate.Gearbox = GetGearbox(detailNode);
-            vhcToUpdate.Drive = GetDrive(detailNode);
-            vhcToUpdate.GasType = GetGasType(detailNode);
-            vhcToUpdate.Engine = GetEngine(detailNode);
+            string nodeWoutWhite = DeleteWhiteChars(detailNode);
+            vhcToUpdate.Registration1stDate = GetRegistration1stDate(nodeWoutWhite);
+            vhcToUpdate.Mileage = GetMileage(nodeWoutWhite);
+            vhcToUpdate.Gearbox = GetGearbox(nodeWoutWhite);
+            vhcToUpdate.Drive = GetDrive(nodeWoutWhite);
+            vhcToUpdate.GasType = GetGasType(nodeWoutWhite);
+            vhcToUpdate.Engine = GetEngine(nodeWoutWhite);
             
 
             return vhcToUpdate;
@@ -203,6 +204,11 @@ namespace CarTradeCenter.WebScrap
         public string GetNewPrice(string vehicleNode)
         {
             return GetDetailedInfo(vehicleNode, "Fahrzeug-Neupreis");
+        }
+
+        public string DeleteWhiteChars(string blackText)
+        {
+            return String.Concat(blackText.Where(c => !Char.IsWhiteSpace(c)));
         }
     }
 }
