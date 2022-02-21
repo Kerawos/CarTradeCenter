@@ -98,37 +98,28 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            Wyposarzenie Standardowe (@Html.DisplayNameFor(model => model.InfoBasic))
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.InfoBasic)
-            <hr />
-        </dd>
-
-        <dt class="col-sm-2">
-            Wyposarzenie Opcjonalne (@Html.DisplayNameFor(model => model.InfoExtra))
+            Wyposarzenie
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.InfoExtra)
             <hr />
         </dd>
-        @if (Model.IsDamaged)
-        {
-            <dt class="col-sm-2">
-                Uszkodzenia (@Html.DisplayNameFor(model => model.InfoDamage))
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.InfoDamage)
-                <hr />
-            </dd>
-            <dt class="col-sm-2">
-                Części nieuszkodzone (@Html.DisplayNameFor(model => model.InfoUsableParts))
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.InfoUsableParts)
-                <hr />
-            </dd>
-        }
+
+        <dt class="col-sm-2">
+            Szacunkowy Koszt Naprawy
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InfoDamage)
+            <hr />
+        </dd>
+
+        <dt class="col-sm-2">
+            Części uszkodzone
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.InfoDamage)
+            <hr />
+        </dd>
 
     </dl>
     <hr />
