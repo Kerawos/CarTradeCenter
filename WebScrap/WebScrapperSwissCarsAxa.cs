@@ -40,7 +40,9 @@ namespace CarTradeCenter.WebScrap
 
         public string GetDamageDescription(string subpageRaw)
         {
-            throw new NotImplementedException();
+            string nodeDmg = Scrp.NodeCutter(subpageRaw, "Beschädigungen", "Vorschaden");
+            string dmg = Scrp.NodeCutter(nodeSeries, "panel-body\">", "</div>");
+            return dmg;
         }
 
         public string GetDrive(string vehicleNode)
@@ -203,6 +205,7 @@ namespace CarTradeCenter.WebScrap
             vhcToUpdate.InfoExtra = GetEquipmentOptionDescription(subpageTextRaw);
             vhcToUpdate.PriceRepairCost = GetPriceRepairCost(subpageTextRaw);
             vhcToUpdate.InfoDamage = GetDamageDescription(subpageTextRaw);
+            //te same metody - do jednej! jutro todo
             
             return vhcToUpdate;
                 
