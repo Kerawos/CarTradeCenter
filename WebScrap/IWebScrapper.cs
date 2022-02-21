@@ -33,6 +33,7 @@ namespace CarTradeCenter.WebScrap
         string GetGasType(string vehicleNode);
         string GetEngine(string vehicleNode);
         string GetPriceBrandNew(string vehicleNode);
+        string GetPriceRepairCost(string vehicleNode);
         List<Image> GetImagesOfVehicle(string vehicleNode, int maxImages);
         Image GetImageMini(string vehicleNode);
         string DeleteWhiteChars(string blackText);

@@ -199,8 +199,11 @@ namespace CarTradeCenter.WebScrap
             vhcToUpdate.Drive = GetDrive(nodeWoutWhite);
             vhcToUpdate.GasType = GetGasType(nodeWoutWhite);
             vhcToUpdate.Engine = GetEngine(nodeWoutWhite);
+            vhcToUpdate.PriceBrandNew = GetPriceBrandNew(nodeWoutWhite);
             vhcToUpdate.InfoExtra = GetEquipmentOptionDescription(subpageTextRaw);
-
+            vhcToUpdate.PriceRepairCost = GetPriceRepairCost(subpageTextRaw);
+            vhcToUpdate.InfoDamage = GetDamageDescription(subpageTextRaw);
+            
             return vhcToUpdate;
                 
         }
@@ -214,6 +217,14 @@ namespace CarTradeCenter.WebScrap
         public string GetPriceBrandNew(string vehicleNode)
         {
             return GetDetailedInfo(vehicleNode, "Fahrzeug-Neupreis");
+        }
+
+        public string GetPriceRepairCost(string vehicleNode)
+        {
+            string nodeCost = Scrp.NodeCutter(vehicleNode, "Reparaturkosten ", "Unfallfrei ");
+            nodeCost = DeleteWhiteChars(nodeCost);
+            string cost = Scrp.NodeCutter(nodeCost, "CHF", "</td>");
+            return cost;
         }
     }
 }
