@@ -26,6 +26,7 @@ namespace CarTradeCenter.Data.Models
         public string Drive { get; set; }
         public string GasType { get; set; }
         public string Engine { get; set; }
+        public string PriceBrandNew { get; set; }
         public string InfoExtra { get; set; }
         public string InfoUsableParts { get; set; }
         public bool IsDamaged { get; set; }

@@ -270,12 +270,13 @@ namespace CarTradeCenter.WebScrap
             throw new NotImplementedException();
         }
 
-        public string GetNewPrice(string vehicleNode)
+
+        public string DeleteWhiteChars(string blackText)
         {
             throw new NotImplementedException();
         }
 
-        public string DeleteWhiteChars(string blackText)
+        public string GetPriceBrandNew(string vehicleNode)
         {
             throw new NotImplementedException();
         }

@@ -56,11 +56,15 @@ namespace CarTradeCenter.WebScrap
         public string GetEquipmenSeriesDescription(string subpageRaw)
         {
             throw new NotImplementedException();
+
         }
 
         public string GetEquipmentOptionDescription(string subpageRaw)
         {
-            throw new NotImplementedException();
+            string nodeSeries = Scrp.NodeCutter(subpageRaw, "Serienausstattung", "Beschädigungen");
+            string series = Scrp.NodeCutter(nodeSeries, "panel-body\">", "</div>");
+            return series;
+            
         }
 
         public int GetExternalId(string carNode)
@@ -195,20 +199,21 @@ namespace CarTradeCenter.WebScrap
             vhcToUpdate.Drive = GetDrive(nodeWoutWhite);
             vhcToUpdate.GasType = GetGasType(nodeWoutWhite);
             vhcToUpdate.Engine = GetEngine(nodeWoutWhite);
-            
+            vhcToUpdate.InfoExtra = GetEquipmentOptionDescription(subpageTextRaw);
 
             return vhcToUpdate;
                 
         }
 
-        public string GetNewPrice(string vehicleNode)
-        {
-            return GetDetailedInfo(vehicleNode, "Fahrzeug-Neupreis");
-        }
 
         public string DeleteWhiteChars(string blackText)
         {
             return String.Concat(blackText.Where(c => !Char.IsWhiteSpace(c)));
+        }
+
+        public string GetPriceBrandNew(string vehicleNode)
+        {
+            return GetDetailedInfo(vehicleNode, "Fahrzeug-Neupreis");
         }
     }
 }
