@@ -40,8 +40,7 @@
             @*<td style="width: 500px"> <a href="@vehicle.Url" target="_blank">@vehicle.Title</a></td>*@
             <td style="width: 500px"> <a asp-action="Details" asp-route-id="@vehicle.Id">@vehicle.Title</a></td>
             <td> <a asp-action="Details" asp-route-id="@vehicle.Id"> <img src="@vehicle.GetImageMiniUrl()" style="max-height: 300px; width:auto"> </a> </td>
-            <td>@vehicle.DateAuctionEnd.ToString("dd.MM.yyyy HH:mm")</td>
-            @*<td> <a asp-action="Details" asp-route-id="@vehicle.Id">Detale</a></td>*@
+            <td>@vehicle.DateAuctionEnd.ToString("dd.MM.yyyy HH:mm")</td
 
             @if (Math.Round(((vehicle.DateAuctionEnd - System.DateTime.Now).TotalHours), 0) > 0)
             {
