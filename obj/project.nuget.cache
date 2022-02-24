@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YKIodNFPdQqGAC5qovGhnYVydyNdudWmiRM1mwfpk7VijJTWshu42gYhpQ+rHKUTSXJ0+N9uxwaCtbdH9sVYzg==",
+  "dgSpecHash": "clC3OhVmQvEDGP1W0Phh0jOBoUl7/FSjNy0m05bj1Sw52+mJETqoEEDC5wITAXQwbBo7G1OAtS9MRYmlsZB0cw==",
   "success": true,
   "projectFilePath": "C:\\Users\\ZZ01M5820\\Box\\.Net Projects\\repos\\CarTradeCenter\\CarTradeCenter.csproj",
   "expectedPackageFiles": [
@@ -203,11 +203,7 @@
     "C:\\Users\\ZZ01M5820\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\ZZ01M5820\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
     "C:\\Users\\ZZ01M5820\\.nuget\\packages\\system.xml.xmldocument\\4.3.0\\system.xml.xmldocument.4.3.0.nupkg.sha512",
-    "C:\\Users\\ZZ01M5820\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512",
-    "C:\\Users\\ZZ01M5820\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512",
-    "C:\\Users\\ZZ01M5820\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\5.0.0\\microsoft.aspnetcore.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\ZZ01M5820\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\5.0.0\\microsoft.windowsdesktop.app.ref.5.0.0.nupkg.sha512",
-    "C:\\Users\\ZZ01M5820\\.nuget\\packages\\microsoft.netcore.app.ref\\5.0.0\\microsoft.netcore.app.ref.5.0.0.nupkg.sha512"
+    "C:\\Users\\ZZ01M5820\\.nuget\\packages\\system.xml.xmlserializer\\4.3.0\\system.xml.xmlserializer.4.3.0.nupkg.sha512"
   ],
   "logs": []
 }

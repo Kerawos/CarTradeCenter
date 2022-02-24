@@ -23,6 +23,7 @@ namespace CarTradeCenter.BackgroundServices
             Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
             WebScrp = new Scrapper();
             this.WebScrpAxa = new WebScrapperAxa();
+            TimeWaitMS = 1000; //1s
         }
 
 
@@ -30,13 +31,13 @@ namespace CarTradeCenter.BackgroundServices
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                TryToAddVehicles(VehiclesToAddAtOnce, VehicleLimit);
+                TryToAddVehicles(VehiclesToAddAtOnce, VehicleLimit, TimeWaitMS);
                 await Task.Delay(TimeFrequency);
             }
         }
 
 
-        public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
+        public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit, int timeWaitMS)
         {
             string mainPageRaw;
             try

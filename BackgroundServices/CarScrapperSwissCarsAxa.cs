@@ -22,18 +22,19 @@ namespace CarTradeCenter.BackgroundServices
             Repo = factory.CreateScope().ServiceProvider.GetRequiredService<IRepositoryVehicle>();
             WebScrp = new Scrapper();
             this.WebScrpSwiss = new WebScrapperSwissCarsAxa();
+            TimeWaitMS = 15000; //15s
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
             {
-                TryToAddVehicles(VehiclesToAddAtOnce, VehicleLimit);
+                TryToAddVehicles(VehiclesToAddAtOnce, VehicleLimit, TimeWaitMS);
                 await Task.Delay(TimeFrequency);
             }
         }
 
-        public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit)
+        public override void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit, int timeWaitMS)
         {
             string mainPageRaw = GetPageRaw(WebScrpSwiss.URL);
             string subPageRaw;
@@ -45,6 +46,7 @@ namespace CarTradeCenter.BackgroundServices
                     return;
                 try
                 {
+                    Thread.Sleep(timeWaitMS); //to prevent scam attack on webpage
                     Vehicle vehicleUnique = WebScrpSwiss.GetUniqueVehicleFromMain(mainPageRaw, vehiclesFromDb);
                     subPageRaw = GetPageRaw(vehicleUnique.Url);
                     WebScrpSwiss.UpdateVehicleFromSubpage(vehicleUnique, subPageRaw);

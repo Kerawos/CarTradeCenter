@@ -15,8 +15,9 @@ namespace CarTradeCenter.BackgroundServices
         protected int VehicleLimit = 9999;
         protected int TimeFrequency;
         protected int VehiclesToAddAtOnce;
+        protected int TimeWaitMS;
 
         public abstract string GetPageRaw(string url);
-        public abstract void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit);
+        public abstract void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit, int timeWaitMS);
     }
 }

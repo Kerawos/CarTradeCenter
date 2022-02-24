@@ -7,7 +7,7 @@ namespace CarTradeCenter.BackgroundServices
 {
     public interface ICarScrapper
     {
-        void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit);
+        void TryToAddVehicles(int vehiclesToAdd, int vehicleLimit, int timeWaitMS);
         string GetPageRaw(string url);
     }
 }
