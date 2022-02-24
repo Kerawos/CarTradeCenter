@@ -41,7 +41,7 @@ namespace CarTradeCenter.WebScrap
         public string GetDamageDescription(string subpageRaw)
         {
             string nodeDmg = Scrp.NodeCutter(subpageRaw, "Beschädigungen", "Vorschaden");
-            string dmg = Scrp.NodeCutter(nodeSeries, "panel-body\">", "</div>");
+            string dmg = Scrp.NodeCutter(nodeDmg, "panel-body\">", "</div>");
             return dmg;
         }
 

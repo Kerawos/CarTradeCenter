@@ -1,0 +1,7 @@
+C:\Users\ZZ01M5820\Box Sync\.Net Projects\repos\CarTradeCenter\obj\Release\netcoreapp3.1\CarTradeCenter.csprojAssemblyReference.cache
+C:\Users\ZZ01M5820\Box Sync\.Net Projects\repos\CarTradeCenter\obj\Release\netcoreapp3.1\CarTradeCenter.AssemblyInfoInputs.cache
+C:\Users\ZZ01M5820\Box Sync\.Net Projects\repos\CarTradeCenter\obj\Release\netcoreapp3.1\CarTradeCenter.AssemblyInfo.cs
+C:\Users\ZZ01M5820\Box Sync\.Net Projects\repos\CarTradeCenter\obj\Release\netcoreapp3.1\CarTradeCenter.csproj.CoreCompileInputs.cache
+C:\Users\ZZ01M5820\Box Sync\.Net Projects\repos\CarTradeCenter\obj\Release\netcoreapp3.1\CarTradeCenter.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ZZ01M5820\Box Sync\.Net Projects\repos\CarTradeCenter\obj\Release\netcoreapp3.1\CarTradeCenter.RazorAssemblyInfo.cache
+C:\Users\ZZ01M5820\Box Sync\.Net Projects\repos\CarTradeCenter\obj\Release\netcoreapp3.1\CarTradeCenter.RazorAssemblyInfo.cs
