@@ -37,10 +37,6 @@
             <tr>
                 <th scope="col">1sza Rej</th>
                 <th scope="col">Przebieg</th>
-                <th scope="col">Skrzynia</th>
-                <th scope="col">Napęd</th>
-                <th scope="col">Paliwo</th>
-                <th scope="col">Silnik</th>
                 <th scope="col">Cena Salonowa</th>
             </tr>
         </thead>
@@ -48,11 +44,31 @@
             <tr>
                 <td>@Html.DisplayFor(model => model.Registration1stDate)</td>
                 <td>@Html.DisplayFor(model => model.Mileage)</td>
+                <td>@Html.DisplayFor(model => model.PriceBrandNew)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<hr />
+
+<div>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Silnik</th>
+                <th scope="col">Paliwo</th>
+                <th scope="col">Skrzynia</th>
+                <th scope="col">Napęd</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(model => model.Engine)</td>
+                <td>@Html.DisplayFor(model => model.GasType)</td>
                 <td>@Html.DisplayFor(model => model.Gearbox)</td>
                 <td>@Html.DisplayFor(model => model.Drive)</td>
-                <td>@Html.DisplayFor(model => model.GasType)</td>
-                <td>@Html.DisplayFor(model => model.Engine)</td>
-                <td>@Html.DisplayFor(model => model.PriceBrandNew)</td>
             </tr>
         </tbody>
     </table>
@@ -123,6 +139,10 @@
 
     </dl>
     <hr />
+</div>
+
+<div>
+    <a href="##" onClick="history.go(-1); return false;" type="button" class="btn btn-primary">Powrót</a> 
 </div>
 
 
