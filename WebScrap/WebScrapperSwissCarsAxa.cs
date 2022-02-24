@@ -219,7 +219,7 @@ namespace CarTradeCenter.WebScrap
 
         public string GetPriceBrandNew(string vehicleNode)
         {
-            return GetDetailedInfo(vehicleNode, "Fahrzeug-Neupreis");
+            return "CHF" + GetDetailedInfo(vehicleNode, "Fahrzeug-Neupreis");
         }
 
         public string GetPriceRepairCost(string vehicleNode)
@@ -227,7 +227,7 @@ namespace CarTradeCenter.WebScrap
             string nodeCost = Scrp.NodeCutter(vehicleNode, "Reparaturkosten ", "Unfallfrei ");
             nodeCost = DeleteWhiteChars(nodeCost);
             string cost = Scrp.NodeCutter(nodeCost, "CHF", "</td>");
-            return cost;
+            return "CHF" + cost;
         }
     }
 }
